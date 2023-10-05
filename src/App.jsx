@@ -20,6 +20,7 @@ function App() {
             <Route path='/login' element={<IniciarSesion/>} />
             <Route path='/confirmar/:token' element={<ConfirmarCuenta/>} />
             <Route path='/cambiar-password' element={<CambiarContrasenia/>} />
+            <Route path='/recovery/:token' element={<h1>cambiaste</h1>}
           </Route>
         </Routes>
       </Provider>
