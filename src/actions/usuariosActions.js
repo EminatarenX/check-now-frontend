@@ -14,6 +14,8 @@ import {
     CAMBIAR_PASSWORD_ERROR
 } from '../types'
 import Swal from 'sweetalert2'
+import { ToastContainer, toast } from 'react-toastify'
+
 import clienteAxios from '../config/axios'
 
 export function registrarUsuarioAction(usuario) {
@@ -167,6 +169,14 @@ export function cambiarPasswordAction (correo)  {
             const mensaje = data.msg
 
             dispatch(cambiarPasswordExito())
+
+            toast.success(mensaje, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true
+            })
             
         } catch (error) {
             

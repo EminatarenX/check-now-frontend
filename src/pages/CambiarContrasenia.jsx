@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { cambiarPasswordAction } from '../actions/usuariosActions'
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CambiarContrasenia() {
     const [correo, guardarCorreo] = useState('')
