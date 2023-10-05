@@ -8,7 +8,10 @@ import {
     CONFIRMAR_USUARIO,
     CONFIRMAR_USUARIO_EXITO,
     CONFIRMAR_USUARIO_ERROR,
-    RESETEAR_MENSAJE
+    RESETEAR_MENSAJE,
+    CAMBIAR_PASSWORD,
+    CAMBIAR_PASSWORD_EXITO,
+    CAMBIAR_PASSWORD_ERROR
 
 } from '../types/index'
 
@@ -24,10 +27,12 @@ export default function usuariosReducer(state = initialState, action){
         case REGISTRAR_USUARIO_ERROR: 
         case LOGIN_USUARIO_ERROR:
         case CONFIRMAR_USUARIO_ERROR:
+        case CAMBIAR_PASSWORD_ERROR:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
+                
             }
         case REGISTRAR_USUARIO:
             return {
@@ -71,6 +76,16 @@ export default function usuariosReducer(state = initialState, action){
             return {
                 ...state,
                 error: null
+            }
+        case CAMBIAR_PASSWORD: 
+            return {
+                ...state,
+                error: null
+            }
+        case CAMBIAR_PASSWORD_EXITO:
+            return {
+                ...state,
+                
             }
         
         default: 

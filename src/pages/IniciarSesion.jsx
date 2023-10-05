@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loginUsuarioAction, resetearMensajeAction } from "../actions/usuariosActions"
-import { useEffect } from "react"
+import { Link } from "react-router-dom"
 
 export default function IniciarSesion() {
     const [correo, guardarCorreo ] = useState('')
@@ -10,7 +10,6 @@ export default function IniciarSesion() {
     const dispatch = useDispatch()
     const cargando = useSelector( state => state.usuarios.loading)
     const error = useSelector( state => state.usuarios.error)
-    const mensaje = useSelector( state => state.usuarios.user?.msg)
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -19,6 +18,8 @@ export default function IniciarSesion() {
         }
 
         dispatch(loginUsuarioAction({correo,password}))
+
+        
     }
 
     useEffect(()=> {
@@ -28,7 +29,7 @@ export default function IniciarSesion() {
     <main className={`bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-center pt-40`}>
 
         <form 
-            className='flex flex-col w-1/3 bg-emerald-900 p-5 rounded-lg shadow-2xl gap-5  w-3/4 lg:w-1/3'
+            className='flex flex-col bg-emerald-900 p-5 rounded-lg shadow-2xl gap-5  w-3/4 lg:w-1/3'
             onSubmit={handleLogin}
         >
            {
@@ -37,12 +38,6 @@ export default function IniciarSesion() {
             {
                 error ? <p className={`${error.classes}`}>{error.msg}</p> : null
             } 
-            {
-                mensaje ? <p 
-                className={`bg-emerald-500 text-white text-center w-full py-2 rounded font-semibold`}
-                
-                >{mensaje.cuerpo} ;)</p> : null
-            }
             
             <input type="email" 
                 placeholder="Correo Electronico"
@@ -59,9 +54,17 @@ export default function IniciarSesion() {
             
             <input 
                 className="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded "
-            type="submit" value="Registrar" 
+            type="submit" value="Iniciar sesión" 
             
             />
+            <div className="flex justify-between">
+                <Link to={'/cambiar-password'} className="text-emerald-100 hover:text-white hover:scale-105 transition-all underline underline-offset-4"> 
+                    Olvide mi contraseña
+                </Link> 
+                <Link to={'/registro'} className="text-emerald-100 hover:text-white hover:scale-105 transition-all underline underline-offset-4">
+                    No tengo cuenta :{'('}
+                </Link>
+                </div>
         </form>
 </main>
   )

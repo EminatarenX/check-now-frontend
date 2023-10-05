@@ -6,6 +6,7 @@ import Inicio from './pages/Inicio'
 import InicioLayout from './components/InicioLayout'
 import IniciarSesion from './pages/IniciarSesion'
 import ConfirmarCuenta from './pages/ConfirmarCuenta'
+import CambiarContrasenia from './pages/CambiarContrasenia'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <Route path='/registro' element={<Registrar/>} />
             <Route path='/login' element={<IniciarSesion/>} />
             <Route path='/confirmar/:token' element={<ConfirmarCuenta/>} />
+            <Route path='/cambiar-password' element={<CambiarContrasenia/>} />
           </Route>
         </Routes>
       </Provider>

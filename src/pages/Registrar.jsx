@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { registrarUsuarioAction, resetearMensajeAction } from "../actions/usuariosActions"
 
 export default function Registrar() {
@@ -65,6 +66,11 @@ export default function Registrar() {
             type="submit" value="Registrar" 
             
             />
+
+                <Link to={'/login'} className="text-emerald-100 hover:text-white hover:no-underline transition-all underline underline-offset-4"> 
+                    Ya tengo una cuenta!
+                </Link> 
+
         </form>
     </main>
   )

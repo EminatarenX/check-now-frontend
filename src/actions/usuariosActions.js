@@ -9,7 +9,9 @@ import {
     CONFIRMAR_USUARIO_ERROR,
     CONFIRMAR_USUARIO_EXITO,
     RESETEAR_MENSAJE,
-
+    CAMBIAR_PASSWORD,
+    CAMBIAR_PASSWORD_EXITO,
+    CAMBIAR_PASSWORD_ERROR
 } from '../types'
 import Swal from 'sweetalert2'
 import clienteAxios from '../config/axios'
@@ -66,8 +68,12 @@ export function loginUsuarioAction(usuario) {
 
             localStorage.setItem('token', data.token)
 
-            dispatch(loginUsuarioExito(data))
+            dispatch(loginUsuarioExito(data.token))
 
+            
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000);
             
         } catch (error) {
             console.log(error)
@@ -109,6 +115,7 @@ export function confirmarUsuarioAction(token){
             }
 
             dispatch(confirmarUsuarioExito(mensaje))
+
             
         } catch (error) {
             console.log(error)
@@ -146,4 +153,45 @@ export function resetearMensajeAction(){
 const resetearMensaje = () => ({
     type: RESETEAR_MENSAJE,
     payload: null
+})
+
+export function cambiarPasswordAction (correo)  {
+    return async (dispatch) => {
+
+        dispatch(cambiarPassword())
+
+        try {
+
+            const { data } = await clienteAxios.post('/usuarios/recovery', correo)
+
+            const mensaje = data.msg
+
+            dispatch(cambiarPasswordExito())
+            
+        } catch (error) {
+            
+            console.log(error)
+
+            const mensaje = {
+                msg: error.response.data.msg,
+                classes: 'bg-red-500 text-white font-bold w-full p-3 text-center rounded text-xl'
+            }
+
+            dispatch(cambiarPasswordError(mensaje))
+        }
+    }
+}
+
+const cambiarPassword = () => ({
+    type: CAMBIAR_PASSWORD,
+    payload: true
+})
+
+const cambiarPasswordExito = () => ({
+    type: CAMBIAR_PASSWORD_EXITO,
+})
+
+const cambiarPasswordError = (mensaje) => ({
+    type: CAMBIAR_PASSWORD_ERROR,
+    payload: mensaje
 })
