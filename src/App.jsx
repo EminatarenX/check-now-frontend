@@ -7,6 +7,7 @@ import InicioLayout from './components/InicioLayout'
 import IniciarSesion from './pages/IniciarSesion'
 import ConfirmarCuenta from './pages/ConfirmarCuenta'
 import CambiarContrasenia from './pages/CambiarContrasenia'
+import RecoveryPassword from './pages/RecoveryPassword'
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
             <Route path='/login' element={<IniciarSesion/>} />
             <Route path='/confirmar/:token' element={<ConfirmarCuenta/>} />
             <Route path='/cambiar-password' element={<CambiarContrasenia/>} />
-            <Route path='/recovery/:token' element={<h1>cambiaste</h1>}
+            <Route path='/recovery/:token' element={<RecoveryPassword/>} />
           </Route>
         </Routes>
       </Provider>
