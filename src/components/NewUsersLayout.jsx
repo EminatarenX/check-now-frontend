@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Outlet } from 'react-router-dom'
 
 export default function NewUsersLayout() {
@@ -8,7 +8,7 @@ export default function NewUsersLayout() {
 
     window.location.reload(false)
   }
-  return (
+  return  (
     <>
     <header className='bg-emerald-700 flex justify-end p-3 '>
         <button

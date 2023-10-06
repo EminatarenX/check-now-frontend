@@ -75,7 +75,7 @@ export default function NewUserForm() {
   }
 
 
-  return (
+  return  (
     <main className='bg-emerald-700'>
       <section className='flex justify-evenly p-5 lg:p-20 items-center flex-col lg:flex-row'>
         <h1 className='text-center text-white text-5xl font-bold'>Bienvenido a Check <span className='text--300'>Now!</span> <br /><span className='text-2xl text-emerald-200'>es un placer tenerte con nosotros</span></h1>
