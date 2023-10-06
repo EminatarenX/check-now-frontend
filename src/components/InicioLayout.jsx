@@ -1,12 +1,10 @@
 import { Outlet, Link } from 'react-router-dom';
 import { useState } from 'react';
 import logo from '../assets/img/Logo-header.svg'
-import { useSelector } from 'react-redux';
 
 export default function InicioLayout() {
   const [showMenu, setShowMenu] = useState(false);
-  const cargando = useSelector( state => state.usuarios.loading)
-  return cargando ? <main className='bg-emerald-700 text-center text-white h-screen'>cargando</main> :  (
+  return  (
     <>
         <header className='sticky top-0 bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-between items-center p-5'>
             <h1 className='text-white text-2xl font-bold'>
