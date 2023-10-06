@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loginUsuarioAction, resetearMensajeAction } from "../actions/usuariosActions"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function IniciarSesion() {
     const [correo, guardarCorreo ] = useState('')
     const [ password, guardarPassword ] = useState('')
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
     const cargando = useSelector( state => state.usuarios.loading)
@@ -18,13 +20,15 @@ export default function IniciarSesion() {
         }
 
         dispatch(loginUsuarioAction({correo,password}))
-
+        
         
     }
 
     useEffect(()=> {
         dispatch(resetearMensajeAction())
+
     },[])
+
   return (
     <main className={`bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-center pt-40`}>
 

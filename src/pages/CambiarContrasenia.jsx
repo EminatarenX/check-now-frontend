@@ -1,14 +1,14 @@
 import {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { cambiarPasswordAction } from '../actions/usuariosActions'
-import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'
 
 export default function CambiarContrasenia() {
     const [correo, guardarCorreo] = useState('')
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
     const error = useSelector( state => state.usuarios.error)
-
 
     const handleEnviar = (e) => {
         e.preventDefault()
@@ -18,6 +18,11 @@ export default function CambiarContrasenia() {
 
         dispatch(cambiarPasswordAction({correo}))
 
+        setTimeout(() => {
+            if(error){
+                navigate('/login')
+            }
+        }, 3000);
     }
 
   return (

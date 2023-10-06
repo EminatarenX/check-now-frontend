@@ -11,7 +11,13 @@ import {
     RESETEAR_MENSAJE,
     CAMBIAR_PASSWORD,
     CAMBIAR_PASSWORD_EXITO,
-    CAMBIAR_PASSWORD_ERROR
+    CAMBIAR_PASSWORD_ERROR,
+    RECOVERY_PASSWORD,
+    RECOVERY_PASSWORD_EXITO,
+    RECOVERY_PASSWORD_ERROR,
+    OBTENER_PERFIL,
+    OBTENER_PERFIL_EXITO,
+    OBTENER_PERFIL_ERROR
 
 } from '../types/index'
 
@@ -28,6 +34,7 @@ export default function usuariosReducer(state = initialState, action){
         case LOGIN_USUARIO_ERROR:
         case CONFIRMAR_USUARIO_ERROR:
         case CAMBIAR_PASSWORD_ERROR:
+        case RECOVERY_PASSWORD_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -80,12 +87,46 @@ export default function usuariosReducer(state = initialState, action){
         case CAMBIAR_PASSWORD: 
             return {
                 ...state,
-                error: null
+                error: null,
+                loading: action.payload
             }
         case CAMBIAR_PASSWORD_EXITO:
             return {
                 ...state,
+                loading: action.payload
                 
+            }
+
+        case RECOVERY_PASSWORD: 
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case RECOVERY_PASSWORD_EXITO:
+            return {
+                ...state,
+                loading: false,
+            }
+        case OBTENER_PERFIL:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case OBTENER_PERFIL_EXITO:
+            return {
+                ...state,
+                loading: false,
+                user: action.payload.usuario,
+                isAuthenticated: true
+            }
+        case OBTENER_PERFIL_ERROR:
+            return {
+                ...state,
+                loading: false,
+                user: null,
+                isAuthenticated: false
             }
         
         default: 
