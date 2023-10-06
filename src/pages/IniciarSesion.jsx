@@ -29,7 +29,7 @@ export default function IniciarSesion() {
 
     },[])
 
-  return (
+  return  (
     <main className={`bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-center pt-40`}>
 
         <form 

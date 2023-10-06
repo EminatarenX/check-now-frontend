@@ -17,7 +17,10 @@ import {
     RECOVERY_PASSWORD_ERROR,
     OBTENER_PERFIL,
     OBTENER_PERFIL_EXITO,
-    OBTENER_PERFIL_ERROR
+    OBTENER_PERFIL_ERROR,
+    NUEVO_USUARIO_DATOS,
+    NUEVO_USUARIO_DATOS_EXITO,
+    NUEVO_USUARIO_DATOS_ERROR
 } from '../types'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
@@ -77,10 +80,7 @@ export function loginUsuarioAction(usuario) {
 
             dispatch(loginUsuarioExito(data.token))
 
-            setTimeout(() => {
-                
-                window.location.reload()
-            }, 1500);
+
             
         } catch (error) {
             console.log(error)
@@ -308,5 +308,69 @@ const obtenerPerfilExito = (data) => ({
 
 const obtenerPerfilError = (mensaje) => ({
     type: OBTENER_PERFIL_ERROR,
+    payload: mensaje
+})
+
+export function formularioNuevoUsuarioAction(usuario){
+    return async (dispatch) => {
+        dispatch(formularioNuevoUsuario())
+
+        const token = localStorage.getItem('token')
+
+        if(!token) return
+
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios.post("/usuarios/registrar-datos", usuario, config)
+            console.log(data)
+            toast.success("Seras direccionado a un panel nuevo", {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+                dispatch(formularioNuevoUsuarioExito())
+
+            setTimeout(() => {
+                
+                window.location.reload()
+            }, 1500);
+            
+        } catch (error) {
+            console.log(error)
+            const mensaje = {
+                msg: error.response.data.msg,
+                classes: 'bg-red-500 text-white font-bold w-full p-2 text-center my-3 rounded',
+                error: true
+            }
+            dispatch(formularioNuevoUsuarioError(mensaje))
+
+        }
+    }
+}
+
+const formularioNuevoUsuario = () => ({
+    type: NUEVO_USUARIO_DATOS,
+    payload: true
+})
+
+const formularioNuevoUsuarioExito = () => ({
+    type: NUEVO_USUARIO_DATOS_EXITO,
+    payload: false
+})
+
+const formularioNuevoUsuarioError = (mensaje) => ({
+    type: NUEVO_USUARIO_DATOS_ERROR,
     payload: mensaje
 })

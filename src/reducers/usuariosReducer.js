@@ -17,7 +17,10 @@ import {
     RECOVERY_PASSWORD_ERROR,
     OBTENER_PERFIL,
     OBTENER_PERFIL_EXITO,
-    OBTENER_PERFIL_ERROR
+    OBTENER_PERFIL_ERROR,
+    NUEVO_USUARIO_DATOS,
+    NUEVO_USUARIO_DATOS_EXITO,
+    NUEVO_USUARIO_DATOS_ERROR
 
 } from '../types/index'
 
@@ -127,6 +130,24 @@ export default function usuariosReducer(state = initialState, action){
                 loading: false,
                 user: null,
                 isAuthenticated: false
+            }
+        case NUEVO_USUARIO_DATOS:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case NUEVO_USUARIO_DATOS_EXITO:
+            return {
+                ...state,
+                loading: action.payload,
+                error: null
+            }
+        case NUEVO_USUARIO_DATOS_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload.error
             }
         
         default: 
