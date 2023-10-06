@@ -80,6 +80,7 @@ export function loginUsuarioAction(usuario) {
 
             dispatch(loginUsuarioExito(data.token))
 
+            window.location.reload()
 
             
         } catch (error) {
@@ -285,6 +286,7 @@ export function obtenerPerfilAction(token) {
         try {
 
             const { data } = await clienteAxios('/usuarios/perfil', config)
+
 
             dispatch(obtenerPerfilExito(data))
 

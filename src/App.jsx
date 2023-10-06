@@ -50,8 +50,10 @@ function App() {
         navigate('/admin')
       } else if (usuario.role === 'user') {
         navigate('/dashboard')
-      }else {
+      }else if(auth && !usuario.role) {
         navigate('/new-user')
+      }else {
+        navigate('/')
       }
     }
   }, [usuario])
