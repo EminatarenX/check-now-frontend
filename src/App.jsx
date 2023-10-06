@@ -31,7 +31,7 @@ function App() {
       const token = localStorage.getItem('token')
 
       if(token) {
-        await dispatch(obtenerPerfilAction(token))
+        dispatch(obtenerPerfilAction(token))
 
       }
     
