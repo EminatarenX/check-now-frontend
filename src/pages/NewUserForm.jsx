@@ -16,8 +16,8 @@ export default function NewUserForm() {
 
   const dispatch = useDispatch()
    
-  const cargando = useSelector(state  => state.usuarios.loading)
-  const error = useSelector( state => state.usuarios.error)
+  const cargando = useSelector(state  => state.usuarios?.loading)
+  const error = useSelector( state => state.usuarios?.error)
 
   const handleFormulario = (e) => {
     const { name, value } = e.target
