@@ -23,7 +23,7 @@ export default function AdminLayout() {
   },[])
   return (
     <>
-      <header className='bg-emerald-950 p-10 lg:p-20 flex items-top justify-between '>
+      <header className='bg-emerald-950 p-5 lg:p-20 flex items-top justify-between '>
       <div className=''>
       <h1 className='text-white text-4xl capitalize font-semibold'>{rutaActual === "/admin" ? 'dashboard' : rutaActual.split('/')[2]}</h1>
      
