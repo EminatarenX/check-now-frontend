@@ -17,6 +17,7 @@ import NewUsersRoute from './components/NewUsersRoute'
 import NewUserForm from './pages/NewUserForm'
 
 import UserProtection from './components/UserProtection'
+import AdminConfig from './pages/admin/AdminConfig'
 import { obtenerPerfilAction } from './actions/usuariosActions'
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
 
           <Route path='/admin' element={ <RutaProtegida />}>
             <Route index element={<Dashboard />} />
+            <Route path='configuracion' element={<AdminConfig/>} />
           </Route>
 
           <Route path='/dashboard' element={<UserProtection/>}>

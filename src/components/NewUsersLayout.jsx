@@ -19,7 +19,7 @@ export default function NewUsersLayout() {
     </header>
     <Outlet/>
     <footer>
-          <div className='bg-emerald-700 flex justify-center items-center p-32'>
+          <div className='bg-emerald-700 flex justify-center items-center p-20 lg:p-40'>
             <p className='text-white text-center'>
               &copy; Todos los derechos reservados <br /> - {new Date().getFullYear()} -
             </p>

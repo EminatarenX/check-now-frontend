@@ -45,7 +45,7 @@ export default function InicioLayout() {
         <Outlet />
 
         <footer>
-          <div className='bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-center items-center p-40'>
+          <div className='bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-center items-center p-20 lg:p-40'>
           <p className='text-white text-center'>
               &copy; Todos los derechos reservados <br /> - {new Date().getFullYear()} -
             </p>
