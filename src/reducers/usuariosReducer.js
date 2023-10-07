@@ -114,7 +114,6 @@ export default function usuariosReducer(state = initialState, action){
         case OBTENER_PERFIL:
             return {
                 ...state,
-                loading: true,
                 error: null
             }
         case OBTENER_PERFIL_EXITO:
@@ -148,6 +147,14 @@ export default function usuariosReducer(state = initialState, action){
                 ...state,
                 loading: false,
                 error: action.payload.error
+            }
+        case 'CERRAR_SESION':
+            return {
+                ...state,
+                user: null,
+                isAuthenticated: false,
+                loading: false,
+                error : null
             }
         
         default: 

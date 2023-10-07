@@ -11,13 +11,19 @@ import RecoveryPassword from './pages/RecoveryPassword'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import RutaProtegida from './components/RutaProtegida'
-import Dashboard from './pages/admin/Dashboard'
 import UserDashboard from './pages/user/UserDashboard'
 import NewUsersRoute from './components/NewUsersRoute'
 import NewUserForm from './pages/NewUserForm'
 
 import UserProtection from './components/UserProtection'
+// admin pages
+import Dashboard from './pages/admin/Dashboard'
+import Plazas from './pages/admin/Plazas'
+import Nominas from './pages/admin/Nominas'
+import Trabajadores from './pages/admin/Trabajadores'
 import AdminConfig from './pages/admin/AdminConfig'
+import Solicitudes from './pages/admin/Solicitudes'
+
 import { obtenerPerfilAction } from './actions/usuariosActions'
 
 function App() {
@@ -78,6 +84,10 @@ function App() {
           <Route path='/admin' element={ <RutaProtegida />}>
             <Route index element={<Dashboard />} />
             <Route path='configuracion' element={<AdminConfig/>} />
+            <Route path='plazas' element={<Plazas/>} />
+            <Route path='nominas' element={<Nominas/>} />
+            <Route path='trabajadores' element={<Trabajadores/>} />
+            <Route path='solicitudes' element={<Solicitudes/>} />
           </Route>
 
           <Route path='/dashboard' element={<UserProtection/>}>

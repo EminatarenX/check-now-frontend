@@ -376,3 +376,18 @@ const formularioNuevoUsuarioError = (mensaje) => ({
     type: NUEVO_USUARIO_DATOS_ERROR,
     payload: mensaje
 })
+
+export function cerrarSesionAction () {
+    return (dispatch) => {
+
+        localStorage.removeItem('token')
+
+        toast.success('Sesion cerrada correctamente')
+        dispatch(cerrarSesion())
+    }
+}
+
+const cerrarSesion = () => ({
+    type: 'CERRAR_SESION',
+    payload: null
+})
