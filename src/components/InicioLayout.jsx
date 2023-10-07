@@ -14,7 +14,7 @@ export default function InicioLayout() {
             </h1>
             <button 
               onClick={() => setShowMenu(!showMenu)}
-              className='text-white text-2xl lg:hidden z-10'>
+              className='text-white text-2xl lg:hidden z-20'>
               &#9776;
             </button>
             <nav className='hidden lg:block'>
