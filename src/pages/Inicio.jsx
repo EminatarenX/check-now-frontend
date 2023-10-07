@@ -12,7 +12,7 @@ export default function Inicio() {
       </section>
       <section className="flex flex-col bg-emerald-800 p-20">
           <h2 className="text-white text-6xl font-bold text-center">¿Que es Check Now?</h2>
-        <article className="mt-20 flex gap-20">
+        <article className="mt-20 flex flex-col lg:flex-row gap-20 ">
          <div>
          <p className="text-white text-center text-xl">Check Now es una aplicacion web que te permite administrar tu negocio de manera mas sencilla, podras llevar un control de tus productos, ventas y clientes.</p>
          </div>
