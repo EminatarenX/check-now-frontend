@@ -4,8 +4,14 @@ import logo from '../assets/img/Logo-header.svg'
 
 export default function InicioLayout() {
   const [showMenu, setShowMenu] = useState(false);
+
+  const handleCerrarNavbar = (e) => {
+    if(e.target.closest('.aside')) {
+      setShowMenu(false)
+    }
+  }
   return  (
-    <>
+    <div onClick={handleCerrarNavbar}>
         <header className='sticky top-0 bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-between items-center p-5'>
             <h1 className='text-white text-2xl font-bold'>
               <Link to={'/'}>
@@ -32,7 +38,7 @@ export default function InicioLayout() {
               </ul>
             </nav>
             <nav 
-              className={`lg:hidden fixed top-0 flex flex-col ${showMenu ? ' right-0' : ' right-[-400px]'} h-screen w-[250px] bg-emerald-900 transition-all justify-center gap-20 z-10`}
+              className={`aside lg:hidden fixed top-0 flex flex-col ${showMenu ? ' right-0' : ' right-[-400px]'} h-screen w-[250px] bg-emerald-900 transition-all justify-center gap-20 z-10`}
             >
               <Link to={'/login'} className='text-white text-2xl font-semibold w-full py-3 text-center hover:bg-emerald-950'>
                 Iniciar Sesion
@@ -51,6 +57,6 @@ export default function InicioLayout() {
             </p>
           </div>
         </footer>
-    </>
+    </div>
   )
 }
