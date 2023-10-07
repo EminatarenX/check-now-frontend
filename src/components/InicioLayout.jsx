@@ -32,7 +32,7 @@ export default function InicioLayout() {
               </ul>
             </nav>
             <nav 
-              className={`lg:hidden fixed top-0 flex flex-col ${showMenu ? ' right-0' : ' right-[-400px]'} h-screen w-[250px] bg-emerald-900 transition-all justify-center gap-20`}
+              className={`lg:hidden fixed top-0 flex flex-col ${showMenu ? ' right-0' : ' right-[-400px]'} h-screen w-[250px] bg-emerald-900 transition-all justify-center gap-20 z-10`}
             >
               <Link to={'/login'} className='text-white text-2xl font-semibold w-full py-3 text-center hover:bg-emerald-950'>
                 Iniciar Sesion
