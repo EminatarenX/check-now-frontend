@@ -42,27 +42,18 @@ export const accionesDashboard = [
     },
 
     {
-        accion: 'Entradas',
-        classes: 'bg-green-500 ',
+        accion: 'Entradas / Salidas',
+        classes: 'bg-rose-600 col-span-2 md:col-span-1 md:row-span-2 xl:row-span-1 xl:col-span-2',
         icon: () => (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-[140px] h-[140px]">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-            </svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-[150px] h-[150px]">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+
 
         ),
-        path: '/admin/entradas'
+        path: '/admin/entradas-salidas'
     },
-    {
-        accion: 'Salidas',
-        classes: 'bg-rose-600 ',
-        icon: () => (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-40 h-40">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-            </svg>
 
-        ),
-        path: '/admin/salidas'
-    },
     {
         accion: 'Trabajadores',
         classes: 'bg-teal-600 ',

@@ -23,6 +23,7 @@ import Nominas from './pages/admin/Nominas'
 import Trabajadores from './pages/admin/Trabajadores'
 import AdminConfig from './pages/admin/AdminConfig'
 import Solicitudes from './pages/admin/Solicitudes'
+import EntradasSalidas from './pages/admin/EntradasSalidas'
 
 import { obtenerPerfilAction } from './actions/usuariosActions'
 
@@ -88,6 +89,7 @@ function App() {
             <Route path='nominas' element={<Nominas/>} />
             <Route path='trabajadores' element={<Trabajadores/>} />
             <Route path='solicitudes' element={<Solicitudes/>} />
+            <Route path='entradas-salidas' element={<EntradasSalidas/>} />
           </Route>
 
           <Route path='/dashboard' element={<UserProtection/>}>
