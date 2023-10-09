@@ -57,7 +57,7 @@ export default function NewUserForm() {
       return
     }
 
-    if(formulario.telefono.length > 10){
+    if(formulario.telefono.length !== 10){
       toast.warning('El telefono debe ser tener 10 digitos',{
         position: "bottom-right",
         autoClose: 3000,

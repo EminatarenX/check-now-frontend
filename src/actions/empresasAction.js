@@ -29,10 +29,8 @@ export function actualizarDatosEmpresaAction(datos){
         try {
             const { data } = await clienteAxios.post(`/empresas`, datos, config)
             toast.success('Datos de la empresa actualizados correctamente')
-            console.log(data)
             dispatch(actualizarDatosEmpresaExito(data))
         } catch (error) {
-            console.log(error)
             toast.error('Error al actualizar los datos de la empresa')
             dispatch(actualizarDatosEmpresaError())
         }
@@ -72,7 +70,6 @@ export function obtenerDatosDeEmpresaAction(){
             const { data } = await clienteAxios.get(`/empresas`, config)
             dispatch(obtenerDatosEmpresaExito(data))
         } catch (error) {
-            console.log(error)
             dispatch(obtenerDatosEmpresaError())
         }
     }

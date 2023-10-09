@@ -356,6 +356,7 @@ export function formularioNuevoUsuarioAction(usuario){
                 classes: 'bg-red-500 text-white font-bold w-full p-2 text-center my-3 rounded',
                 error: true
             }
+            toast.error(mensaje.msg)
             dispatch(formularioNuevoUsuarioError(mensaje))
 
         }

@@ -146,7 +146,7 @@ export default function usuariosReducer(state = initialState, action){
             return {
                 ...state,
                 loading: false,
-                error: action.payload.error
+                
             }
         case 'CERRAR_SESION':
             return {

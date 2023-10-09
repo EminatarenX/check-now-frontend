@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 import { registrarUsuarioAction, resetearMensajeAction } from "../actions/usuariosActions"
 
 export default function Registrar() {
 
     const [correo, guardarCorreo ] = useState('')
     const [ password, guardarPassword ] = useState('')
+    const [ repetirPassword, guardarRepetirPassword ] = useState('')
 
     const dispatch = useDispatch()
 
@@ -19,7 +21,16 @@ export default function Registrar() {
         e.preventDefault()
 
         if([correo, password].includes('')){
+            toast.error('Todos los campos son obligatorios')
+            return
+        }
 
+        if( password.length < 6){
+            toast.error('La contraseña debe tener al menos 6 caracteres')
+            return
+        }
+        if( password !== repetirPassword){
+            toast.error('Las contraseñas no coinciden')
             return
         }
 
@@ -47,23 +58,27 @@ export default function Registrar() {
                 placeholder="Correo Electronico"
                 className={`bg-transparent text-white  border-b-2 border-emerald-300 focus:outline-none p-2 placeholder:text-white focus:scale-105 transition-all`}
                 onChange={e => guardarCorreo(e.target.value)}
+                value={correo}
 
             />
             
             <input type="password"
                 placeholder="Contraseña"
                 className={`bg-transparent text-white  border-b-2 border-emerald-300 focus:outline-none p-2 placeholder:text-white focus:scale-105 transition-all`}
+                value={password}
                 onChange={e => guardarPassword(e.target.value)}
             />
             
             <input type="password"
                 placeholder="Repetir Contraseña"
                 className={`bg-transparent text-white  border-b-2 border-emerald-300 focus:outline-none p-2 placeholder:text-white focus:scale-105 transition-all`}
-                onChange={e => guardarPassword(e.target.value)}
+                value={repetirPassword}
+                onChange={e => guardarRepetirPassword(e.target.value)}
             />
             <input 
                 className="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded "
             type="submit" value="Registrar" 
+            
             
             />
 

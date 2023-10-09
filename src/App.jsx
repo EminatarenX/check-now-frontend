@@ -47,8 +47,8 @@ function App() {
 
     verificar()
 
-  },[])
 
+  },[])
 
   useEffect(() => {
     // Observar cambios en el estado de usuario
@@ -58,13 +58,14 @@ function App() {
         navigate('/admin')
       } else if (usuario.role === 'user') {
         navigate('/dashboard')
-      }else if(auth && !usuario.role) {
+      }else if(usuario.role === 'new') {
         navigate('/new-user')
       }else {
         navigate('/')
       }
     }
   }, [usuario])
+  
 
 
 
