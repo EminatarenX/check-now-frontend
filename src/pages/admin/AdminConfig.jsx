@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 
 // funciones de redux
-import { actualizarDatosEmpresaAction, obtenerDatosDeEmpresaAction } from '../../actions/empresasAction';
+import { actualizarDatosEmpresaAction } from '../../actions/empresasAction';
 
 export default function AdminConfig() {
     const usuario = useSelector( state => state.usuarios.user)
@@ -94,7 +94,6 @@ export default function AdminConfig() {
             })
         }
 
-        dispatch(obtenerDatosDeEmpresaAction())
     },[])
 
     useEffect(() => {

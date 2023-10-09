@@ -3,17 +3,31 @@ import { accionesDashboard } from "../../helpers"
 import { useNavigate } from "react-router-dom"
 import AccionDashboard from "../../components/AccionDashboard"
 import { cerrarSesionAction } from "../../actions/usuariosActions"
-
+import { useEffect } from "react"
+import { obtenerDatosDeEmpresaAction } from "../../actions/empresasAction"
 export default function Dashboard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const datos_empresa = useSelector( state => state.empresa.datos)
 
   const cerrarSesion = () => {
       dispatch(cerrarSesionAction())
       navigate('/login')
   }
 
+
+
   const usuario = useSelector( state => state.usuarios.user)
+
+  useEffect(()=> {
+    if(!datos_empresa){
+
+      dispatch(obtenerDatosDeEmpresaAction())
+    }
+  })
+
+
   return (
     <main className='bg-emerald-950'>
 
