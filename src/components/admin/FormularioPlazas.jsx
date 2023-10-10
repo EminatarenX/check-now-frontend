@@ -50,8 +50,9 @@ export default function FormularioPlazas({setFormularioPlaza}) {
           />
             <div className='flex justify-evenly flex-col xl:flex-row items-center'>
             <div className="mt-3 grid">
-            <p className='border-2 border-green-600 px-5 py-3 text-emerald-800 rounded'>Horario de entrada</p>
+            <label htmlFor='entrada' className='border-2 border-green-600 px-5 py-3 text-emerald-800 rounded'>Horario de entrada</label>
             <input type="time"
+            name='entrada'
             placeholder="Horario de Entrada"
             className={`flex- bg-transparent text-emerald-900  border-b-2 border-emerald-300 focus:outline-none p-3 placeholder:text-emerald-700  transition-all`}
 
@@ -59,8 +60,9 @@ export default function FormularioPlazas({setFormularioPlaza}) {
             </div>
           
             <div className="mt-3 grid">
-            <p className='border-2 border-rose-500 px-5 py-3 text-emerald-800 rounded'>Horario de salida</p>
+            <label htmlFor='salida' className='border-2 border-rose-500 px-5 py-3 text-emerald-800 rounded'>Horario de salida</label>
             <input type="time"
+            name='salida'
             placeholder="Horario de salida"
             className={`flex- bg-transparent text-emerald-900  border-b-2 border-emerald-300 focus:outline-none p-3 placeholder:text-emerald-700  transition-all`}
 
