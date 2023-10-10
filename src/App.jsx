@@ -32,8 +32,8 @@ function App() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const usuario = useSelector(state => state.usuarios?.user)
-  const auth = useSelector(state => state.usuarios.isAuthenticated)
 
+  
   useEffect(() => {
     const verificar = async() => {
       const token = localStorage.getItem('token')
@@ -51,6 +51,7 @@ function App() {
   },[])
 
   useEffect(() => {
+
     // Observar cambios en el estado de usuario
     if (usuario) {
 

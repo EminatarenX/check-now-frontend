@@ -126,7 +126,7 @@ export function confirmarUsuarioAction(token){
 
             
         } catch (error) {
-            console.log(error)
+
             const mensaje = {
                 msg: error.response.data.msg,
                 classes: 'bg-emerald-500 text-white font-bold w-full p-3 text-center rounded text-3xl'
@@ -291,7 +291,6 @@ export function obtenerPerfilAction(token) {
             dispatch(obtenerPerfilExito(data))
 
         }catch(error){
-            console.log(error)
 
             dispatch(obtenerPerfilError(error.response.data.msg))
         }

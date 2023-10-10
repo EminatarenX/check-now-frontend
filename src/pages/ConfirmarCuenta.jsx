@@ -20,7 +20,7 @@ export default function ConfirmarCuenta() {
   return (
     <div className='bg-gradient-to-r from-emerald-800 to-emerald-500 h-80 p-10 flex flex-col '> 
         {
-            cargando ? <p>Cargando...</p> : null
+            cargando ? <p className={`text-white text-center font-semibold text-2xl`}>Cargando...</p> : <p className={`text-white text-center font-semibold text-2xl`}>Confirmar cuenta</p>
         }
         {
             error ? <p className={error.classes}>{error.msg}</p> : null
