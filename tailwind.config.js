@@ -18,8 +18,8 @@ export default {
         }
       },
       animation: {
-        entrada: 'entrada 1s ease',
-        salida: 'salida 1s ease'
+        entrada: 'entrada .3s ease',
+        salida: 'salida .3s ease'
       }
     },
   },

@@ -3,7 +3,7 @@ import React from 'react'
 export default function Entrada({entrada}) {
     const {nombre, apellido, fecha, plaza, horaEntrada} = entrada
   return (
-    <div className="bg-emerald-800 flex justify-between rounded w-full p-4 min-w-[800px]">
+    <div className="bg-emerald-800 flex justify-between rounded w-full p-4 min-w-[800px] animate-entrada">
        
     <p className="text-white text-lg font-semibold">{nombre}</p>
     <p className="text-white text-lg font-semibold">{apellido}</p>

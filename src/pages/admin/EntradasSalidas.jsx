@@ -119,7 +119,7 @@ export default function EntradasSalidas() {
                   No hay {filtro === 'entradas' ? 'entradas' : 'salidas'} registradas
                 </p>
               ) : (
-                <article className='flex flex-col bg-emerald-950 rounded overflow-y-auto max-h-[600px] p-5 gap-4 mt-5'>
+                <article className={`flex flex-col ${filtro === 'entradas' ? 'bg-emerald-950' : 'bg-rose-950'} rounded overflow-y-auto max-h-[600px] p-5 gap-4 mt-5`}>
                   {
                     filtro === 'entradas' ? (
                       entradas.map( entrada => (
