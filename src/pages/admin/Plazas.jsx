@@ -4,30 +4,30 @@ import FormularioPlazas from '../../components/admin/FormularioPlazas'
 
 export default function Plazas() {
   const [plazas, setPlazas] = useState([
-    // {
-    //   nombre: 'contador publico',
-    //   descripcion: 'Una descripcion de la plaza nomas',
-    //   estado: 'Disponible',
-    //   salario: 60000
-    // },
-    // {
-    //   nombre: 'contador publico',
-    //   descripcion: 'Una descripcion de la plaza nomas',
-    //   estado: 'Disponible',
-    //   salario: 60000
-    // },
-    // {
-    //   nombre: 'contador publico',
-    //   descripcion: 'Una descripcion de la plaza nomas',
-    //   estado: 'Disponible',
-    //   salario: 60000
-    // },
-    // {
-    //   nombre: 'contador publico',
-    //   descripcion: 'Una descripcion de la plaza nomas',
-    //   estado: 'Disponible',
-    //   salario: 60000
-    // }
+    {
+      nombre: 'contador publico',
+      descripcion: 'Una descripcion de la plaza nomas',
+      estado: 'Disponible',
+      salario: 60000
+    },
+    {
+      nombre: 'contador publico',
+      descripcion: 'Una descripcion de la plaza nomas',
+      estado: 'Disponible',
+      salario: 60000
+    },
+    {
+      nombre: 'contador publico',
+      descripcion: 'Una descripcion de la plaza nomas',
+      estado: 'Disponible',
+      salario: 60000
+    },
+    {
+      nombre: 'contador publico',
+      descripcion: 'Una descripcion de la plaza nomas',
+      estado: 'Disponible',
+      salario: 60000
+    }
   ])
 
   const [formularioPlaza, setFormularioPlaza] = useState(false)

@@ -1,41 +1,85 @@
 import CheckInOut from "../../components/admin/CheckInOut"
 import { useState } from "react"
+import Salida from "../../components/admin/Salida"
+import Entrada from "../../components/admin/Entrada"
 export default function EntradasSalidas() {
   const [filtro, setFiltro ] = useState('entradas')
 
-  const [checks, setChecks ] = useState([
-    // {
-    //   nombre: 'Emiliano',
-    //   apellido: 'Gonzalez',
-    //   fecha: '2021-10-01',
-    //   plaza: 'Contador',
-    //   horaEntrada: '08:00',
-    //   horaSalida: '16:00',
-    // },
-    // {
-    //   nombre: 'Emiliano',
-    //   apellido: 'Gonzalez',
-    //   fecha: '2021-10-01',
-    //   plaza: 'Contador',
-    //   horaEntrada: '08:00',
-    //   horaSalida: '16:00',
-    // },
-    // {
-    //   nombre: 'Emiliano',
-    //   apellido: 'Gonzalez',
-    //   fecha: '2021-10-01',
-    //   plaza: 'Contador',
-    //   horaEntrada: '08:00',
-    //   horaSalida: '16:00',
-    // },
-    // {
-    //   nombre: 'Emiliano',
-    //   apellido: 'Gonzalez',
-    //   fecha: '2021-10-01',
-    //   plaza: 'Contador',
-    //   horaEntrada: '08:00',
-    //   horaSalida: '16:00',
-    // },
+  const [entradas, setEntradas ] = useState([
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2021-10-01',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2021-10-01',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2021-10-01',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2021-10-01',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+
+
+    },
+  ])
+  const [salidas, setSalidas ] = useState([
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2021-10-01',
+      plaza: 'Contador',
+
+      horaSalida: '16:00',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2021-10-01',
+      plaza: 'Contador',
+
+      horaSalida: '16:00',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2021-10-01',
+      plaza: 'Contador',
+
+      horaSalida: '16:00',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2021-10-01',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      horaSalida: '16:00',
+
+    },
   ])
   return (
     <main className="bg-emerald-950">
@@ -70,32 +114,28 @@ export default function EntradasSalidas() {
                 </nav>
                  
 
-              { checks.length === 0 ? ( 
+              { entradas.length === 0 ? ( 
                 <p className="bg-emerald-300 text-emerald-700 text-center mt-5 p-5 rounded">
                   No hay {filtro === 'entradas' ? 'entradas' : 'salidas'} registradas
                 </p>
               ) : (
-                <article className="block w-full overflow-x-auto">
-                <table className='w-[800px] mt-4 '>
-                  <thead className='bg-emerald-600 text-emerald-100'>
-                    <tr>
-                      <th className='p-2'>Nombre</th>
-                      <th className='p-2'>Apellido</th>
-                      <th className='p-2'>Fecha</th>
-                      <th className='p-2'>Plaza</th>
-                      <th className='p-2'>Hora de entrada</th>
-                      <th className='p-2'>Hora de salida</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      checks.map((check, index) => (
-                        <CheckInOut key={index} check={check} />
+                <article className='flex flex-col bg-emerald-950 rounded overflow-y-auto max-h-[600px] p-5 gap-4 mt-5'>
+                  {
+                    filtro === 'entradas' ? (
+                      entradas.map( entrada => (
+                        <Entrada 
+                          key={entrada.id} 
+                          entrada={entrada}
+                        />
                       ))
-                    }
-                  </tbody>
-                </table>
-                </article>
+                    ) : (
+                      salidas.map( salida => (
+                        <Salida key={salida.id} salida={salida} />
+                      ))
+                    )
+                    
+                  }
+               </article>
   
                 )}
           </article>
