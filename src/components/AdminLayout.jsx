@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { formatearFecha } from '../helpers'
 
 
@@ -11,9 +10,6 @@ export default function AdminLayout() {
   const location = useLocation()
   const rutaActual = location.pathname
 
-  const usuario = useSelector( state => state.usuarios.user)
-
-
   useEffect(()=> {
     const interval = setInterval(()=> {
       setFecha(new Date())
@@ -23,13 +19,13 @@ export default function AdminLayout() {
   },[])
   return (
     <>
-      <header className='bg-emerald-950 p-5 lg:p-20 flex items-top justify-between '>
+      <header className='bg-emerald-950 p-5 items-end lg:p-20 flex lg:items-start justify-between '>
       <div className=''>
       <h1 className='text-white text-4xl capitalize font-semibold'>{rutaActual === "/admin" ? 'dashboard' : rutaActual === '/admin/entradas-salidas' ? 'Entradas / salidas' : rutaActual.split('/')[2]}</h1>
      
       <p className="text-light text-emerald-200 text-xs mt-4">{formatearFecha(new Date().toISOString())}</p>
       </div>
-      <p className='text-emerald-300 text-2xl font-semibold'>
+      <p className='text-emerald-300 text-lg lg:text-2xl font-semibold'>
         {`${new Date().getHours()} : ${new Date().getMinutes()}  `}
         <span className='text-xs text-emerald-800'>
         {new Date().getHours() >= 12 ? 'pm': 'am'}

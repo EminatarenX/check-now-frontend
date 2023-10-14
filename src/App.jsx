@@ -24,6 +24,8 @@ import Trabajadores from './pages/admin/Trabajadores'
 import AdminConfig from './pages/admin/AdminConfig'
 import Solicitudes from './pages/admin/Solicitudes'
 import EntradasSalidas from './pages/admin/EntradasSalidas'
+import Departamentos from './pages/admin/Departamentos'
+import Categoria from './pages/admin/Categoria'
 
 import { obtenerPerfilAction } from './actions/usuariosActions'
 
@@ -87,11 +89,12 @@ function App() {
           <Route path='/admin' element={ <RutaProtegida />}>
             <Route index element={<Dashboard />} />
             <Route path='configuracion' element={<AdminConfig/>} />
-            <Route path='plazas' element={<Plazas/>} />
+            <Route path='departamentos' element={<Departamentos/>} />
             <Route path='nominas' element={<Nominas/>} />
             <Route path='trabajadores' element={<Trabajadores/>} />
             <Route path='solicitudes' element={<Solicitudes/>} />
             <Route path='entradas-salidas' element={<EntradasSalidas/>} />
+            <Route path="departamentos/:departamento" element={<Categoria/>} />
           </Route>
 
           <Route path='/dashboard' element={<UserProtection/>}>
