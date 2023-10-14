@@ -1,11 +1,39 @@
-import { iconosDepartamentos } from "../../helpers"
+
 import { useState } from "react"
-export default function FormularioDepartamento({setFormularioDepartamento}) {
+import { toast } from "react-toastify"
+
+// Redux
+import { useDispatch } from "react-redux"
+import { crearDepartamentoAction } from "../../actions/empresasAction"
+
+
+export default function FormularioDepartamento({setFormularioDepartamento, iconosDepartamentos}) {
+
+    const dispatch = useDispatch()
+
     const handleCrearDepartamento = (e) => {
         e.preventDefault()
-        console.log('creando Departamento')
+
+        if([nombreDepartamento, iconoDepartamento].includes('')) {
+            toast.error('Todos los campos son obligatorios')
+            return
+        }
+       
+        const departamento = {
+            nombre: nombreDepartamento,
+            icon: iconoDepartamento
+        }
+        dispatch(crearDepartamentoAction(departamento))
+        setFormularioDepartamento(false)
     }
+
     const [ iconoDepartamento, setIconoDepartamento ] = useState('')
+    const [ nombreDepartamento, setNombreDepartamento ] = useState('')
+
+   
+
+
+
   return (
     <div className='w-full fixed top-0 h-screen bg-emerald-950 bg-opacity-90 p-5 xl:p-20'>
         <div className='flex justify-end m-2 xl:m-0'>
@@ -19,9 +47,11 @@ export default function FormularioDepartamento({setFormularioDepartamento}) {
             onSubmit={handleCrearDepartamento} 
             className='bg-white rounded-2xl p-5 lg:p-10 flex flex-col animate-entrada'>
         <input type="text"
-            placeholder="Nombre o titulo del departamento"
+            placeholder="Nombre o titulo del departamento (ej: 'Ventas, Marketing, etc') "
             className={`bg-transparent text-emerald-900  border-b-2 border-emerald-300 focus:outline-none p-3 placeholder:text-emerald-700  transition-all`}
-
+            value={nombreDepartamento}
+            name="nombre"
+            onChange={(e) => setNombreDepartamento(e.target.value)}
           />
 
         <p className='text-emerald-800 text-lg mt-5 pl-4'>Icono del departamento</p>
@@ -31,6 +61,7 @@ export default function FormularioDepartamento({setFormularioDepartamento}) {
                 iconosDepartamentos.map( (icono, i) => (
                     <button 
                         onClick={() => setIconoDepartamento(icono.nombre)}
+                        type="button"
                         key={i} className={`flex flex-col items-center gap-2 active:bg-emerald-200 hover:bg-emerald-100 ${iconoDepartamento === icono.nombre && 'bg-emerald-200' } rounded`}>
                         {icono.icon()}
                     </button>

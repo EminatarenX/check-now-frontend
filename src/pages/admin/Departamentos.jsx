@@ -1,25 +1,37 @@
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect } from 'react'
 import FormularioDepartamento from '../../components/admin/FormularioDepartamento'
+import DepartamentoInList from '../../components/admin/DepartamentoInList'
 import { useNavigate } from 'react-router-dom'
+import '../../styles/helpers.css'
+
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { iconosDepartamentos } from '../../helpers'
+import { obtenerDepartamentosAction } from '../../actions/empresasAction'
 
 export default function Departamentos() {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const departamentos = useSelector(state => state.empresa.departamentos)
+  const loading = useSelector(state => state.empresa.loading)
 
-    const [departamentos, setDepartamentos] = useState([
-        {nombre: 'contabilidad',},
-        {nombre: 'software',},
-        {nombre: 'recursos-humanos',},
-        {nombre: 'ventas',}
-    ])
-    const [ formularioDepartamento, setFormularioDepartamento ] = useState(false)
+  const [formularioDepartamento, setFormularioDepartamento] = useState(false)
+
+
+  useEffect(() => {
+    dispatch(obtenerDepartamentosAction())
+
+  }, [])
+
+
   return (
     <Fragment>
-        {formularioDepartamento && <FormularioDepartamento setFormularioDepartamento={setFormularioDepartamento} />}
-   
-    <main className="bg-emerald-950">
+      {formularioDepartamento && <FormularioDepartamento 
+        setFormularioDepartamento={setFormularioDepartamento}
+       iconosDepartamentos={iconosDepartamentos} />}
+
+      <main className="bg-emerald-950">
         <section className="bg-emerald-200 rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20">
-          {/* <h1 className="text-emerald-900 text-4xl font-semibold"></h1> */}
-          <p className="text-lg text-emerald-600 mt-2">Crea, modifica, elimina departamentos</p>
 
           <article className='flex justify-between flex-col lg:flex-row py-5 border-b-2 border-emerald-300'>
             {
@@ -29,11 +41,13 @@ export default function Departamentos() {
                   onClick={() => setFormularioDepartamento(true)}
                 >Crear Departamento
                 </button>
-              
+
               )
             }
           </article>
+          
           {departamentos.length === 0 ? (
+
             <article className='flex flex-col items-center rounded p-5 justify-center bg-emerald-300'>
               <p className='text-emerald-700 text-2xl'>Agrega un departamento</p>
               <button className='text-emerald-700 bg-transparent rounded-2xl'
@@ -47,14 +61,16 @@ export default function Departamentos() {
             </article>
           ) : (<article className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-5 gap-5">
             {
+              loading ? <p className='text-emerald-800 text-4xl mt-5 pl-4 font-semibold'>Cargando...</p> :
               departamentos.length > 0 &&
               departamentos.map((departamento, i) => (
-                <button 
-                    onClick={() => navigate(`/admin/departamentos/${departamento.nombre}`)}
-                    key={i} className="bg-emerald-100 rounded-lg p-5 flex flex-col gap-3">
-                    { departamento.nombre.replace(/-/g, ' ') }
-                    
-                </button>
+                <DepartamentoInList 
+                  departamento={departamento} 
+                  i={i} 
+                  navigate={navigate} 
+                  iconosDepartamentos={iconosDepartamentos} 
+                  key={i}
+                />
               ))
             }
           </article>)}
@@ -62,6 +78,6 @@ export default function Departamentos() {
         </section>
 
       </main>
-      </Fragment>
+    </Fragment>
   )
 }

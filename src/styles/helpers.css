@@ -1,0 +1,46 @@
+.boton-editar-departamento {
+    position: absolute;
+    bottom: -30px;
+    width: 50%;
+    right: 0;
+    background-color: #94fc8b;
+    border: 1px solid #e3e3e3;
+    color: #004e3c;
+    font-weight: 500;
+    padding: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    transition: all 0.3s ease;
+    animation: appear 0.3s ease;
+}
+
+.boton-eliminar-departamento{
+    position: absolute;
+    bottom: -30px;
+    width: 50%;
+    left: 0;
+    background-color: #fc8b8b;
+    border: 1px solid #e3e3e3;
+    color: #3c0000;
+    font-weight: 500;
+    padding: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    transition: all 0.3s ease;
+    animation: appear 0.3s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

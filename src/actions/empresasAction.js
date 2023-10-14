@@ -4,7 +4,13 @@ import {
     ACTUALIZAR_DATOS_EMPRESA_ERROR,
     OBTENER_DATOS_EMPRESA,
     OBTENER_DATOS_EMPRESA_EXITO,
-    OBTENER_DATOS_EMPRESA_ERROR
+    OBTENER_DATOS_EMPRESA_ERROR,
+    OBTENER_DEPARTAMENTOS_EMPRESA,
+    OBTENER_DEPARTAMENTOS_EMPRESA_EXITO,
+    OBTENER_DEPARTAMENTOS_EMPRESA_ERROR,
+    CREAR_DEPARTAMENTO,
+    CREAR_DEPARTAMENTO_EXITO,
+    CREAR_DEPARTAMENTO_ERROR
 
 } from '../types'
 
@@ -88,4 +94,92 @@ const obtenerDatosEmpresaExito = (datos) => ({
 const obtenerDatosEmpresaError = () => ({
     type: OBTENER_DATOS_EMPRESA_ERROR,
 
+})
+
+export function obtenerDepartamentosAction () {
+    return async (dispatch) => {
+        dispatch(obtenerDepartamentos())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await clienteAxios.get('/departamentos', config)
+
+            dispatch(obtenerDepartamentosExito(data))
+
+        } catch (error) {
+
+            dispatch(obtenerDepartamentosError(error.response.data.msg))
+            
+        }
+    }
+}
+
+const obtenerDepartamentos = () => ({
+    type: OBTENER_DEPARTAMENTOS_EMPRESA,
+    payload: true
+})
+
+const obtenerDepartamentosExito = (datos) => ({
+    type: OBTENER_DEPARTAMENTOS_EMPRESA_EXITO,
+    payload: datos.departamentos
+})
+
+const obtenerDepartamentosError = (error) => ({
+    type: OBTENER_DEPARTAMENTOS_EMPRESA_ERROR,
+    payload: error
+})
+
+export function crearDepartamentoAction (departamento) {
+    return async (dispatch) => {
+        dispatch( crearDepartamento() )
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await clienteAxios.post('/departamentos/crear', departamento, config)
+
+            dispatch(crearDepartamentoExito(data.departamento))
+
+            toast.success('Departamento creado correctamente')
+
+        } catch (error) {
+            console.log(error)
+            dispatch(crearDepartamentoError(error.response.data.msg))
+            toast.error('Error al crear el departamento')
+        }
+    }
+}
+
+const crearDepartamento = () => ({
+    type: CREAR_DEPARTAMENTO,
+    payload: true
+})
+
+const crearDepartamentoExito = (departamento) => {
+    return {
+        type: CREAR_DEPARTAMENTO_EXITO,
+        payload: departamento
+    }
+}
+
+const crearDepartamentoError = (error) => ({
+    type: CREAR_DEPARTAMENTO_ERROR,
+    payload: error
 })
