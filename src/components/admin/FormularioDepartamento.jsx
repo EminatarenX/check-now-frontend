@@ -35,7 +35,7 @@ export default function FormularioDepartamento({setFormularioDepartamento, icono
 
 
   return (
-    <div className='w-full fixed top-0 h-screen bg-emerald-950 bg-opacity-90 p-5 xl:p-20'>
+    <div className='w-full fixed top-0 h-screen bg-emerald-950 bg-opacity-90 p-5 xl:p-20 z-10'>
         <div className='flex justify-end m-2 xl:m-0'>
         <button >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-14 w-14 xl:h-20 xl:w-20 text-emerald-900 hover:text-emerald-700 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="white" onClick={()=> setFormularioDepartamento(false)}>
