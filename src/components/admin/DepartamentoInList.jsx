@@ -1,6 +1,13 @@
 import { useEffect } from "react"
+import Swal from "sweetalert2";
+import { eliminarDepartamentoAction } from "../../actions/empresasAction";
+import { useDispatch } from "react-redux";
 
-export default function DepartamentoInList({departamento, i, navigate, iconosDepartamentos}) {
+export default function DepartamentoInList({departamento, i, navigate, iconosDepartamentos, setEditarDepartamento, setFormularioDepartamento,
+  setIconoDepartamento, setNombreDepartamento, setDepartamentoId
+}) {
+  const dispatch = useDispatch()
+
     useEffect(()=> {
     if(departamento){
 
@@ -22,8 +29,29 @@ export default function DepartamentoInList({departamento, i, navigate, iconosDep
       };
 
       const handleClickEliminar = () => {
-        console.log('Eliminar departamento');
+        Swal.fire({
+          title: '¿Estás seguro?',
+          text: "Esta acción no se puede revertir",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#10B981',
+          cancelButtonColor: '#EF4444',
+          confirmButtonText: 'Sí, eliminar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // TODO: Eliminar departamento
+            dispatch(eliminarDepartamentoAction(departamento._id))
+          }
+        })
       };
+      const handleClick = () => {
+        setNombreDepartamento(departamento.nombre)
+        setIconoDepartamento(departamento.icon)
+        setDepartamentoId(departamento._id)
+        setEditarDepartamento(true)
+        setFormularioDepartamento(true)
+      }
   
       const handleMouseLeave = () => {
         const boton = departamentoDom.querySelector('.boton-editar-departamento');
@@ -35,9 +63,6 @@ export default function DepartamentoInList({departamento, i, navigate, iconosDep
           departamentoDom.removeChild(botonEliminar);
         }
       };
-      const handleClick = () => {
-        navigate(`/admin/departamentos/editar/${departamento._id}`)
-      }
 
 
          // Agregar eventos solo una vez al cargar el componente
@@ -56,10 +81,10 @@ export default function DepartamentoInList({departamento, i, navigate, iconosDep
   return (
     <div
     
-    className="bg-emerald-100 rounded-lg p-3 gap-3 departamento relative">
+    className="bg-emerald-100 rounded-lg gap-3 departamento relative">
     <button
       onClick={() => navigate(`/admin/departamentos/${departamento.nombre}`)} 
-       className="flex items-center gap-3 capitalize">
+       className="flex items-center p-5 gap-3 capitalize">
 
         {iconosDepartamentos.find((icono) => icono.nombre === departamento.icon) ? (
         iconosDepartamentos.find((icono) => icono.nombre === departamento.icon).icon()

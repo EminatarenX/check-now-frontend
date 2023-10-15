@@ -26,7 +26,6 @@ import Solicitudes from './pages/admin/Solicitudes'
 import EntradasSalidas from './pages/admin/EntradasSalidas'
 import Departamentos from './pages/admin/Departamentos'
 import Categoria from './pages/admin/Categoria'
-import EditarDepartamento from './pages/admin/EditarDepartamento'
 
 import { obtenerPerfilAction } from './actions/usuariosActions'
 
@@ -96,7 +95,6 @@ function App() {
             <Route path='solicitudes' element={<Solicitudes/>} />
             <Route path='entradas-salidas' element={<EntradasSalidas/>} />
             <Route path="departamentos/:departamento" element={<Categoria/>} />
-            <Route path='departamentos/editar/:id' element={<EditarDepartamento/>} />
           </Route>
 
           <Route path='/dashboard' element={<UserProtection/>}>

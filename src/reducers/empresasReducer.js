@@ -10,7 +10,13 @@ import {
     OBTENER_DEPARTAMENTOS_EMPRESA_ERROR,
     CREAR_DEPARTAMENTO,
     CREAR_DEPARTAMENTO_EXITO,
-    CREAR_DEPARTAMENTO_ERROR
+    CREAR_DEPARTAMENTO_ERROR,
+    MODIFICAR_DEPARTAMENTO,
+    MODIFICAR_DEPARTAMENTO_EXITO,
+    MODIFICAR_DEPARTAMENTO_ERROR,
+    ELIMINAR_DEPARTAMENTO,
+    ELIMINAR_DEPARTAMENTO_EXITO,
+    ELIMINAR_DEPARTAMENTO_ERROR
 
 } from '../types'
 
@@ -55,7 +61,8 @@ export default function empresasReducer( state = initialState, action){
         case OBTENER_DATOS_EMPRESA_ERROR:
         case OBTENER_DEPARTAMENTOS_EMPRESA_ERROR:
         case CREAR_DEPARTAMENTO_ERROR:
-        
+        case MODIFICAR_DEPARTAMENTO_ERROR:
+        case ELIMINAR_DEPARTAMENTO_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -86,6 +93,34 @@ export default function empresasReducer( state = initialState, action){
                 ...state,
                 loading: false,
                 departamentos: [...state.departamentos, action.payload]
+            }
+        case MODIFICAR_DEPARTAMENTO:
+            return {
+                ...state,
+                loading: action.payload,
+                error: null,
+                mensaje: null
+            }
+        case MODIFICAR_DEPARTAMENTO_EXITO:
+            return {
+                ...state, 
+                loading: false,
+                departamentos: state.departamentos.map(departamento =>
+                   departamento._id === action.payload._id ? departamento = action.payload : departamento
+                )                  
+            }
+        case ELIMINAR_DEPARTAMENTO:
+            return {
+                ...state,
+                loading: action.payload,
+                error: null,
+                mensaje: null
+            }
+        case ELIMINAR_DEPARTAMENTO_EXITO:
+            return {
+                ...state,
+                loading: false,
+                departamentos: state.departamentos.filter(departamento => departamento._id !== action.payload)
             }
         
         default: 

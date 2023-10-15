@@ -16,7 +16,11 @@ export default function Departamentos() {
   const loading = useSelector(state => state.empresa.loading)
 
   const [formularioDepartamento, setFormularioDepartamento] = useState(false)
+  const [ editarDepartamento, setEditarDepartamento ] = useState(false)
 
+  const [ iconoDepartamento, setIconoDepartamento ] = useState('')
+  const [ nombreDepartamento, setNombreDepartamento ] = useState('')
+  const [ departamentoId, setDepartamentoId ] = useState('')
 
   useEffect(() => {
     dispatch(obtenerDepartamentosAction())
@@ -27,8 +31,18 @@ export default function Departamentos() {
   return (
     <Fragment>
       {formularioDepartamento && <FormularioDepartamento 
+        iconoDepartamento={iconoDepartamento}
+        setIconoDepartamento={setIconoDepartamento}
+        nombreDepartamento={nombreDepartamento}
+        setNombreDepartamento={setNombreDepartamento}
         setFormularioDepartamento={setFormularioDepartamento}
-       iconosDepartamentos={iconosDepartamentos} />}
+       iconosDepartamentos={iconosDepartamentos} 
+        setEditarDepartamento={setEditarDepartamento}
+        editarDepartamento={editarDepartamento}
+        departamentoId={departamentoId}
+       />
+       
+       }
 
       <main className="bg-emerald-950">
         <section className="bg-emerald-200 rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20">
@@ -69,6 +83,12 @@ export default function Departamentos() {
                   i={i} 
                   navigate={navigate} 
                   iconosDepartamentos={iconosDepartamentos} 
+                  setEditarDepartamento={setEditarDepartamento}
+                  setFormularioDepartamento={setFormularioDepartamento}
+                  editarDepartamento={editarDepartamento}
+                  setIconoDepartamento={setIconoDepartamento}
+                  setNombreDepartamento={setNombreDepartamento}
+                  setDepartamentoId={setDepartamentoId}
                   key={i}
                 />
               ))

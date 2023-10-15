@@ -10,7 +10,13 @@ import {
     OBTENER_DEPARTAMENTOS_EMPRESA_ERROR,
     CREAR_DEPARTAMENTO,
     CREAR_DEPARTAMENTO_EXITO,
-    CREAR_DEPARTAMENTO_ERROR
+    CREAR_DEPARTAMENTO_ERROR,
+    MODIFICAR_DEPARTAMENTO,
+    MODIFICAR_DEPARTAMENTO_EXITO,
+    MODIFICAR_DEPARTAMENTO_ERROR,
+    ELIMINAR_DEPARTAMENTO,
+    ELIMINAR_DEPARTAMENTO_EXITO,
+    ELIMINAR_DEPARTAMENTO_ERROR
 
 } from '../types'
 
@@ -181,5 +187,94 @@ const crearDepartamentoExito = (departamento) => {
 
 const crearDepartamentoError = (error) => ({
     type: CREAR_DEPARTAMENTO_ERROR,
+    payload: error
+})
+
+export function editarDepartamentoAction(body){
+    return async (dispatch) => {
+        dispatch(editarDepartamento())
+
+        const { departamento, id } = body
+        
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await clienteAxios.put(`/departamentos/editar/${id}`, departamento, config)
+            console.log(data)
+            dispatch(editarDepartamentoExito(data.departamento))
+
+            toast.success('Departamento editado correctamente')
+
+        } catch (error) {
+            console.log(error)
+            dispatch(editarDepartamentoError(error.response.data.msg))
+            toast.error('Error al editar el departamento')
+        }
+    }
+}
+
+const editarDepartamento = () => ({
+    type: MODIFICAR_DEPARTAMENTO,
+    payload: true
+})
+
+const editarDepartamentoExito = (departamento) => ({
+    type: MODIFICAR_DEPARTAMENTO_EXITO,
+    payload: departamento
+})
+
+const editarDepartamentoError = (error) => ({
+    type: MODIFICAR_DEPARTAMENTO_ERROR,
+    payload: error
+})
+
+export function eliminarDepartamentoAction(id) {
+    return async (dispatch) => {
+        dispatch(eliminarDepartamento())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            await clienteAxios.delete(`/departamentos/eliminar/${id}`, config)
+            dispatch(eliminarDepartamentoExito(id))
+
+            toast.success('Departamento eliminado correctamente')
+
+        } catch (error) {
+            console.log(error)
+            dispatch(eliminarDepartamentoError(error.response.data.msg))
+            toast.error('Error al eliminar el departamento')
+        }
+    }
+}
+
+const eliminarDepartamento = () => ({
+    type: ELIMINAR_DEPARTAMENTO,
+    payload: true
+})
+
+const eliminarDepartamentoExito = (id) => ({
+    type: ELIMINAR_DEPARTAMENTO_EXITO,
+    payload: id
+})
+
+const eliminarDepartamentoError = (error) => ({
+    type: ELIMINAR_DEPARTAMENTO_ERROR,
     payload: error
 })

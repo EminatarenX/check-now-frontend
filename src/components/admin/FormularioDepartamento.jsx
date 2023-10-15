@@ -4,10 +4,19 @@ import { toast } from "react-toastify"
 
 // Redux
 import { useDispatch } from "react-redux"
-import { crearDepartamentoAction } from "../../actions/empresasAction"
+import { crearDepartamentoAction, editarDepartamentoAction } from "../../actions/empresasAction"
 
 
-export default function FormularioDepartamento({setFormularioDepartamento, iconosDepartamentos}) {
+export default function FormularioDepartamento({iconoDepartamento, 
+    setIconoDepartamento, 
+    nombreDepartamento, 
+    setNombreDepartamento ,
+    setFormularioDepartamento, 
+    iconosDepartamentos, 
+    editarDepartamento,
+    departamentoId,
+    setEditarDepartamento
+}) {
 
     const dispatch = useDispatch()
 
@@ -27,8 +36,26 @@ export default function FormularioDepartamento({setFormularioDepartamento, icono
         setFormularioDepartamento(false)
     }
 
-    const [ iconoDepartamento, setIconoDepartamento ] = useState('')
-    const [ nombreDepartamento, setNombreDepartamento ] = useState('')
+    const handleEditarDepartamento = (e) => {
+        e.preventDefault()
+
+        if([nombreDepartamento, iconoDepartamento].includes('')) {
+            toast.error('Todos los campos son obligatorios')
+            return
+        }
+       
+        const departamento = {
+            nombre: nombreDepartamento,
+            icon: iconoDepartamento
+        }
+
+        dispatch(editarDepartamentoAction({departamento, id: departamentoId}))
+        setFormularioDepartamento(false)
+        setEditarDepartamento(false)
+        
+    }
+
+
 
    
 
@@ -44,7 +71,10 @@ export default function FormularioDepartamento({setFormularioDepartamento, icono
         </button>
         </div>
         <form
-            onSubmit={handleCrearDepartamento} 
+            onSubmit={ (e) => {
+                editarDepartamento ? handleEditarDepartamento(e) :
+                handleCrearDepartamento(e)
+            }} 
             className='bg-white rounded-2xl p-5 lg:p-10 flex flex-col animate-entrada'>
         <input type="text"
             placeholder="Nombre o titulo del departamento (ej: 'Ventas, Marketing, etc') "
@@ -73,7 +103,7 @@ export default function FormularioDepartamento({setFormularioDepartamento, icono
      
           <input 
           type="submit" 
-          value="Agregar departamento" 
+          value={`${editarDepartamento ? 'Guardar cambios' : 'Agregar departamento' }`} 
             className="bg-emerald-900 text-white font-bold py-2 px-4 rounded mt-5 cursor-pointer hover:bg-emerald-700 transition-all"
           />
         </form>
