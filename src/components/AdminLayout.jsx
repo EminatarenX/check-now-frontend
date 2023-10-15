@@ -39,6 +39,7 @@ export default function AdminLayout() {
             reloj.classList.remove('reloj-in')
             reloj.classList.add('reloj-out')
             
+            
           }
         }else{
           document.body.appendChild(reloj)
