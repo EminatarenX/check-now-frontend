@@ -24,6 +24,10 @@ export default function Departamentos() {
 
   useEffect(() => {
     dispatch(obtenerDepartamentosAction())
+    document.addEventListener('selectstart', (e) => {
+      e.preventDefault()
+
+    })
 
   }, [])
 

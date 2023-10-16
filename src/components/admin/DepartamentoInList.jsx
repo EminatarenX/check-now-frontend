@@ -80,8 +80,7 @@ export default function DepartamentoInList({departamento, i, navigate, iconosDep
   },[departamento])
   return (
     <div
-    
-    className="bg-emerald-100 rounded-lg gap-3 departamento relative">
+    className="bg-emerald-100 rounded-lg gap-3 departamento relative animate-entrada">
     <button
       onClick={() => navigate(`/admin/departamentos/${departamento.nombre}`)} 
        className="flex items-center p-5 gap-3 capitalize">

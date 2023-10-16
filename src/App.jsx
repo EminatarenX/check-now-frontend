@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import {useNavigate, Routes, Route } from 'react-router-dom'
+import {useNavigate, Routes, Route, useLocation } from 'react-router-dom'
 import Registrar from './pages/Registrar'
 import Inicio from './pages/Inicio'
 import InicioLayout from './components/InicioLayout'
@@ -33,6 +33,7 @@ function App() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation()
   const usuario = useSelector(state => state.usuarios?.user)
 
   
@@ -43,10 +44,10 @@ function App() {
       if(token) {
         dispatch(obtenerPerfilAction(token))
 
+      }else {
+        navigate('/login') //este es el cambio que hice
       }
-    
     }
-
     verificar()
 
 
@@ -68,6 +69,13 @@ function App() {
       }
     }
   }, [usuario])
+
+  //otro cambio que podria generar problemas
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   
 
 
