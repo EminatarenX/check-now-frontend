@@ -24,7 +24,18 @@ export default function AdminLayout() {
 
       const reloj = document.createElement('span')
       reloj.classList.add('reloj')
-      reloj.innerHTML = `${fecha.getHours()} : ${fecha.getMinutes()}`
+      reloj.innerHTML = `${
+          fecha.getHours() > 12 ?
+          fecha.getHours() - 12 : 
+          fecha.getHours()
+      } :  
+      ${
+        fecha.getMinutes() < 10 ?
+          '0' + fecha.getMinutes() :
+          fecha.getMinutes()}
+      ${
+        fecha.getHours() >= 12 ? 'pm' : 'am'
+      }`
       
       
 
@@ -39,7 +50,7 @@ export default function AdminLayout() {
             reloj.classList.remove('reloj-in')
             reloj.classList.add('reloj-out')
             
-            
+
           }
         }else{
           document.body.appendChild(reloj)
@@ -59,7 +70,15 @@ export default function AdminLayout() {
       <p className="text-light text-emerald-200 text-xs mt-4">{formatearFecha(fecha.toISOString())}</p>
       </div>
       <p className='text-emerald-300 text-lg lg:text-2xl font-semibold'>
-        {`${fecha.getHours()} : ${fecha.getMinutes()}  `}
+
+        {`${
+        fecha.getHours() > 12 ?  
+        fecha.getHours() - 12 : fecha.getHours()  
+        } : 
+        ${fecha.getMinutes() < 10 ?
+         '0' + fecha.getMinutes() :
+          fecha.getMinutes()}  `
+        }
         <span className='text-xs text-emerald-800'>
         {fecha.getHours() >= 12 ? 'pm': 'am'}
         </span>

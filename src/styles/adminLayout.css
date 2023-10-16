@@ -1,27 +1,25 @@
 .reloj, .reloj-out, .reloj-in{
     display: block;
     position: fixed;
-    background-color: rgb(2 44 34 / 80%);
-    color: white;
+    background-color: rgba(2, 44, 34, 0.872);
+    color: rgb(134, 249, 228);
     font-size: 1.5rem;
-    padding: 0.5rem;
+    padding: 1rem;
     border-radius: 0.5rem;
-    /* top: 10px; */
     right: 1rem;
     z-index: 1;
     transition: all 0.5s ease;
-    /* animation: entrar .5s ease-out; */
 
 }
 
 .reloj-out{
-    top: -100px;
-    animation: salir .5s ease-out;
+    top: -50px;
+    animation: salir 1s ease;
 }
 
 .reloj-in{
     top: 10px;
-    animation: entrar .5s ease-out;
+    animation: entrar .5s ease;
 }
 
 
@@ -30,13 +28,13 @@
         transform: translateY(0);
     }
     to{
-        transform: translateY(-100%);
+        transform: translateY(-50px);
     }
 }
 
 @keyframes entrar  {
     from{
-        transform: translateY(-100%);
+        transform: translateY(-50px);
     }
     to{
         transform: translateY(0);
