@@ -93,10 +93,8 @@ export default function EntradasSalidas() {
       <section className="bg-emerald-200 rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20">
         <h1 className="text-emerald-900 text-4xl font-semibold">Registro de entradas y salidas</h1>
         <p className="text-lg text-emerald-600 mt-2">Aqui podras ver todas las entradas y salidas de tus trabajadores</p>
-        <article className=''>
 
-
-          <nav className='flex flex-column justify-between items-center gap-5 mt-10'>
+          <nav className='flex items-center mt-10'>
 
             <ul className={`flex gap-5 w-full lg:flex-row flex-col`}>
 
@@ -126,25 +124,20 @@ export default function EntradasSalidas() {
           </nav>
 
 
-          {entradas.length === 0 ? (
-            <p className="bg-emerald-300 text-emerald-700 text-center mt-5 p-5 rounded">
-              No hay registros
-            </p>
-          ) : (
-            <article className={`flex flex-col bg-emerald-950 rounded overflow-y-auto min-h-[600px] max-h-[600px] p-5 gap-4 mt-5`}>
-              {
-                  filtrados.map((entrada, i) => (
-                    <Entrada
-                      key={i}
-                      entrada={entrada}
-                    />
-                  ))
+          <article className='flex flex-col bg-emerald-950 rounded overflow-y-auto max-h-[600px] p-5 gap-4 mt-5'>
+          {
+            filtrados.length === 0 ? (
 
-              }
-            </article>
+                <p className='text-emerald-500 text-center'>No hay registros</p>
+            )  :  (
 
-          )}
+              filtrados.map(  (entrada, i) => (
+                
+                  <Entrada key={i} entrada={entrada} />
+              )) 
+            )}
         </article>
+
 
       </section>
     </main>

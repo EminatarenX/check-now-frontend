@@ -84,7 +84,7 @@ export default function Trabajadores() {
         <h1 className="text-emerald-900 text-4xl font-semibold">Listado de trabajadores</h1>
         <p className="text-lg text-emerald-600 mt-2">Aqui podras ver todos los trabajadores de tu empresa y sus datos personales</p>
 
-        <nav className='flex flex-column justify-between items-center gap-5 mt-10'>
+        <nav className='flex items-center mt-10'>
 
           <ul className={`flex gap-5 w-full lg:flex-row flex-col`}>
 

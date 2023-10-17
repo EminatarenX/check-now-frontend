@@ -55,7 +55,7 @@ export default function Departamentos() {
             {
               departamentos.length > 0 &&
               (
-                <button className='bg-green-500 py-3 px-10 rounded text-white font-bold'
+                <button className='bg-emerald-800 py-3 px-10 rounded text-white font-bold'
                   onClick={() => setFormularioDepartamento(true)}
                 >Crear Departamento
                 </button>
