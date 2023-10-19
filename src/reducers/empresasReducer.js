@@ -16,7 +16,16 @@ import {
     MODIFICAR_DEPARTAMENTO_ERROR,
     ELIMINAR_DEPARTAMENTO,
     ELIMINAR_DEPARTAMENTO_EXITO,
-    ELIMINAR_DEPARTAMENTO_ERROR
+    ELIMINAR_DEPARTAMENTO_ERROR,
+    CREAR_CATEGORIA_DEPARTAMENTO,
+    CREAR_CATEGORIA_DEPARTAMENTO_EXITO,
+    CREAR_CATEGORIA_DEPARTAMENTO_ERROR,
+    OBTENER_CATEGORIAS_DEPARTAMENTO,
+    OBTENER_CATEGORIAS_DEPARTAMENTO_ERROR,
+    OBTENER_CATEGORIAS_DEPARTAMENTO_EXITO,
+    ELIMINAR_CATEGORIA_DEPARTAMENTO,
+    ELIMINAR_CATEGORIA_DEPARTAMENTO_EXITO,
+    ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR
 
 } from '../types'
 
@@ -25,6 +34,8 @@ const initialState = {
     departamentos: [],
     nominas: [],
     empleados: [],
+    categorias: [],
+    plazas: [], 
     loading: false,
     error: null,
     mensaje: null
@@ -63,6 +74,8 @@ export default function empresasReducer( state = initialState, action){
         case CREAR_DEPARTAMENTO_ERROR:
         case MODIFICAR_DEPARTAMENTO_ERROR:
         case ELIMINAR_DEPARTAMENTO_ERROR:
+        case CREAR_CATEGORIA_DEPARTAMENTO_ERROR:
+        case ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -122,7 +135,60 @@ export default function empresasReducer( state = initialState, action){
                 loading: false,
                 departamentos: state.departamentos.filter(departamento => departamento._id !== action.payload)
             }
-        
+        case CREAR_CATEGORIA_DEPARTAMENTO:
+            return {
+                ...state,
+                loading: action.payload,
+                error: null,
+                mensaje: null
+            }
+        case CREAR_CATEGORIA_DEPARTAMENTO_EXITO:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                categorias: [...state.categorias, action.payload]
+            }
+        case OBTENER_CATEGORIAS_DEPARTAMENTO:
+            return {
+                ...state,
+                loading: action.payload,
+                error: null,
+                mensaje: null,
+                categorias: []
+            }
+        case OBTENER_CATEGORIAS_DEPARTAMENTO_EXITO:
+            return {
+                ...state, 
+                loading: false,
+                error: null,
+                categorias: action.payload
+            }
+        case ELIMINAR_CATEGORIA_DEPARTAMENTO:
+            return {
+                ...state,
+                loading: action.payload,
+                error: null,
+                mensaje: null
+            }
+        case ELIMINAR_CATEGORIA_DEPARTAMENTO_EXITO: 
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                mensaje: null,
+                categorias: state.categorias.filter(categoria => 
+                    categoria._id !== action.payload
+                )
+            }
+            case OBTENER_CATEGORIAS_DEPARTAMENTO_ERROR:
+                return {
+                    ...state,
+                    loading: false,
+                    error: action.payload,
+                    mensaje: null,
+                    categorias: []
+                }
         default: 
             return state
     }

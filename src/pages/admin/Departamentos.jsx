@@ -5,13 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import '../../styles/helpers.css'
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { iconosDepartamentos } from '../../helpers'
-import { obtenerDepartamentosAction } from '../../actions/empresasAction'
+
 
 export default function Departamentos() {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const departamentos = useSelector(state => state.empresa.departamentos)
   const loading = useSelector(state => state.empresa.loading)
 
@@ -23,7 +22,7 @@ export default function Departamentos() {
   const [ departamentoId, setDepartamentoId ] = useState('')
 
   useEffect(() => {
-    dispatch(obtenerDepartamentosAction())
+
     document.addEventListener('selectstart', (e) => {
       e.preventDefault()
 

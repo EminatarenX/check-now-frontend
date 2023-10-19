@@ -2,8 +2,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { accionesDashboard } from "../../helpers"
 import { useNavigate } from "react-router-dom"
 import AccionDashboard from "../../components/AccionDashboard"
-import { cerrarSesionAction } from "../../actions/usuariosActions"
 import { useEffect } from "react"
+import { cerrarSesionAction } from "../../actions/usuariosActions"
+import { obtenerDepartamentosAction } from "../../actions/empresasAction"
 import { obtenerDatosDeEmpresaAction } from "../../actions/empresasAction"
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -25,7 +26,8 @@ export default function Dashboard() {
 
       dispatch(obtenerDatosDeEmpresaAction())
     }
-  })
+    dispatch(obtenerDepartamentosAction())
+  },[])
 
 
   return (

@@ -1,6 +1,9 @@
 import { useEffect } from "react"
 import Swal from "sweetalert2";
+
+// Redux
 import { eliminarDepartamentoAction } from "../../actions/empresasAction";
+import { setCategoriaAction } from "../../actions/helperAction";
 import { useDispatch } from "react-redux";
 
 export default function DepartamentoInList({departamento, i, navigate, iconosDepartamentos, setEditarDepartamento, setFormularioDepartamento,
@@ -75,14 +78,17 @@ export default function DepartamentoInList({departamento, i, navigate, iconosDep
     };
     }
 
-    // Agregar eventos solo una vez al cargar el componente
     
   },[departamento])
   return (
     <div
     className="bg-emerald-100 rounded-lg gap-3 departamento relative animate-entrada">
     <button
-      onClick={() => navigate(`/admin/departamentos/${departamento.nombre}`)} 
+      onClick={() => {
+   
+        dispatch(setCategoriaAction(departamento._id))
+        navigate(`/admin/departamentos/${departamento.nombre}`)
+      }} 
        className="flex items-center p-5 gap-3 capitalize">
 
         {iconosDepartamentos.find((icono) => icono.nombre === departamento.icon) ? (

@@ -16,7 +16,16 @@ import {
     MODIFICAR_DEPARTAMENTO_ERROR,
     ELIMINAR_DEPARTAMENTO,
     ELIMINAR_DEPARTAMENTO_EXITO,
-    ELIMINAR_DEPARTAMENTO_ERROR
+    ELIMINAR_DEPARTAMENTO_ERROR,
+    CREAR_CATEGORIA_DEPARTAMENTO,
+    CREAR_CATEGORIA_DEPARTAMENTO_EXITO,
+    CREAR_CATEGORIA_DEPARTAMENTO_ERROR,
+    OBTENER_CATEGORIAS_DEPARTAMENTO,
+    OBTENER_CATEGORIAS_DEPARTAMENTO_ERROR,
+    OBTENER_CATEGORIAS_DEPARTAMENTO_EXITO,
+    ELIMINAR_CATEGORIA_DEPARTAMENTO,
+    ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR,
+    ELIMINAR_CATEGORIA_DEPARTAMENTO_EXITO
 
 } from '../types'
 
@@ -257,7 +266,6 @@ export function eliminarDepartamentoAction(id) {
             toast.success('Departamento eliminado correctamente')
 
         } catch (error) {
-            console.log(error)
             dispatch(eliminarDepartamentoError(error.response.data.msg))
             toast.error('Error al eliminar el departamento')
         }
@@ -276,5 +284,129 @@ const eliminarDepartamentoExito = (id) => ({
 
 const eliminarDepartamentoError = (error) => ({
     type: ELIMINAR_DEPARTAMENTO_ERROR,
+    payload: error
+})
+
+
+export function crearCategoriaAction(body) {
+    return async (dispatch) => {
+
+        dispatch(crearCategoria())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await clienteAxios.post('/categorias/crear', body, config)
+            dispatch(crearCategoriaExito(data.categoria))
+            toast.success('Categoria agregada')
+            
+        } catch (error) {
+            dispatch(crearCategoriaError(error.response.data.msg))
+            toast.error('Error al crear la categoria')
+        }
+    }
+}
+
+const crearCategoria = () => ({
+    type: CREAR_CATEGORIA_DEPARTAMENTO,
+    payload: true
+})
+
+const crearCategoriaExito = (categoria) => ({
+    type: CREAR_CATEGORIA_DEPARTAMENTO_EXITO,
+    payload: categoria
+})
+
+const crearCategoriaError = (error) => ({
+    type: CREAR_CATEGORIA_DEPARTAMENTO_ERROR,
+    payload: error
+})
+
+export function obtenerCategoriasAction (id) {
+    return async (dispatch) => {
+        dispatch(obtenerCategorias())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios(`/categorias/${id}`, config)
+
+            dispatch(obtenerCategoriasExito(data.categorias))
+            
+        } catch (error) {
+            dispatch(obtenerCategoriasError(error.response.data.msg))
+            toast.warning(error.response.data.msg)
+        }
+    }
+}
+const obtenerCategorias = () => ({
+    type: OBTENER_CATEGORIAS_DEPARTAMENTO,
+    payload: true
+})
+
+const obtenerCategoriasExito = (categorias) => ({
+    type: OBTENER_CATEGORIAS_DEPARTAMENTO_EXITO,
+    payload: categorias
+})
+
+const obtenerCategoriasError = (error) => ({
+    type: OBTENER_CATEGORIAS_DEPARTAMENTO_ERROR,
+    payload: error
+})
+
+export function eliminarCategoriaDepartamentoAction(id) {
+    return async (dispatch) => {
+        dispatch(eliminarCategoria())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+        
+        try {
+            await clienteAxios.delete(`/categorias/eliminar/${id}`, config)
+            dispatch(eliminarCategoriaExito(id))
+            toast.success('Categoria eliminada correctamente')
+        } catch (error) {
+            dispatch(eliminarCategoriaError(error.response.data.msg))
+            toast.error('Error al eliminar la categoria')
+        }
+    }
+}
+
+const eliminarCategoria = () => ({
+    type: ELIMINAR_CATEGORIA_DEPARTAMENTO,
+    payload: true
+})
+
+const eliminarCategoriaExito = (id) => ({
+    type: ELIMINAR_CATEGORIA_DEPARTAMENTO_EXITO,
+    payload: id
+})
+
+const eliminarCategoriaError = (error) => ({
+    type: ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR,
     payload: error
 })
