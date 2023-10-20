@@ -33,6 +33,8 @@ export default function FormularioDepartamento({iconoDepartamento,
             icon: iconoDepartamento
         }
         dispatch(crearDepartamentoAction(departamento))
+        setNombreDepartamento('')
+        setIconoDepartamento('')
         setFormularioDepartamento(false)
     }
 

@@ -13,11 +13,18 @@ const initialState = {
 
 export default function helperReducer ( state = initialState, action){
     switch(action.type){
-        case SET_ID_CATEGORIA: 
+        case SET_ID_DEPARTAMENTO: 
             return {
                 ...state,
                 departamento: action.payload
             }
+        case SET_ID_CATEGORIA:
+            return {
+                ...state,
+                categoria: action.payload
+            }
+        
+        
         default: 
             return state
     }

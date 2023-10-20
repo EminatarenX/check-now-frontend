@@ -5,13 +5,13 @@ import NuevaPlaza from "../../components/admin/NuevaPlaza"
 import ModalEliminarCategoria from "../../components/admin/ModalEliminarCategoria"
 
 import { useSelector, useDispatch } from "react-redux"
-import { obtenerCategoriasAction } from "../../actions/empresasAction"
+import { obtenerCategoriasAction, obtenerPlazasAction } from "../../actions/empresasAction"
 
 
 export default function Categoria() {
   const dispatch = useDispatch()
   const { categorias, plazas, loading } = useSelector(state => state.empresa)
-  const { departamento: departamento_id } = useSelector(state => state.helper)
+  const { departamento: departamento_id} = useSelector(state => state.helper)
 
   const { departamento } = useParams()
   const departamentoCapitalizado = departamento.charAt(0).toUpperCase() + departamento.slice(1).replace(/-/g, ' ')
@@ -20,10 +20,21 @@ export default function Categoria() {
   const [modalPlaza, setModalPlaza] = useState(false)
   const [modalEliminarCategoria, setModalEliminarCategoria] = useState(false)
   const [categoria, setCategoria] = useState('todas')
+  const [plazasFiltradas, setPlazasFiltradas] = useState([])
+  
 
   useEffect(() => {
     dispatch(obtenerCategoriasAction(departamento_id))
+    
   }, [])
+
+  useEffect(()=> {
+    if(categoria !== "todas"){
+      dispatch(obtenerPlazasAction(categoria))
+    }
+
+  },[categoria])
+
 
   return (
     <Fragment>
@@ -125,16 +136,18 @@ export default function Categoria() {
               plazas.length === 0 ? (
                 <p className='text-emerald-500 text-center lg:col-span-3'>No hay plazas</p>
               ) : (
-                <div className='bg-white shadow-lg p-3 rounded flex gap-5'>
+                plazas.map( plaza => (
+                  <div className='bg-white shadow-lg p-3 rounded flex gap-5' key={plaza._id}>
                   <img className='w-20 h-20 rounded-full object-cover'
                     src="https://th.bing.com/th/id/R.abb5e2f3a89fe5f1871d9e13555a4cfb?rik=Gw6033iUygmZPQ&riu=http%3a%2f%2fcdn.marketing4ecommerce.net%2fwp-content%2fuploads%2f2017%2f01%2f02204956%2fqu%c3%a9-es-una-imagen-vectorial.jpg&ehk=HTmTsIAUN71R1e1kAp3MB6q0dm57GQVLk2TwmRfmuds%3d&risl=&pid=ImgRaw&r=0" alt="imagen-carro" />
                   <div>
-                    <p>Nombre</p>
-                    <p>Plaza</p>
-                    <p>Fecha</p>
+                    <p>{plaza.nombre}</p>
+                    <p>{plaza.categoria}</p>
+                    <p>{plaza.salario}</p>
                   </div>
 
                 </div>
+                ))
               )
             }
 

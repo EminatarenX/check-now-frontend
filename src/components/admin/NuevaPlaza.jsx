@@ -1,7 +1,13 @@
 import {useState} from 'react'
 import { toast } from 'react-toastify'
 
+// Redux
+import { useDispatch } from 'react-redux';
+import { agregarPlazaAction } from '../../actions/empresasAction';
+
 export default function NuevaPlaza({setModalPlaza, categorias}) {
+
+  const dispatch = useDispatch()
 
   const [formularioPlaza, setFormularioPlaza] = useState({
     nombre: '',
@@ -36,7 +42,9 @@ export default function NuevaPlaza({setModalPlaza, categorias}) {
     }
 
     
-    console.log(formularioPlaza)
+    dispatch(agregarPlazaAction(formularioPlaza))
+    setModalPlaza(false)
+    setFormularioPlaza({})
   }
 
   return (
@@ -105,7 +113,7 @@ export default function NuevaPlaza({setModalPlaza, categorias}) {
        <div className='flex flex-col w-full'>
         <label htmlFor="horario-salida">Horario de salida</label>
        <input type="time"
-       value={formularioPlaza.horario_salida}
+        value={formularioPlaza.horario_salida}
         onChange={e => setFormularioPlaza({ ...formularioPlaza, horario_salida: e.target.value })}
         placeholder="Horario de la plaza o vacante (ej: 8:00 - 17:00)"
         className={`bg-transparent text-emerald-900  border-b-2 border-emerald-300 focus:outline-none p-3 placeholder:text-emerald-700  transition-all`}

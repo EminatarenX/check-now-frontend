@@ -25,7 +25,13 @@ import {
     OBTENER_CATEGORIAS_DEPARTAMENTO_EXITO,
     ELIMINAR_CATEGORIA_DEPARTAMENTO,
     ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR,
-    ELIMINAR_CATEGORIA_DEPARTAMENTO_EXITO
+    ELIMINAR_CATEGORIA_DEPARTAMENTO_EXITO,
+    AGREGAR_PLAZA,
+    AGREGAR_PLAZA_ERROR,
+    AGREGAR_PLAZA_EXITO,
+    OBTENER_PLAZAS,
+    OBTENER_PLAZAS_ERROR,
+    OBTENER_PLAZAS_EXITO
 
 } from '../types'
 
@@ -408,5 +414,89 @@ const eliminarCategoriaExito = (id) => ({
 
 const eliminarCategoriaError = (error) => ({
     type: ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR,
+    payload: error
+})
+
+export function agregarPlazaAction (plaza) {
+    return async dispatch => {
+        dispatch(agregarPlaza())
+        const token = localStorage.getItem('token')
+        if(!token) return 
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios.post('/plazas/crear', plaza, config)
+            dispatch(agregarPlazaExito(data.plaza))
+            toast.success("Plaza agregada")
+            
+        } catch (error) {
+            console.log(error)
+            dispatch(agregarPlazaError())
+            toast.error(error.response.data.msg)
+        }
+    }
+}
+
+const agregarPlaza = () => ({
+    type: AGREGAR_PLAZA,
+    payload: true
+})
+
+const agregarPlazaExito = (plaza) => ({
+    type: AGREGAR_PLAZA_EXITO,
+    payload: plaza
+})
+
+const agregarPlazaError = (error) => ({
+    type: AGREGAR_PLAZA_ERROR,
+    payload: error
+})
+
+export function obtenerPlazasAction (id) {
+    return async dispatch => {
+        dispatch(obtenerPlazas())
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios(`/plazas/${id}`, config)
+            dispatch(obtenerPlazasExito(data.plazas))
+
+        } catch (error) {
+            console.log(error)
+            toast.error(error.response.data.msg)
+            dispatch(obtenerPlazasError(error))
+
+        }
+    }
+}
+
+const obtenerPlazas = () => ({
+    type: OBTENER_PLAZAS,
+    payload: true
+})
+
+const obtenerPlazasExito = (plazas) => ({
+    type: OBTENER_PLAZAS_EXITO,
+    payload: plazas
+})
+
+const obtenerPlazasError = (error) => ({
+    type: OBTENER_PLAZAS_ERROR,
     payload: error
 })

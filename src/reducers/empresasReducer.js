@@ -25,7 +25,13 @@ import {
     OBTENER_CATEGORIAS_DEPARTAMENTO_EXITO,
     ELIMINAR_CATEGORIA_DEPARTAMENTO,
     ELIMINAR_CATEGORIA_DEPARTAMENTO_EXITO,
-    ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR
+    ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR,
+    AGREGAR_PLAZA,
+    AGREGAR_PLAZA_EXITO,
+    AGREGAR_PLAZA_ERROR,
+    OBTENER_PLAZAS,
+    OBTENER_PLAZAS_EXITO,
+    OBTENER_PLAZAS_ERROR
 
 } from '../types'
 
@@ -76,6 +82,8 @@ export default function empresasReducer( state = initialState, action){
         case ELIMINAR_DEPARTAMENTO_ERROR:
         case CREAR_CATEGORIA_DEPARTAMENTO_ERROR:
         case ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR:
+        case AGREGAR_PLAZA_ERROR:
+        case OBTENER_PLAZAS_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -155,7 +163,7 @@ export default function empresasReducer( state = initialState, action){
                 loading: action.payload,
                 error: null,
                 mensaje: null,
-                categorias: []
+                plazas: []
             }
         case OBTENER_CATEGORIAS_DEPARTAMENTO_EXITO:
             return {
@@ -189,6 +197,33 @@ export default function empresasReducer( state = initialState, action){
                     mensaje: null,
                     categorias: []
                 }
+            case AGREGAR_PLAZA:
+                return {
+                    ...state,
+                    loading: action.payload,
+                    error: null,
+                    mensaje: null,
+                }
+            case AGREGAR_PLAZA_EXITO: 
+                return {
+                    ...state,
+                    loading: false,
+                    plazas: [...state.plazas, action.payload]
+                }
+            case OBTENER_PLAZAS:
+                return {
+                    ...state,
+                    loading: action.payload,
+                    error: null,
+                    mensaje: null,
+                }
+            case OBTENER_PLAZAS_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    plazas: action.payload
+                }
+
         default: 
             return state
     }
