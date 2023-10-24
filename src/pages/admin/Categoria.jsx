@@ -6,6 +6,7 @@ import ModalEliminarCategoria from "../../components/admin/ModalEliminarCategori
 
 import { useSelector, useDispatch } from "react-redux"
 import { obtenerCategoriasAction, obtenerPlazasAction } from "../../actions/empresasAction"
+import Plaza from "../../components/admin/Plaza"
 
 
 export default function Categoria() {
@@ -131,23 +132,18 @@ export default function Categoria() {
 
 
           <article
-            className="grid lg:grid-cols-3 rounded p-5 gap-4 mt-5"
+            className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-5 gap-5"
           >
             {
-              plazas.length === 0 ? (
-                <p className='text-emerald-500 text-center lg:col-span-3'>No hay plazas</p>
+              plazas.length === 0 || categoria === 'todas' ? (
+                <p className='text-emerald-500 text-center lg:col-span-4 mt-10'>No hay plazas</p>
               ) : (
+                
                 plazas.map( plaza => (
-                  <div className='bg-white shadow-lg p-3 rounded flex gap-5' key={plaza._id}>
-                  <img className='w-20 h-20 rounded-full object-cover'
-                    src="https://th.bing.com/th/id/R.abb5e2f3a89fe5f1871d9e13555a4cfb?rik=Gw6033iUygmZPQ&riu=http%3a%2f%2fcdn.marketing4ecommerce.net%2fwp-content%2fuploads%2f2017%2f01%2f02204956%2fqu%c3%a9-es-una-imagen-vectorial.jpg&ehk=HTmTsIAUN71R1e1kAp3MB6q0dm57GQVLk2TwmRfmuds%3d&risl=&pid=ImgRaw&r=0" alt="imagen-carro" />
-                  <div>
-                    <p>{plaza.nombre}</p>
-                    <p>{plaza.categoria}</p>
-                    <p>{plaza.salario}</p>
-                  </div>
-
-                </div>
+                 <Plaza
+                  key={plaza._id}
+                  plaza={plaza}
+                 />
                 ))
               )
             }

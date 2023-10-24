@@ -18,7 +18,6 @@ import NewUserForm from './pages/NewUserForm'
 import UserProtection from './components/UserProtection'
 // admin pages
 import Dashboard from './pages/admin/Dashboard'
-import Plazas from './pages/admin/Plazas'
 import Nominas from './pages/admin/Nominas'
 import Trabajadores from './pages/admin/Trabajadores'
 import AdminConfig from './pages/admin/AdminConfig'
@@ -26,6 +25,7 @@ import Solicitudes from './pages/admin/Solicitudes'
 import EntradasSalidas from './pages/admin/EntradasSalidas'
 import Departamentos from './pages/admin/Departamentos'
 import Categoria from './pages/admin/Categoria'
+import Plaza from './pages/admin/Plaza'
 
 import { obtenerPerfilAction } from './actions/usuariosActions'
 
@@ -104,6 +104,7 @@ function App() {
             <Route path='solicitudes' element={<Solicitudes/>} />
             <Route path='entradas-salidas' element={<EntradasSalidas/>} />
             <Route path="departamentos/:departamento" element={<Categoria/>} />
+            <Route path='departamentos/:departamento/:plaza' element={<Plaza/>} />
           </Route>
 
           <Route path='/dashboard' element={<UserProtection/>}>
