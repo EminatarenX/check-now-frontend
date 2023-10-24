@@ -33,6 +33,7 @@ export default function Categoria() {
       dispatch(obtenerPlazasAction(categoria))
     }
 
+
   },[categoria])
 
 
@@ -57,7 +58,7 @@ export default function Categoria() {
                   className='bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
 
                 >
-                  <option value="todas"> CATEGORIA ( TODAS )</option>
+                  <option value="todas">-- Seleccione una categoria --</option>
                   {
                     categorias.map(categoria => (
                       <option key={categoria._id} value={categoria._id}>{categoria.nombre.toUpperCase().replace(/-/g, " ")}</option>
