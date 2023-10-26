@@ -7,7 +7,7 @@ import ModalEliminarCategoria from "../../components/admin/ModalEliminarCategori
 import { useSelector, useDispatch } from "react-redux"
 import { obtenerCategoriasAction, obtenerPlazasAction } from "../../actions/empresasAction"
 import Plaza from "../../components/admin/Plaza"
-
+import Regresar from "../../components/admin/Regresar"
 
 export default function Categoria() {
   const dispatch = useDispatch()
@@ -21,7 +21,7 @@ export default function Categoria() {
   const [modalPlaza, setModalPlaza] = useState(false)
   const [modalEliminarCategoria, setModalEliminarCategoria] = useState(false)
   const [categoria, setCategoria] = useState('todas')
-  const [plazasFiltradas, setPlazasFiltradas] = useState([])
+ 
   
 
   useEffect(() => {
@@ -46,11 +46,12 @@ export default function Categoria() {
       <main className='bg-emerald-950'>
 
 
-        <section className='bg-emerald-200 rounded-tl-[100px] p-14 lg:p-20'>
+        <section className='bg-emerald-200 rounded-tl-[100px] p-10 lg:p-20'>
 
 
           <h1 className='text-4xl text-emerald-900 font-semibold'>{departamentoCapitalizado} </h1>
           <p className='text-emerald-600 text-lg'>Aqui podras ver las plazas o vacantes de {departamentoCapitalizado}</p>
+          <Regresar/>
 
           <nav className="flex items-center mt-10">
             <ul className="flex gap-5 w-full lg:flex-row flex-col lg:justify-between">

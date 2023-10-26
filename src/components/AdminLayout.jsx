@@ -25,13 +25,13 @@ export default function AdminLayout() {
   return (
     <>
       <Reloj reloj={fecha} />
-      <header className='bg-emerald-950 p-5 items-end lg:p-20 flex lg:items-start justify-between relative'>
-        <div className=''>
+      <header className='bg-emerald-950 p-5 items-end lg:p-10 flex lg:items-start justify-between relative'>
+        <div className='mb-0 lg:mb-5'>
           <h1 className='text-white text-4xl capitalize font-semibold'>{rutaActual === "/admin" ? 'dashboard' : rutaActual === '/admin/entradas-salidas' ? 'Entradas / salidas' : rutaActual.split('/')[2]}</h1>
 
           <p className="text-light text-emerald-200 text-xs mt-4">{formatearFecha(fecha.toISOString())}</p>
         </div>
-        <p className='text-emerald-300 text-lg lg:text-2xl font-semibold'>
+        <p className='text-white text-lg lg:text-2xl font-semibold'>
 
           {`${fecha.getHours() > 12 ?
               fecha.getHours() - 12 : fecha.getHours()
@@ -40,7 +40,7 @@ export default function AdminLayout() {
               '0' + fecha.getMinutes() :
               fecha.getMinutes()}  `
           }
-          <span className='text-xs text-emerald-800'>
+          <span className='text-xs text-emerald-100'>
             {fecha.getHours() >= 12 ? 'pm' : 'am'}
           </span>
         </p>
@@ -51,7 +51,7 @@ export default function AdminLayout() {
           <Link className={`${rutaActual === '/admin/trabajadores' ? 'bg-emerald-600 text-emerald-100' : 'bg-emerald-200 text-emerald-900'} rounded-t-2xl font-medium p-2`} to={'/admin/trabajadores'}>Trabajadores</Link>
           <Link className={`${rutaActual === '/admin/solicitudes' ? 'bg-emerald-600 text-emerald-100' : 'bg-emerald-200 text-emerald-900'}  rounded-t-2xl  font-medium p-2`} to={'/admin/solicitudes'}>Solicitudes</Link>
         </nav>
-        <button
+        {/* <button
           onClick={() => {
             navigate(-1)
           }} 
@@ -61,7 +61,7 @@ export default function AdminLayout() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
           </svg>
 
-        </button>
+        </button> */}
       </header>
       <Outlet />
       <footer>

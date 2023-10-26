@@ -3,6 +3,7 @@ import FormularioDepartamento from '../../components/admin/FormularioDepartament
 import DepartamentoInList from '../../components/admin/DepartamentoInList'
 import { useNavigate } from 'react-router-dom'
 import '../../styles/helpers.css'
+import Regresar from '../../components/admin/Regresar'
 
 // Redux
 import { useSelector } from 'react-redux'
@@ -48,8 +49,8 @@ export default function Departamentos() {
        }
 
       <main className="bg-emerald-950">
-        <section className="bg-emerald-200 rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20">
-
+        <section className="bg-emerald-200 rounded-tl-[100px] rounded-br-[100px] p-10 lg:p-20"> 
+          <Regresar/>
           <article className='flex justify-between flex-col lg:flex-row py-5 border-b-2 border-emerald-300'>
             {
               departamentos.length > 0 &&

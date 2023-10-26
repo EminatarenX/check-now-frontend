@@ -31,7 +31,10 @@ import {
     AGREGAR_PLAZA_ERROR,
     OBTENER_PLAZAS,
     OBTENER_PLAZAS_EXITO,
-    OBTENER_PLAZAS_ERROR
+    OBTENER_PLAZAS_ERROR,
+    GET_PLAZA_BY_ID,
+    GET_PLAZA_BY_ID_ERROR,
+    GET_PLAZA_BY_ID_EXITO
 
 } from '../types'
 
@@ -42,6 +45,7 @@ const initialState = {
     empleados: [],
     categorias: [],
     plazas: [], 
+    plazaActual: null,
     loading: false,
     error: null,
     mensaje: null
@@ -84,6 +88,7 @@ export default function empresasReducer( state = initialState, action){
         case ELIMINAR_CATEGORIA_DEPARTAMENTO_ERROR:
         case AGREGAR_PLAZA_ERROR:
         case OBTENER_PLAZAS_ERROR:
+        case GET_PLAZA_BY_ID_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -222,6 +227,19 @@ export default function empresasReducer( state = initialState, action){
                     ...state,
                     loading: false,
                     plazas: action.payload
+                }
+            case GET_PLAZA_BY_ID:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null,
+                    mensaje: null,
+                }
+            case GET_PLAZA_BY_ID_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    plazaActual: action.payload
                 }
 
         default: 

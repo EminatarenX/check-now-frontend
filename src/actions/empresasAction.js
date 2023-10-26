@@ -31,7 +31,10 @@ import {
     AGREGAR_PLAZA_EXITO,
     OBTENER_PLAZAS,
     OBTENER_PLAZAS_ERROR,
-    OBTENER_PLAZAS_EXITO
+    OBTENER_PLAZAS_EXITO,
+    GET_PLAZA_BY_ID,
+    GET_PLAZA_BY_ID_ERROR,
+    GET_PLAZA_BY_ID_EXITO
 
 } from '../types'
 
@@ -498,5 +501,45 @@ const obtenerPlazasExito = (plazas) => ({
 
 const obtenerPlazasError = (error) => ({
     type: OBTENER_PLAZAS_ERROR,
+    payload: error
+})
+
+export function obtenerPlazaAction(id) {
+    return async dispatch => {
+        dispatch(getPlaza())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await clienteAxios(`/plazas/plaza/${id}`, config)
+            dispatch(getPlazaExito(data.plaza))
+
+        } catch (error) {
+            toast.error(error.response.data.msg)
+            dispatch(getPlazaError(error))
+        }
+    }
+}
+
+const getPlaza = () => ({
+    type: GET_PLAZA_BY_ID,
+    payload: true
+})
+
+const getPlazaExito = (plaza) => ({
+    type: GET_PLAZA_BY_ID_EXITO,
+    payload: plaza
+})
+
+const getPlazaError = (error) => ({
+    type: GET_PLAZA_BY_ID_ERROR,
     payload: error
 })
