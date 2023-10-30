@@ -28,6 +28,7 @@ import Categoria from './pages/admin/Categoria'
 import Plaza from './pages/admin/Plaza'
 
 import { obtenerPerfilAction } from './actions/usuariosActions'
+import UserConfig from './pages/user/UserConfig'
 
 function App() {
 
@@ -109,10 +110,12 @@ function App() {
 
           <Route path='/dashboard' element={<UserProtection/>}>
             <Route index element={<UserDashboard />} />
+            <Route path='settings' element={<UserConfig/>} />
           </Route>
 
           <Route path='/new-user' element={<NewUsersRoute/>}>
            <Route index element={<NewUserForm/>}/>
+           
           </Route>
         </Routes>
         </>

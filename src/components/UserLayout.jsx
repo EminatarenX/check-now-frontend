@@ -29,13 +29,30 @@ export default function UserLayout() {
               <button>
                 
               </button>
-              <Link to={'/'}>
+              <Link to={'/dashboard'}
+                onClick={() => setAside(false)}
+              >
                 <img src={logo} className='h-12' alt="logo" />
               </Link>
-              <Link className="text-white text-lg hover:scale-105 transition-transform" to={'/settings'}>
+              <Link 
+                to={'/dashboard'} 
+                className="text-white text-lg hover:scale-105 transition-transform"
+                onClick={() => setAside(false)}
+                
+                >
+                
+                Inicio
+              </Link>
+              <Link className="text-white text-lg hover:scale-105 transition-transform" to={'/dashboard/settings'}
+                onClick={() => setAside(false)}
+
+              >
                 Configuración
               </Link>
-              <button className="text-white text-lg hover:scale-105 transition-transform" onClick={cerrarSesion}>
+              <button className="text-white text-lg hover:scale-105 transition-transform" onClick={() => { 
+                  setAside(false)
+                  cerrarSesion
+                }}>
                 Cerrar Sesión
               </button>
          
@@ -53,12 +70,15 @@ export default function UserLayout() {
       <main className="flex">
 
         <aside className="w-1/5 bg-emerald-800 h-screen hidden lg:flex flex-col gap-10 p-5 ">
-          <h1 className="text-emerald-100 text-4xl capitalize">{location.pathname === "/dashboard" ? "Bienvenido" : location.pathname.split('/')[1]}</h1>
+          <h1 className="text-emerald-100 text-4xl capitalize">
+            {location.pathname === "/dashboard" ? 
+            "Bienvenido" : location.pathname === '/dashboard/settings' ? 
+            'Configuración' : location.pathname.split('/')[1]}</h1>
           <Link to={'/dashboard'} className="relative group text-start text-emerald-100 capitalize text-xl overflow-hidden">
             Inicio
             <span className="absolute inset-x-0 w-0 bottom-0 h-0.5 bg-white group-hover:w-full transition-all"></span>
           </Link>
-          <Link to={'/settings'} className="relative group text-start text-emerald-100 capitalize text-xl overflow-hidden">
+          <Link to={'/dashboard/settings'} className="relative group text-start text-emerald-100 capitalize text-xl overflow-hidden">
             Configuración
             <span className="absolute inset-x-0 w-0 bottom-0 h-0.5 bg-white group-hover:w-full transition-all"></span>
           </Link>
