@@ -34,7 +34,7 @@ export default function Dashboard() {
     <main className='bg-emerald-950'>
 
 
-      <section className='bg-emerald-200 rounded-tl-[100px] p-10 lg:p-20'>
+      <section className='bg-white rounded-tl-[100px] p-10 lg:p-20'>
     
       <article className="flex flex-col lg:flex-row gap-5 justify-between items-start">
       <div>

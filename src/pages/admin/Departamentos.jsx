@@ -49,13 +49,13 @@ export default function Departamentos() {
        }
 
       <main className="bg-emerald-950">
-        <section className="bg-emerald-200 rounded-tl-[100px] rounded-br-[100px] p-10 lg:p-20"> 
+        <section className="bg-white rounded-tl-[100px] min-h-[500px] rounded-br-[100px] p-10 lg:p-20"> 
           <Regresar/>
           <article className='flex justify-between flex-col lg:flex-row py-5 border-b-2 border-emerald-300'>
             {
               departamentos.length > 0 &&
               (
-                <button className='bg-emerald-800 py-3 px-10 rounded text-white font-bold'
+                <button className=' py-3 px-10 rounded text-green-700 border border-dotted border-green-600 hover:bg-green-600 hover:text-white transition-colors font-bold'
                   onClick={() => setFormularioDepartamento(true)}
                 >Crear Departamento
                 </button>

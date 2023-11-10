@@ -25,11 +25,11 @@ export default function AdminLayout() {
   return (
     <>
       <Reloj reloj={fecha} />
-      <header className='bg-emerald-950 p-5 items-end lg:p-10 flex lg:items-start justify-between relative'>
-        <div className='mb-0 lg:mb-5'>
+      <header className='bg-emerald-950 p-5 items-end lg:p-5 flex lg:items-start justify-between relative'>
+        <div className='mb-0 lg:mb-8'>
           <h1 className='text-white text-4xl capitalize font-semibold'>{rutaActual === "/admin" ? 'dashboard' : rutaActual === '/admin/entradas-salidas' ? 'Entradas / salidas' : rutaActual.split('/')[2]}</h1>
 
-          <p className="text-light text-emerald-200 text-xs mt-4">{formatearFecha(fecha.toISOString())}</p>
+          {/* <p className="text-light text-emerald-200 text-xs mt-4">{formatearFecha(fecha.toISOString())}</p> */}
         </div>
         <p className='text-white text-lg lg:text-2xl font-semibold'>
 
@@ -45,11 +45,11 @@ export default function AdminLayout() {
           </span>
         </p>
         <nav className={`absolute ${rutaActual === "/admin" ? 'hidden' : 'lg:flex'} bottom-0 hidden lg:left-32 justify-center animate-entrada`}>
-          <Link className={` bg-emerald-200 rounded-t-2xl text-emerald-900 font-medium p-2`} to={'/admin'}>Inicio</Link>
-          <Link className={`${rutaActual === '/admin/departamentos' ? 'bg-emerald-600 text-emerald-100' : 'bg-emerald-200 text-emerald-900'}  rounded-t-2xl font-medium p-2`} to={'/admin/departamentos'}>Departamentos</Link>
-          <Link className={`${rutaActual === '/admin/entradas-salidas' ? 'bg-emerald-600 text-emerald-100' : 'bg-emerald-200 text-emerald-900'}  rounded-t-2xl font-medium p-2`} to={'/admin/entradas-salidas'}>Entradas / Salidas</Link>
-          <Link className={`${rutaActual === '/admin/trabajadores' ? 'bg-emerald-600 text-emerald-100' : 'bg-emerald-200 text-emerald-900'} rounded-t-2xl font-medium p-2`} to={'/admin/trabajadores'}>Trabajadores</Link>
-          <Link className={`${rutaActual === '/admin/solicitudes' ? 'bg-emerald-600 text-emerald-100' : 'bg-emerald-200 text-emerald-900'}  rounded-t-2xl  font-medium p-2`} to={'/admin/solicitudes'}>Solicitudes</Link>
+          <Link className={` bg-white rounded-t-2xl text-emerald-900 font-medium p-2 text-sm`} to={'/admin'}>Inicio</Link>
+          <Link className={`${rutaActual === '/admin/departamentos' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl font-medium p-2 text-sm`} to={'/admin/departamentos'}>Departamentos</Link>
+          <Link className={`${rutaActual === '/admin/entradas-salidas' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl font-medium p-2 text-sm`} to={'/admin/entradas-salidas'}>Entradas / Salidas</Link>
+          <Link className={`${rutaActual === '/admin/trabajadores' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'} rounded-t-2xl font-medium p-2 text-sm`} to={'/admin/trabajadores'}>Trabajadores</Link>
+          <Link className={`${rutaActual === '/admin/solicitudes' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl  font-medium p-2 text-sm`} to={'/admin/solicitudes'}>Solicitudes</Link>
         </nav>
         {/* <button
           onClick={() => {

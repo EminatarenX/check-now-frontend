@@ -90,7 +90,7 @@ export default function UserLayout() {
           </button>
 
         </aside>
-        <main className="w-full lg:w-4/5 bg-white-500 p-5 bg-slate-200">
+        <main className="w-full lg:w-4/5 bg-white-500 p-5 bg-slate-200 lg:overflow-y-scroll lg:max-h-[850px]">
 
           <Outlet />
         </main>

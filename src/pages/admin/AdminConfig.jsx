@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 
-
 // funciones de redux
 import { actualizarDatosEmpresaAction } from '../../actions/empresasAction';
 
@@ -10,7 +9,7 @@ export default function AdminConfig() {
     const usuario = useSelector( state => state.usuarios.user)
     const datos_empresa = useSelector( state => state.empresa.datos)
     const dispatch = useDispatch()
-
+    
     // formularios states
     const [location, setLocation] = useState({
         lat: null,
@@ -110,6 +109,8 @@ export default function AdminConfig() {
             })
         }
 
+
+
     },[])
 
     useEffect(() => {
@@ -127,10 +128,11 @@ export default function AdminConfig() {
 
     return (
         <main className='bg-emerald-950'>
-            <section className='bg-emerald-100 p-20 rounded-tl-[150px] grid grid-cols-1 lg:grid-cols-4 gap-14'>
+            <section className='bg-white p-10 rounded-tl-[100px] grid grid-cols-1 lg:grid-cols-4 gap-14'>
                 {
                     // Formulario de datos de usuario
                 }
+
                 <article className='lg:col-span-2 flex flex-col gap-2'>
                     <h2 className='text-emerald-900 text-3xl font-semibold mb-3'>Datos del usuario</h2>
                     <input type="text"

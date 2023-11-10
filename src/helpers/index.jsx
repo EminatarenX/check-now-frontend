@@ -330,3 +330,73 @@ export const iconosDepartamentos = [
 export const formatearDinero = (cantidad) => {
     return cantidad.toLocaleString('en-US', { style: 'currency', currency: 'USD'})
 }
+
+export const checks = (props) => {
+    
+    return {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: '5%',
+      left: 'center'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: 'bold'
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: props.map(item => {
+            return {
+                value: item.value,
+                name: item.name,
+                itemStyle: {
+                    color: item.itemStyle ? item.itemStyle.color : '#000000' 
+                }
+            }
+        })
+      }
+    ]
+    }    
+};
+
+export const basicBarOptions = (props) => {
+    return {
+        xAxis: {
+          type: 'category',
+          data: props.map(item => item.name)
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: props.map(item => item.value),
+            type: 'bar',
+            itemStyle: {
+                color: 'rgb(5 150 105/ .70)' 
+            }
+          }
+        ]
+      };
+}

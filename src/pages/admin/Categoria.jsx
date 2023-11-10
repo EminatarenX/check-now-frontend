@@ -46,7 +46,7 @@ export default function Categoria() {
       <main className='bg-emerald-950'>
 
 
-        <section className='bg-emerald-200 rounded-tl-[100px] p-10 lg:p-20'>
+        <section className='bg-white min-h-[500px] rounded-tl-[100px] p-10 lg:p-20'>
 
 
           <h1 className='text-4xl text-emerald-900 font-semibold'>{departamentoCapitalizado} </h1>

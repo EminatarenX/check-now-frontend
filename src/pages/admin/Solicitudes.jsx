@@ -24,14 +24,14 @@ export default function Solicitudes() {
   const [cargando, setCargando ] = useState(false)
   return (
     <main className="bg-emerald-950">
-    <section className="bg-emerald-200 rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20">
+    <section className="bg-white min-h-[500px] rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20">
      <h1 className="text-emerald-900 text-4xl font-semibold">Solicitudes de trabajadores</h1>
      <p className="text-lg text-emerald-600 mt-2">Aqui podras ver todas las solicitudes entrantes para ocupar tus plazas</p>
       {
-        solicitudes.length === 0 && !cargando ? <p className="text-lg bg-emerald-300 rounded p-5 text-emerald-600 mt-2">No hay solicitudes</p> :
+        solicitudes.length === 0 && !cargando ? <p className="text-lg bg-slate-300 rounded p-5 text-emerald-600 mt-2">No hay solicitudes</p> :
         solicitudes.length === 0 && cargando ? 
-        <p className="text-lg bg-emerald-300 rounded p-5 text-emerald-600 mt-2">Cargando</p> : 
-        <article className='bg-emerald-300 rounded p-5 text-emerald-600 mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+        <p className="text-lg bg-slate-300 rounded p-5 text-emerald-600 mt-2">Cargando</p> : 
+        <article className='bg-slate-300 rounded p-5 text-emerald-600 mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
       {
         solicitudes.map( (solicitud, i) => (
             <div className='bg-white shadow-xl p-3 rounded flex gap-5' key={ i}>

@@ -82,7 +82,7 @@ export default function DepartamentoInList({departamento, i, navigate, iconosDep
   },[departamento])
   return (
     <div
-    className="bg-emerald-100 rounded-lg gap-3 departamento relative animate-entrada">
+    className="bg-emerald-900 rounded-lg gap-3 departamento relative animate-entrada">
     <button
       onClick={() => {
    
@@ -97,7 +97,7 @@ export default function DepartamentoInList({departamento, i, navigate, iconosDep
 
         <div>Icono no encontrado</div>
         )}
-        <span className='text-sm text-emerald-800 font-semibold'>{departamento.nombre.replace(/-/g, ' ')}</span>
+        <span className='text-sm text-white font-semibold'>{departamento.nombre.replace(/-/g, ' ')}</span>
     </button>  
     
   </div>

@@ -10,7 +10,7 @@ export default function AccionDashboard({ parametros }) {
       rounded-xl h-60 md:h-full xl:h-60 font-bold w-full p-4 shadow ${classes}`}>
 
       <Link to={path}>
-        <p className="text-emerald-100 text-lg font-semibold">
+        <p className="text-white text-lg font-semibold">
           {accion}
         </p>
         <div className="flex justify-center mt-2 hover:scale-110 hover:cursor-pointer transition-all">
