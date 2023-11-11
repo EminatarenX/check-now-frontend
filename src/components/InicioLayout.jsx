@@ -50,13 +50,33 @@ export default function InicioLayout() {
         </header>
         <Outlet />
 
-        <footer>
-          <div className='bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-center items-center p-20 lg:p-40'>
-          <p className='text-white text-center'>
-              &copy; Todos los derechos reservados <br /> - {new Date().getFullYear()} -
-            </p>
-          </div>
-        </footer>
+        <footer className='bg-gradient-to-r from-emerald-800 to-emerald-500'>
+  <div className='container mx-auto flex flex-col lg:flex-row justify-between items-center px-8 lg:px-16 py-40'>
+    
+    {/* Sección de Derechos de Autor */}
+    <div className='text-white text-center mb-4 lg:mb-0'>
+      <p>&copy; Todos los derechos reservados - {new Date().getFullYear()} -</p>
+    </div>
+
+    {/* Sección de Enlaces */}
+    <div className='flex flex-wrap justify-center space-x-4 lg:space-x-8'>
+      <a href='#' className='text-white hover:text-emerald-300 transition duration-300'>Inicio</a>
+      <a href='#' className='text-white hover:text-emerald-300 transition duration-300'>Productos</a>
+      <a href='#' className='text-white hover:text-emerald-300 transition duration-300'>Acerca de nosotros</a>
+      <a href='#' className='text-white hover:text-emerald-300 transition duration-300'>Blog</a>
+    </div>
+
+    {/* Sección de Ayuda y Contacto */}
+    <div className='text-white text-center'>
+      <p className='mb-2'>¿Necesitas ayuda?</p>
+      <a href='#' className='text-emerald-300 hover:underline transition duration-300'>Ayuda</a>
+      <span className='mx-2'>|</span>
+      <a href='#' className='text-emerald-300 hover:underline transition duration-300'>Contacto</a>
+    </div>
+
+  </div>
+</footer>
+
     </div>
   )
 }

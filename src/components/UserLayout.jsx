@@ -24,7 +24,7 @@ export default function UserLayout() {
   return (
     <>
       <aside 
-        className={`fixed  top-0 ${aside ? 'left-0' : '-left-[1000px]'} transition-all duration-700 h-screen w-full bg-emerald-900  flex flex-col lg:hidden items-center gap-10 justify-center p-5`}
+        className={`fixed  top-0 ${aside ? 'left-0' : '-left-[1000px]'} transition-all duration-700 h-screen w-full bg-emerald-900  flex flex-col lg:hidden items-center gap-10 justify-center p-5 z-10`}
       >
               <button>
                 

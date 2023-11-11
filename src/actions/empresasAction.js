@@ -34,7 +34,16 @@ import {
     OBTENER_PLAZAS_EXITO,
     GET_PLAZA_BY_ID,
     GET_PLAZA_BY_ID_ERROR,
-    GET_PLAZA_BY_ID_EXITO
+    GET_PLAZA_BY_ID_EXITO,
+    GET_SOLICITUDES,
+    GET_SOLICITUDES_ERROR,
+    GET_SOLICITUDES_EXITO,
+    RECHAZAR_SOLICITUD,
+    RECHAZAR_SOLICITUD_ERROR,
+    RECHAZAR_SOLICITUD_EXITO,
+    ACEPTAR_SOLICITUD,
+    ACEPTAR_SOLICITUD_EXITO,
+    ACEPTAR_SOLICITUD_ERROR
 
 } from '../types'
 
@@ -57,7 +66,7 @@ export function actualizarDatosEmpresaAction(datos){
         }
 
         try {
-            const { data } = await clienteAxios.post(`/empresas`, datos, config)
+            const { data } = await clienteAxios.post(`/empresas/editar`, datos, config)
             toast.success('Datos de la empresa actualizados correctamente')
             dispatch(actualizarDatosEmpresaExito(data))
         } catch (error) {
@@ -541,5 +550,134 @@ const getPlazaExito = (plaza) => ({
 
 const getPlazaError = (error) => ({
     type: GET_PLAZA_BY_ID_ERROR,
+    payload: error
+})
+
+export function obtenerSolicitudesAction(){
+    return async dispatch => {
+        dispatch(getSolicitudes())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios('/empresas/solicitudes', config)
+
+            dispatch(getSolicitudesExito(data.solicitudes))
+            
+        } catch (error) {
+            console.log(error)
+            dispatch(getSolicitudesError(error))
+            toast.error("hubo un error intenta mas tarde")
+        }
+    }
+}
+
+const getSolicitudes = () => ({
+    type: GET_SOLICITUDES,
+    payload: true
+})
+
+const getSolicitudesExito = (solicitudes) => ({
+    type: GET_SOLICITUDES_EXITO,
+    payload: solicitudes
+})
+
+const getSolicitudesError = (error) => ({
+    type: GET_SOLICITUDES_ERROR,
+    payload: error
+})
+
+export function rechazarSolicitudAction(id) {
+    return async dispatch => {
+        dispatch(rechazarSolicitud())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios.delete(`/empresas/solicitudes/rechazar/${id}`, config)
+            dispatch(rechazarSolicitudExito(id))
+            toast.success(data.msg)
+            
+        } catch (error) {
+            console.log(error)
+            toast.error('Error al rechazar la solicitud')
+            dispatch(rechazarSolicitudError(error))
+        }
+    }
+}
+
+const rechazarSolicitud = () => ({
+    type: RECHAZAR_SOLICITUD,
+    payload: true
+})
+
+const rechazarSolicitudExito = (id) => ({
+    type: RECHAZAR_SOLICITUD_EXITO,
+    payload: id
+})
+
+const rechazarSolicitudError = (error) => ({
+    type: RECHAZAR_SOLICITUD_ERROR,
+    payload: error
+})
+
+export function aceptarSolicitudAction (body) {
+    return async dispatch => {
+        dispatch(aceptarSolicitud())
+
+        const token = localStorage.getItem('token')
+
+        if(!token) return
+        const config = {
+            headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            await clienteAxios.post("/empresas/solicitudes/aceptar", body, config)
+            dispatch(aceptarSolicitudExito(body.solicitud))
+            toast.success("Solicitud aceptada")
+        } catch (error) {
+            console.log(error)
+            toast.error('Error al aceptar la solicitud')
+            dispatch(aceptarSolicitudError(error))
+        }
+
+    }
+}
+
+const aceptarSolicitud = () => ({
+    type: ACEPTAR_SOLICITUD,
+    payload: true
+})
+
+const aceptarSolicitudExito = (id) => ({
+    type: ACEPTAR_SOLICITUD_EXITO,
+    payload: id
+})
+
+const aceptarSolicitudError = (error) => ({
+    type: ACEPTAR_SOLICITUD_ERROR,
     payload: error
 })

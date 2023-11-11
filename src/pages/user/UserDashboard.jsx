@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Scanner from "../../components/Scanner";
-import { toast } from "react-toastify";
+
 import { Html5QrcodeScanner } from "html5-qrcode";
 import UserIndex from "./UserIndex";
 // Redux
@@ -16,52 +16,40 @@ export default function UserDashboard() {
 
 
   useEffect(() => {
-    const activarScanner = () => {
-      if(empresa) return
-
-      if(!document.getElementById('reader'))
-        return
-
-      const scanner = new Html5QrcodeScanner('reader',{
-        qrbox: {
-          width: 250,
-          height: 250,
-        },
-        fps: 5,
-      })  
+    const fetchData = async () => {
+      await dispatch(loginEmpleadoAction());
   
-      if(!scanner){
-        return
+      const activarScanner = () => {
+        if(empresa) return
+  
+        if(!document.getElementById('reader'))
+          return
+  
+        const scanner = new Html5QrcodeScanner('reader',{
+          qrbox: {
+            width: 250,
+            height: 250,
+          },
+          fps: 5,
+        })  
+  
+        scanner.render(success, error);
+  
+        function success(result) {
+          scanner.clear();
+          dispatch(buscarPlazaAction(result))
+        }
+  
+        function error(err) {
+          console.warn(err)
+        }
       }
-    
-      scanner.render(success, error);
-    
-      function success(result) {
-        scanner.clear();
-        dispatch(buscarPlazaAction(result))
-        
-      }
-      
-      function error(err) {
-        console.warn(err)
-      }
+  
+      activarScanner()
     }
-    
-    activarScanner()
-    dispatch(loginEmpleadoAction())
-  },[])
-
-
-  const  buscarEmpresa = e => {
-    e.preventDefault()
-
-    if(buscar.length === 0){
-      toast.error('El campo esta vacio, intente de nuevo')
-
-      return
-    }
-    
-  }
+  
+    fetchData();
+  }, [])
 
   const Registrarme = () => {
     dispatch(accederEmpresaAction({empresa: buscarPlaza.categoria.departamento.empresa._id, plaza: buscarPlaza._id}))
@@ -71,7 +59,8 @@ export default function UserDashboard() {
     return (
       <UserIndex/>
     )
-  }else return (
+  }
+  return (
     <>
     {
       loading ? (
@@ -81,19 +70,17 @@ export default function UserDashboard() {
       ) : (
         <section className="grid grid-cols-2 gap-2">
       <article className="bg-white rounded p-2 col-span-2">
-        {!empresa && (
+      
           <form className="flex gap-5 py-5 flex-col relative"
-            onSubmit={buscarEmpresa}
+          
           >
             <p className="text-emerald-900 font-semibold text-2xl">
               Busca tu empresa para poder acceder a tus estadísticas de empleado
             </p>
-
-            {
-              buscarPlaza === null && <Scanner />
-            }
+            <Scanner />
+       
           </form> 
-        )}
+     
        </article>
 
        {

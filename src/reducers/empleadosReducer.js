@@ -19,6 +19,7 @@ const initialState = {
     buscarPlaza:null,
     loading: false,
     error: null,
+    solicitud: null
 }
 
 export default function empleadosReducer ( state = initialState, action){
@@ -53,7 +54,7 @@ export default function empleadosReducer ( state = initialState, action){
             return {
                 ...state,
                 loading: false,
-                empresa: action.payload,
+                solicitud: action.payload,
                 error: null
             }
         case EMPLEADO_LOGIN:
@@ -65,9 +66,8 @@ export default function empleadosReducer ( state = initialState, action){
             return {
                 ...state,
                 loading: false,
-                informacion_personal: action.payload.informacion_personal,
-                plaza: action.payload.plaza,
-                empresa: action.payload.empresa,
+                empresa: action.payload ? action.payload.empresa : null,
+                plaza: action.payload ? action.payload.plaza : null,
                 error: null
             }
         default: 

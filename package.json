@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^1.9.6",
     "axios": "^1.5.1",
     "echarts": "^5.4.3",

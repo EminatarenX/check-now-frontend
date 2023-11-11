@@ -1,9 +1,13 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
 import RoudChart from "../../components/charts/RoudChart"
 import { checks, basicBarOptions } from "../../helpers"
 import RoundChart from "../../components/charts/RoudChart"
 import BasicBar from "../../components/charts/BasicChart"
+
+
+//Redux
+import { useSelector } from "react-redux"
+import GoogleMapComponent from "../../components/map/GoogleMapComponent"
 
 export default function UserIndex() {
     const checkChart =[
@@ -28,7 +32,9 @@ export default function UserIndex() {
             <h1 className="text-4xl">
                 {plaza.nombre}
             </h1>
+                <GoogleMapComponent />
             <div className="flex flex-col lg:flex-row gap-5 mt-5">
+
                 <button className="w-full bg-emerald-100 text-emerald-600 py-3 rounded font-semibold">
                     Entrar
                 </button>

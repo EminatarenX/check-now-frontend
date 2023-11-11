@@ -34,7 +34,16 @@ import {
     OBTENER_PLAZAS_ERROR,
     GET_PLAZA_BY_ID,
     GET_PLAZA_BY_ID_ERROR,
-    GET_PLAZA_BY_ID_EXITO
+    GET_PLAZA_BY_ID_EXITO,
+    GET_SOLICITUDES,
+    GET_SOLICITUDES_EXITO,
+    GET_SOLICITUDES_ERROR,
+    RECHAZAR_SOLICITUD,
+    RECHAZAR_SOLICITUD_ERROR,
+    RECHAZAR_SOLICITUD_EXITO,
+    ACEPTAR_SOLICITUD,
+    ACEPTAR_SOLICITUD_EXITO,
+    ACEPTAR_SOLICITUD_ERROR
 
 } from '../types'
 
@@ -43,6 +52,7 @@ const initialState = {
     departamentos: [],
     nominas: [],
     empleados: [],
+    solicitudes: [],
     categorias: [],
     plazas: [], 
     plazaActual: null,
@@ -89,6 +99,9 @@ export default function empresasReducer( state = initialState, action){
         case AGREGAR_PLAZA_ERROR:
         case OBTENER_PLAZAS_ERROR:
         case GET_PLAZA_BY_ID_ERROR:
+        case GET_SOLICITUDES_ERROR:
+        case RECHAZAR_SOLICITUD_ERROR:
+        case ACEPTAR_SOLICITUD_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -241,7 +254,48 @@ export default function empresasReducer( state = initialState, action){
                     loading: false,
                     plazaActual: action.payload
                 }
+            case GET_SOLICITUDES:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null,
+                    mensaje: null,
+                }
+            case GET_SOLICITUDES_EXITO:
+                return { 
+                    ...state,
+                    loading: false,
+                    solicitudes: action.payload
 
+                }
+            case RECHAZAR_SOLICITUD:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null,
+                    mensaje: null,
+                }
+            case RECHAZAR_SOLICITUD_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    solicitudes: state.solicitudes.filter(solicitud => solicitud._id !== action.payload)
+                }
+            case ACEPTAR_SOLICITUD:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null,
+                    mensaje: null,
+                }
+            case ACEPTAR_SOLICITUD_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    solicitudes: state.solicitudes.filter(solicitud => solicitud._id !== action.payload)
+                }
+
+            
         default: 
             return state
     }

@@ -30,7 +30,7 @@ export function buscarPlazaAction (id) {
 
             const { data } =  await clienteAxios.get(`/plazas/buscar/${id}`, config)
             dispatch(buscarEmpresaExito(data.plaza))
-            console.log(data.plaza)
+            
         } catch (error) {
             dispatch(buscarEmpresaError(error))
             toast.error('No se pudo obtener la plaza')
@@ -55,6 +55,7 @@ const buscarEmpresaError = (error) => ({
 
 export function accederEmpresaAction (empresa){
     return async (dispatch) => {
+        dispatch(accederEmpresa())
         const token = localStorage.getItem("token")
 
         if(!token) return dispatch(accederEmpresaError('No hay token'))
@@ -68,19 +69,16 @@ export function accederEmpresaAction (empresa){
 
         try {
 
-            const { data } = await clienteAxios.post("/empleados/acceder", empresa, config)
+            const { data } = await clienteAxios.post("/empleados/solicitud", empresa, config)
 
             dispatch(accederEmpresaExito(data.empresa))
-            toast.success('Bienvenido')
+            toast.success('Solicitud enviada con exito')
 
-            setTimeout(() => {
-                window.location.reload()
-            }, 1500);
             
         } catch (error) {
             console.log(error)
             dispatch(accederEmpresaError(error))
-            toast.error('Hubo un error, intentalo mas tarde')
+            toast.error('Ya haz enviado una solicitud con anterioridad')
         }
     }
 }
@@ -116,6 +114,7 @@ export function loginEmpleadoAction () {
 
         try {
             const { data } = await clienteAxios('/empleados/getInfo', config)
+            console.log(data)
             dispatch(loginEmpleadoExito(data.empleado))
         } catch (error) {
             console.log(error)
@@ -131,7 +130,7 @@ const loginEmpleado = () => ({
 
 const loginEmpleadoExito = (empleado) => ({
     type: EMPLEADO_LOGIN_EXITO,
-    payload: empleado
+    payload: empleado.empresa ? empleado : null
 })
 
 const loginEmpleadoError = (error) => ({
