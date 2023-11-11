@@ -3,80 +3,53 @@ import Trabajador from '../../components/admin/Trabajador'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { obtenerDepartamentosAction } from '../../actions/empresasAction'
+import { obtenerDepartamentosAction, obtenerEmpleadosAction, obtenerCategoriasAction } from '../../actions/empresasAction'
 
 export default function Trabajadores() {
   const dispatch = useDispatch()
-  const departamentos = useSelector( state => state.empresa.departamentos)
-  const [filtro, setFiltro ] = useState({
-    departamento: '',
-    categoria: '',
-    trabajador: ''
-  })
+  const {departamentos, empleados} = useSelector( state => state.empresa)
+
+  const [filtro, setFiltro ] = useState({departamento: '',categoria: '',empleado: ''})
   const [filtrados, setFiltrados ] = useState([])
-
-  const [trabajadores, setTrabajadores] = useState([
-  {
-      id: 1,
-      nombre: 'Luiz daniel',
-      email: 'luis@correo.com',
-      fecha: '2021-09-01',
-      departamento: 'redes', categoria: 'internet'
-    },
-    {
-      id: 2,
-      nombre: 'Emiliano Nataren',
-      email: 'emi@correo.com',
-      fecha: '2021-09-01',
-      departamento: 'software', categoria: 'frontend'
-    },
-    {
-      id: 3,
-      nombre: 'Alberto Potasio',
-      email: 'alberto@correo.com',
-      fecha: '2021-09-01',
-      departamento: 'software', categoria: 'backend'
-    },
-    {
-      id: 4,
-      nombre: 'Criis vim',
-      email: 'cris@correo.com',
-      fecha: '2021-09-01',
-      departamento: 'redes', categoria: 'lan'
-    },
-
-
-  ])
-
+  
   const filtrarYOrdenarTrabajadores = () => {
-    let trabajadoresFiltrados = [...trabajadores]
+    let empleadosFiltrados = [...empleados]
 
     if(filtro.departamento && filtro.departamento !== 'todos'){
-      trabajadoresFiltrados = trabajadoresFiltrados.filter(
-        trabajador => trabajador.departamento === filtro.departamento
+      
+      empleadosFiltrados = empleadosFiltrados.filter(
+        empleado => empleado.plaza.categoria.departamento.nombre === filtro.departamento
       )
     }
 
     if(filtro.categoria && filtro.categoria !== 'todos'){
-      trabajadoresFiltrados = trabajadoresFiltrados.filter( trabajador => 
-        trabajador.categoria === filtro.categoria  
+      empleadosFiltrados = empleadosFiltrados.filter( empleado => 
+        empleado.plaza.categoria.nombre === filtro.categoria  
       )
     }
 
-    if(filtro.trabajador) {
-      trabajadoresFiltrados = trabajadoresFiltrados.filter( trabajador => 
-        trabajador.nombre.toLowerCase().includes(filtro.trabajador.toLowerCase())
+    if(filtro.empleado) {
+      empleadosFiltrados = empleadosFiltrados.filter( empleado => 
+        empleado.usuario.nombre.toLowerCase().includes(filtro.empleado.toLowerCase())
       )
     }
 
-    trabajadoresFiltrados.sort( (a, b) => a.nombre.localeCompare(b.nombre))
-    setFiltrados(trabajadoresFiltrados)
+    empleadosFiltrados.sort( (a, b) => a.usuario.nombre.localeCompare(b.usuario.nombre))
+    setFiltrados(empleadosFiltrados)
   }
 
   useEffect(() => {
     filtrarYOrdenarTrabajadores()
+    // dispatch(obtenerCategoriasAction())
+
   },[filtro])
 
+  useEffect(() => {
+    
+    dispatch(obtenerEmpleadosAction())
+      
+  }
+  ,[])
 
   return (
     <main className="bg-emerald-950">
@@ -111,22 +84,22 @@ export default function Trabajadores() {
               <option value="lan">LAN</option>
             </select>
             <input type="text" placeholder='Buscar nombre' className='placeholder:text-emerald-500 bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
-              onChange={e => setFiltro({...filtro, trabajador: e.target.value})}
+              onChange={e => setFiltro({...filtro, empleado: e.target.value})}
             />
            
           </ul>
         </nav>
 
-        <article className='flex flex-col bg-emerald-950 rounded overflow-y-auto max-h-[600px] p-5 gap-4 mt-5'>
+        <article className='flex flex-col bg-slate-200 p-2 rounded overflow-y-auto max-h-[600px] gap-4 mt-5'>
           {
             filtrados.length === 0 ? (
 
                 <p className='text-emerald-500 text-center'>No hay trabajadores</p>
             )  :  (
 
-              filtrados.map(  (trabajador, i) => (
+              filtrados.map(  (empleado) => (
                 
-                  <Trabajador key={i} trabajador={trabajador} />
+                  <Trabajador key={empleado._id} empleado={empleado} />
               )) 
             )}
         </article>

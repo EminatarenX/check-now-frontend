@@ -43,7 +43,10 @@ import {
     RECHAZAR_SOLICITUD_EXITO,
     ACEPTAR_SOLICITUD,
     ACEPTAR_SOLICITUD_EXITO,
-    ACEPTAR_SOLICITUD_ERROR
+    ACEPTAR_SOLICITUD_ERROR,
+    OBTENER_EMPLEADOS,
+    OBTENER_EMPLEADOS_ERROR,
+    OBTENER_EMPLEADOS_EXITO
 
 } from '../types'
 
@@ -102,6 +105,7 @@ export default function empresasReducer( state = initialState, action){
         case GET_SOLICITUDES_ERROR:
         case RECHAZAR_SOLICITUD_ERROR:
         case ACEPTAR_SOLICITUD_ERROR:
+        case OBTENER_EMPLEADOS_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -294,8 +298,19 @@ export default function empresasReducer( state = initialState, action){
                     loading: false,
                     solicitudes: state.solicitudes.filter(solicitud => solicitud._id !== action.payload)
                 }
-
-            
+            case OBTENER_EMPLEADOS:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null,
+                }
+            case OBTENER_EMPLEADOS_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    empleados: action.payload
+                }
+                
         default: 
             return state
     }

@@ -1,16 +1,13 @@
 
-export default function Trabajador({trabajador}) {
-    const {nombre, email, fecha} = trabajador
+export default function Trabajador({empleado}) {
+
+    
   return (
-    <div className="bg-emerald-800 flex justify-between rounded w-full p-4 min-w-[800px] animate-entrada">
+    <div className="bg-white flex justify-between rounded w-full px-2 py-5 shadow animate-entrada">
        
-            <p className="text-white text-lg font-semibold">{nombre}</p>
-            <p className="text-white text-lg font-semibold">{email}</p>
-            <p className="text-white text-lg font-semibold">{fecha}</p>
-            <div className="flex gap-2">
-                <button className="bg-emerald-700 text-white px-2 py-1 rounded">Editar</button>
-                <button className="bg-rose-700 text-white px-2 py-1 rounded">Eliminar</button>
-            </div>
+            <p className="text-emerald-950 text-lg font-semibold capitalize">{empleado.usuario.nombre}</p>
+            {/* <p className="text-white text-lg font-semibold">{empleado.usuario.correo}</p> */}
+         
 
     </div>
   )

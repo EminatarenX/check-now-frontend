@@ -43,7 +43,10 @@ import {
     RECHAZAR_SOLICITUD_EXITO,
     ACEPTAR_SOLICITUD,
     ACEPTAR_SOLICITUD_EXITO,
-    ACEPTAR_SOLICITUD_ERROR
+    ACEPTAR_SOLICITUD_ERROR,
+    OBTENER_EMPLEADOS,
+    OBTENER_EMPLEADOS_ERROR,
+    OBTENER_EMPLEADOS_EXITO
 
 } from '../types'
 
@@ -679,5 +682,48 @@ const aceptarSolicitudExito = (id) => ({
 
 const aceptarSolicitudError = (error) => ({
     type: ACEPTAR_SOLICITUD_ERROR,
+    payload: error
+})
+
+export function obtenerEmpleadosAction () {
+    return async dispatch => {
+        dispatch(obtenerEmpleados())
+
+        const token = localStorage.getItem('token')
+        if(!token) return   
+
+        const config = {
+            headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios('/empleados', config)
+            dispatch(obtenerEmpleadosExito(data.empleados))
+            
+            
+        } catch (error) {
+            console.log(error)
+            dispatch(obtenerEmpleadosError(error))
+            toast.error('Error al obtener los empleados')
+        }
+    }
+}
+
+const obtenerEmpleados = () => ({
+    type: OBTENER_EMPLEADOS,
+    payload: true
+})
+
+const obtenerEmpleadosExito = (empleados) => ({
+    type: OBTENER_EMPLEADOS_EXITO,
+    payload: empleados
+})
+
+const obtenerEmpleadosError = (error) => ({
+    type: OBTENER_EMPLEADOS_ERROR,
     payload: error
 })
