@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Scanner from "../../components/Scanner";
-import socket from "../../helpers/socket";
+
 
 import { Html5QrcodeScanner } from "html5-qrcode";
 import UserIndex from "./UserIndex";
@@ -11,8 +11,7 @@ import { buscarPlazaAction, accederEmpresaAction, loginEmpleadoAction } from '..
 
 export default function UserDashboard() {
   const { empresa, buscarPlaza, loading } = useSelector((state) => state.empleado);
-  const { id } = useSelector((state) => state.usuarios.user);
-  
+
   const dispatch = useDispatch()
   
 
@@ -51,12 +50,10 @@ export default function UserDashboard() {
     }
   
     fetchData();
-    socket.emit('user-qr', id)
+    
   }, [])
 
-useEffect(() => {
-  
-})
+
 
   const Registrarme = () => {
     dispatch(accederEmpresaAction({empresa: buscarPlaza.categoria.departamento.empresa._id, plaza: buscarPlaza._id}))
