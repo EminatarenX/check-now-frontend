@@ -1,8 +1,9 @@
-import { useState } from "react"
+
 import RoudChart from "../../components/charts/RoudChart"
 import { checks, basicBarOptions } from "../../helpers"
 import RoundChart from "../../components/charts/RoudChart"
 import BasicBar from "../../components/charts/BasicChart"
+import socket from "../../helpers/socket"
 
 
 //Redux
@@ -25,6 +26,8 @@ export default function UserIndex() {
     ]
 
     const { plaza } = useSelector(state => state.empleado)
+
+   
     
   return (
     <section className="flex flex-col">

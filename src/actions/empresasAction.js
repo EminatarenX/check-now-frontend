@@ -52,6 +52,7 @@ import {
 
 import clienteAxios from "../config/axios";
 import { toast } from "react-toastify";
+import socket from '../helpers/socket'
 
 // Actualizar datos de la empresa
 export function actualizarDatosEmpresaAction(datos){
@@ -658,8 +659,9 @@ export function aceptarSolicitudAction (body) {
 
         try {
 
-            await clienteAxios.post("/empresas/solicitudes/aceptar", body, config)
+            const { data } = await clienteAxios.post("/empresas/solicitudes/aceptar", body, config)
             dispatch(aceptarSolicitudExito(body.solicitud))
+            socket.emit('solicitud aceptada', data.empleado)
             toast.success("Solicitud aceptada")
         } catch (error) {
             console.log(error)

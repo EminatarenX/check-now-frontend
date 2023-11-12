@@ -36,17 +36,23 @@ export default function Solicitudes() {
   },[])
 
   useEffect(() => {
-    const handleSolicitudRecibida = (solicitud) => {
-      dispatch(nuevaSolicitudSocketAction(solicitud));
-    };
+    socket.on('solicitud recibida', (solicitud) => {
+      dispatch(nuevaSolicitudSocketAction(solicitud))
+    })
+  })
+
+  // useEffect(() => {
+  //   const handleSolicitudRecibida = (solicitud) => {
+  //     dispatch(nuevaSolicitudSocketAction(solicitud));
+  //   };
   
-    socket.on('solicitud recibida', handleSolicitudRecibida);
+  //   socket.on('solicitud recibida', handleSolicitudRecibida);
   
-    return () => {
-      socket.off('solicitud recibida', handleSolicitudRecibida);
-      socket.disconnect(); // Asegúrate de cerrar el socket cuando el componente se desmonta
-    };
-  }, [dispatch, socket]);
+  //   return () => {
+  //     socket.off('solicitud recibida', handleSolicitudRecibida);
+  //     socket.disconnect(); // Asegúrate de cerrar el socket cuando el componente se desmonta
+  //   };
+  // }, [dispatch, socket]);
   
   return (
     <>
