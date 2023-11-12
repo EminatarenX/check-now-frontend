@@ -7,7 +7,7 @@ import { obtenerDepartamentosAction, obtenerEmpleadosAction, obtenerCategoriasAc
 
 export default function Trabajadores() {
   const dispatch = useDispatch()
-  const {departamentos, empleados} = useSelector( state => state.empresa)
+  const {departamentos, empleados, categorias} = useSelector( state => state.empresa)
 
   const [filtro, setFiltro ] = useState({departamento: '',categoria: '',empleado: ''})
   const [filtrados, setFiltrados ] = useState([])
@@ -16,15 +16,16 @@ export default function Trabajadores() {
     let empleadosFiltrados = [...empleados]
 
     if(filtro.departamento && filtro.departamento !== 'todos'){
-      
+
       empleadosFiltrados = empleadosFiltrados.filter(
-        empleado => empleado.plaza.categoria.departamento.nombre === filtro.departamento
+        empleado => empleado.plaza.categoria.departamento._id === filtro.departamento
       )
     }
 
     if(filtro.categoria && filtro.categoria !== 'todos'){
+
       empleadosFiltrados = empleadosFiltrados.filter( empleado => 
-        empleado.plaza.categoria.nombre === filtro.categoria  
+        empleado.plaza.categoria._id === filtro.categoria  
       )
     }
 
@@ -40,7 +41,8 @@ export default function Trabajadores() {
 
   useEffect(() => {
     filtrarYOrdenarTrabajadores()
-    // dispatch(obtenerCategoriasAction())
+
+    dispatch(obtenerCategoriasAction(filtro.departamento))
 
   },[filtro])
 
@@ -70,7 +72,7 @@ export default function Trabajadores() {
               {
                 departamentos.length === 0 ? null :
                 departamentos.map( departamento => (
-                  <option className='uppercase' value={departamento.nombre} >{departamento.nombre.replace(/-/g, " ").toUpperCase()}</option>
+                  <option key={departamento._id} className='uppercase' value={departamento._id} >{departamento.nombre.replace(/-/g, " ").toUpperCase()}</option>
                 ))
               }
             </select>
@@ -78,10 +80,13 @@ export default function Trabajadores() {
               className='bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
             >
               <option className="uppercase" value="todos">CATEGORIA / EQUIPO ( TODOS )</option>
-              <option value="backend">BACKEND</option>
-              <option value="frontend">FRONTEND</option>
-              <option value="internet">INTERNET</option>
-              <option value="lan">LAN</option>
+              {
+                categorias.length === 0 ? null :
+                categorias.map( categoria => (
+                  <option key={categoria._id} className='uppercase' value={categoria._id} >{categoria.nombre.replace(/-/g, " ").toUpperCase()}</option>
+                ))
+              }
+
             </select>
             <input type="text" placeholder='Buscar nombre' className='placeholder:text-emerald-500 bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
               onChange={e => setFiltro({...filtro, empleado: e.target.value})}
@@ -90,7 +95,7 @@ export default function Trabajadores() {
           </ul>
         </nav>
 
-        <article className='flex flex-col bg-slate-200 p-2 rounded overflow-y-auto max-h-[600px] gap-4 mt-5'>
+        <article className='grid grid-cols-1 lg:grid-cols-3 bg-slate-200 p-2 rounded overflow-y-auto max-h-[600px] gap-4 mt-5'>
           {
             filtrados.length === 0 ? (
 

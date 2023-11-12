@@ -46,7 +46,8 @@ import {
     ACEPTAR_SOLICITUD_ERROR,
     OBTENER_EMPLEADOS,
     OBTENER_EMPLEADOS_ERROR,
-    OBTENER_EMPLEADOS_EXITO
+    OBTENER_EMPLEADOS_EXITO,
+
 
 } from '../types'
 
@@ -310,7 +311,8 @@ export default function empresasReducer( state = initialState, action){
                     loading: false,
                     empleados: action.payload
                 }
-                
+
+
         default: 
             return state
     }
