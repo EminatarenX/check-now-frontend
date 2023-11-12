@@ -311,7 +311,11 @@ export default function empresasReducer( state = initialState, action){
                     loading: false,
                     empleados: action.payload
                 }
-
+            case "NUEVA_SOLICITUD_SOCKET":
+                return {
+                    ...state,
+                    solicitudes: [...state.solicitudes, action.payload]
+                }
 
         default: 
             return state

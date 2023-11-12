@@ -1,14 +1,17 @@
 import {useState, useEffect} from 'react'
 import { formatearFecha, formatearDinero } from '../../helpers'
 import Loader from '../../components/loaders/loader'
+import socket from '../../helpers/socket'
+
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
-import { obtenerSolicitudesAction, rechazarSolicitudAction, aceptarSolicitudAction } from '../../actions/empresasAction'
+import { obtenerSolicitudesAction, rechazarSolicitudAction, aceptarSolicitudAction, nuevaSolicitudSocketAction } from '../../actions/empresasAction'
 
 
 export default function Solicitudes() {
   const { solicitudes, loading } = useSelector(state => state.empresa)
+  const { _id: empresaId } = useSelector(state => state.empresa.datos)
   const [ solicitud, setSolicitud ] = useState([])
   const dispatch = useDispatch()
  
@@ -28,8 +31,23 @@ export default function Solicitudes() {
 
   useEffect(()=> {
     dispatch(obtenerSolicitudesAction())
+    
+    socket.emit('solicitudes', empresaId)
   },[])
 
+  useEffect(() => {
+    const handleSolicitudRecibida = (solicitud) => {
+      dispatch(nuevaSolicitudSocketAction(solicitud));
+    };
+  
+    socket.on('solicitud recibida', handleSolicitudRecibida);
+  
+    return () => {
+      socket.off('solicitud recibida', handleSolicitudRecibida);
+      socket.disconnect(); // Asegúrate de cerrar el socket cuando el componente se desmonta
+    };
+  }, [dispatch, socket]);
+  
   return (
     <>
     {

@@ -727,3 +727,14 @@ const obtenerEmpleadosError = (error) => ({
     type: OBTENER_EMPLEADOS_ERROR,
     payload: error
 })
+
+export function nuevaSolicitudSocketAction (solicitud) {
+    return async dispatch => {
+        dispatch(nuevaSolicitudSocket(solicitud))
+    }
+}
+
+const nuevaSolicitudSocket = (solicitud) => ({
+    type: 'NUEVA_SOLICITUD_SOCKET',
+    payload: solicitud
+})

@@ -11,6 +11,8 @@ import {
 } from '../types'
 import { toast } from 'react-toastify'
 import clienteAxios from '../config/axios'
+import socket from '../helpers/socket'
+
 
 export function buscarPlazaAction (id) {
     return async    dispatch => {
@@ -70,7 +72,7 @@ export function accederEmpresaAction (empresa){
         try {
 
             const { data } = await clienteAxios.post("/empleados/solicitud", empresa, config)
-
+            socket.emit('enviar solicitud', data.solicitud)
             dispatch(accederEmpresaExito(data.empresa))
             toast.success('Solicitud enviada con exito')
 
@@ -78,7 +80,7 @@ export function accederEmpresaAction (empresa){
         } catch (error) {
             console.log(error)
             dispatch(accederEmpresaError(error))
-            toast.error('Ya haz enviado una solicitud con anterioridad')
+            toast.error(error.response.data.msg)
         }
     }
 }
@@ -114,7 +116,7 @@ export function loginEmpleadoAction () {
 
         try {
             const { data } = await clienteAxios('/empleados/getInfo', config)
-            console.log(data)
+           
             dispatch(loginEmpleadoExito(data.empleado))
         } catch (error) {
             console.log(error)

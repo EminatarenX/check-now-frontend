@@ -67,7 +67,7 @@ function App() {
       }else if(usuario.role === 'new') {
         navigate('/new-user')
       }else {
-        navigate('/login')
+        navigate(`/`)
       }
     }
   }, [usuario])
