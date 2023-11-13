@@ -2,16 +2,39 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { formatearDinero } from "../../helpers";
 import Regresar from "../../components/admin/Regresar";
+import { useState } from "react";
 import QRCode from "react-qr-code";
+import EditarPlaza from "../../components/admin/modals/EditarPlaza";
+import Swal from "sweetalert2";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { obtenerPlazaAction } from "../../actions/empresasAction";
+import { obtenerPlazaAction, eliminarPlazaAction } from "../../actions/empresasAction";
 import { obtenerEmpleadosEnPlazaAction } from "../../actions/helperAction";
 
 export default function Plaza() {
   const { plazaActual: plaza, loading } = useSelector((state) => state.empresa);
   const { empleado } = useSelector((state) => state.helper);
   const { plaza: id_plaza } = useParams();
+
+  const [ editarPlaza, setEditarPlaza ] = useState(false)
+
+  const handleEliminar = async() => {
+    const result = await Swal.fire({
+      title: "¿Estas seguro?",
+      text: "No podras revertir esta accion",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#10B981",
+      cancelButtonColor: "#EF4444",
+      confirmButtonText: "Si, eliminar",
+      cancelButtonText: "Cancelar",
+    })
+      if (result.isConfirmed) {
+        dispatch(eliminarPlazaAction(id_plaza))
+      }
+  
+  }
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,6 +42,13 @@ export default function Plaza() {
     dispatch(obtenerEmpleadosEnPlazaAction(id_plaza));
   }, []);
   return (
+    <>
+    {
+      editarPlaza && <EditarPlaza 
+        setEditarPlaza={setEditarPlaza}
+        plaza={plaza}
+      />
+    }
     <main className="bg-emerald-950">
       <section className="bg-white rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20 ">
         {loading || !plaza ? null : (
@@ -28,10 +58,14 @@ export default function Plaza() {
         )}
         <Regresar />
         <div className="flex justify-between mt-5 gap-5 lg:w-1/2">
-          <button className="p-2 rounded bg-slate-100 text-cyan-700 shadow font-semibold w-full lg:w-1/3">
+          <button className="p-2 rounded bg-slate-100 text-cyan-700 shadow font-semibold w-full lg:w-1/3"
+          onClick={()=> setEditarPlaza(true)}
+          >
             Editar
           </button>
-          <button className="p-2 rounded bg-slate-100 text-red-700 shadow font-semibold w-full lg:w-1/3">
+          <button className="p-2 rounded bg-slate-100 text-red-700 shadow font-semibold w-full lg:w-1/3"
+          onClick={handleEliminar}
+          >
             Eliminar
           </button>
         </div>
@@ -195,5 +229,6 @@ export default function Plaza() {
         )}
       </section>
     </main>
+    </>
   );
 }

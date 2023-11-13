@@ -12,7 +12,7 @@ export default function InicioLayout() {
   }
   return  (
     <div onClick={handleCerrarNavbar}>
-        <header className='sticky top-0 bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-between items-center p-5'>
+        <header className='sticky top-0 bg-gradient-to-r from-emerald-800 to-emerald-500 flex justify-between items-center p-5 z-10'>
             <h1 className='text-white text-2xl font-bold'>
               <Link to={'/'}>
                 <img src={logo} className='h-12' alt="logo" />

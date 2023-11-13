@@ -47,6 +47,12 @@ import {
     OBTENER_EMPLEADOS,
     OBTENER_EMPLEADOS_ERROR,
     OBTENER_EMPLEADOS_EXITO,
+    EDITAR_PLAZA,
+    EDITAR_PLAZA_ERROR,
+    EDITAR_PLAZA_EXITO,
+    ELIMINAR_PLAZA,
+    ELIMINAR_PLAZA_ERROR,
+    ELIMINAR_PLAZA_EXITO   
 
 
 } from '../types'
@@ -107,6 +113,8 @@ export default function empresasReducer( state = initialState, action){
         case RECHAZAR_SOLICITUD_ERROR:
         case ACEPTAR_SOLICITUD_ERROR:
         case OBTENER_EMPLEADOS_ERROR:
+        case EDITAR_PLAZA_ERROR:
+        case ELIMINAR_PLAZA_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -315,6 +323,31 @@ export default function empresasReducer( state = initialState, action){
                 return {
                     ...state,
                     solicitudes: [...state.solicitudes, action.payload]
+                }
+            case EDITAR_PLAZA:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null,
+                }
+            case EDITAR_PLAZA_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    plazaActual: action.payload,
+
+                }
+            case ELIMINAR_PLAZA:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null,
+                }
+            case ELIMINAR_PLAZA_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    plazas: state.plazas.filter(plaza => plaza._id !== action.payload)
                 }
 
         default: 

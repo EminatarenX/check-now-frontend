@@ -47,6 +47,12 @@ import {
     OBTENER_EMPLEADOS,
     OBTENER_EMPLEADOS_ERROR,
     OBTENER_EMPLEADOS_EXITO,
+    EDITAR_PLAZA,
+    EDITAR_PLAZA_ERROR,
+    EDITAR_PLAZA_EXITO,
+    ELIMINAR_PLAZA,
+    ELIMINAR_PLAZA_ERROR,
+    ELIMINAR_PLAZA_EXITO,
 
 } from '../types'
 
@@ -738,4 +744,87 @@ export function nuevaSolicitudSocketAction (solicitud) {
 const nuevaSolicitudSocket = (solicitud) => ({
     type: 'NUEVA_SOLICITUD_SOCKET',
     payload: solicitud
+})
+
+export function editarPlazaAction (plaza) {
+    return async dispatch => {
+        dispatch(editarPlaza())
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type' : 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await clienteAxios.put(`/plazas/editar/${plaza.id}`, plaza, config)
+          
+            dispatch(editarPlazaExito(data.plaza))
+            toast.success('Plaza editada correctamente')
+        } catch (error) {
+            
+            dispatch(editarPlazaError(error))
+            toast.error('Error al editar la plaza')
+        }
+    }
+}
+
+const editarPlaza = () => ({
+    type: EDITAR_PLAZA,
+    payload: true
+})
+
+const editarPlazaExito = (plaza) => ({
+    type: EDITAR_PLAZA_EXITO,
+    payload: plaza
+})
+
+const editarPlazaError = (error) => ({
+    type: EDITAR_PLAZA_ERROR,
+    payload: error
+})
+
+export function eliminarPlazaAction (id) {
+    return async dispatch => {
+        dispatch(eliminarPlaza())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios.delete(`/plazas/eliminar/${id}`, config)
+            dispatch(eliminarPlazaExito(id))
+            toast.success(data.msg)
+        } catch (error) {
+            console.log(error)
+            toast.error(error.response.data.msg)
+            dispatch(eliminarPlazaError(error))
+        }
+    }
+}
+
+const eliminarPlaza = () => ({
+    type: ELIMINAR_PLAZA,
+    payload: true
+})
+
+const eliminarPlazaExito = (id) => ({
+    type: ELIMINAR_PLAZA_EXITO,
+    payload: id
+})
+
+const eliminarPlazaError = (error) => ({
+    type: ELIMINAR_PLAZA_ERROR,
+    payload: error
 })

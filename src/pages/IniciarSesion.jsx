@@ -44,7 +44,7 @@ export default function IniciarSesion() {
             } 
             
             <input type="email" 
-                placeholder="Correo Electronico"
+                placeholder="Correo electrónico"
                 className={`bg-transparent text-white  border-b-2 border-emerald-300 focus:outline-none p-2 placeholder:text-white focus:scale-105 transition-all`}
                 onChange={e => guardarCorreo(e.target.value)}
 

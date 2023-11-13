@@ -1,7 +1,7 @@
 import {
-  CloudArrowUpIcon,
-  LockClosedIcon,
-  ServerIcon,
+  ClipboardDocumentListIcon,
+  DocumentPlusIcon,
+  ArrowPathRoundedSquareIcon
 } from "@heroicons/react/20/solid";
 import imagenInicio from "../assets/img/img-inicio-check.svg";
 export default function Inicio() {
@@ -22,7 +22,7 @@ export default function Inicio() {
       </section>
       <section className="flex flex-col bg-emerald-800 p-5 lg:p-14">
         <h2 className="text-white text-6xl font-bold text-center">
-          ¿Que es Check Now?
+          ¿Que es Check-Now?
         </h2>
         <div className="overflow-hidden py-24 sm:py-3 mt-5">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -32,20 +32,18 @@ export default function Inicio() {
                   <h2 className="text-base font-semibold leading-7 text-white">
                     Administra mas rápido!
                   </h2>
-                  <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                    A better workflow
-                  </p>
+                 
                   <p className="mt-6 text-lg leading-8 text-white">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Maiores impedit perferendis suscipit eaque, iste dolor
-                    cupiditate blanditiis ratione.
+                    Check-Now es una aplicación web que te permite administrar tu negocio o empresa 
+                    de manera mas sencilla y rápida, con Check-Now podrás llevar un control de tus departamentos,
+                    empleados y mucho mas!.
                   </p>
                   <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-white lg:max-w-none">
                     {features.map((feature) => (
                       <div key={feature.name} className="relative pl-9">
                         <dt className="inline font-semibold text-white">
                           <feature.icon
-                            className="absolute left-1 top-1 h-5 w-5 text-indigo-600"
+                            className="absolute left-1 top-1 h-5 w-5 text-emerald-500"
                             aria-hidden="true"
                           />
                           {feature.name}
@@ -73,21 +71,21 @@ export default function Inicio() {
 
 const features = [
   {
-    name: "Push to deploy.",
+    name: "Crea.",
     description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
-    icon: CloudArrowUpIcon,
+      "Crea tus propios departamentos de trabajo, divídelo por categorías y crea plazas y vacantes para futuros empleados.",
+    icon: DocumentPlusIcon,
   },
   {
-    name: "SSL certificates.",
+    name: "Mejora el flujo de trabajo.",
     description:
-      "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-    icon: LockClosedIcon,
+      "Registra las entradas y salidas de cada trabajador, genera estadísticas de forma automática.",
+    icon: ArrowPathRoundedSquareIcon,
   },
   {
-    name: "Database backups.",
+    name: "Personaliza nominas.",
     description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: ServerIcon,
+      "Genera de forma automatica nominas en base a tus necesidades y Check-Now se encargara de llevar un control de ellas de manera precisa y eficaz.",
+    icon: ClipboardDocumentListIcon,
   },
 ];
