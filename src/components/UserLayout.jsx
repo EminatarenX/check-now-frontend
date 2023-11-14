@@ -52,9 +52,9 @@ export default function UserLayout() {
         </Link>
         <button
           className="text-white text-lg hover:scale-105 transition-transform"
-          onClick={() => {
+          onClick={(e) => {
             setAside(false);
-            cerrarSesion;
+            cerrarSesion(e);
           }}
         >
           Cerrar Sesión

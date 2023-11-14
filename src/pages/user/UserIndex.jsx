@@ -26,6 +26,7 @@ export default function UserIndex() {
 
     const filtrarYOrdenarChecks = () => {
       if(filtro.fecha === "") return
+      
       let checksFiltrados = [...datos?.checks] 
   
      
