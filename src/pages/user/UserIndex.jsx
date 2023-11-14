@@ -1,6 +1,3 @@
-import RoudChart from "../../components/charts/RoudChart"
-import { checks, basicBarOptions } from '../../helpers'
-import BasicBar from "../../components/charts/BasicChart";
 import EmpleadoInfo from "../../components/admin/EmpleadoInfo";
 import TablaEmpleado from "../admin/TablaEmpleado";
 import { useEffect } from "react";
@@ -21,17 +18,6 @@ export default function UserIndex() {
     <section className="flex flex-col">
         <article className="bg-white p-2 rounded-xl">
 
-            <h2 className="text-4xl font-semibold text-emerald-900 text-center">Registro</h2>
-        
-            <div className="flex flex-col lg:flex-row gap-5 mt-5">
-
-                <button className="w-full bg-emerald-100 text-emerald-600 py-3 rounded font-semibold">
-                    Entrar {datos.plaza.horario_entrada}
-                </button>
-                <button className="w-full bg-red-100 text-red-500 py-3 rounded font-semibold">
-                    Salir {datos.plaza.horario_salida}
-                </button>
-            </div>
             {loading && !datos ? (
             <div className="flex justify-center">
               <div className="rounded-full h-40 w-40 border-b border-l border-r border-emerald-900 animate-spin relative"></div>
@@ -39,6 +25,17 @@ export default function UserIndex() {
           ) : (
             datos && (
               <>
+              <h2 className="text-4xl font-semibold text-emerald-900 text-center">Registro</h2>
+          
+              <div className="flex flex-col lg:flex-row gap-5 mt-5">
+
+                  <button className="w-full bg-emerald-100 text-emerald-600 py-3 rounded font-semibold">
+                      Entrar {datos?.plaza?.horario_entrada}
+                  </button>
+                  <button className="w-full bg-red-100 text-red-500 py-3 rounded font-semibold">
+                      Salir {datos?.plaza?.horario_salida}
+                  </button>
+              </div>
                 <EmpleadoInfo empleado={datos} />
                   <h2 className="text-emerald-900 text-2xl font-semibold mt-5">
                       Historial de entradas y salidas
