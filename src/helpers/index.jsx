@@ -22,7 +22,7 @@ export const obtenerHoraEntrada = (fecha) => {
     const hora = fechaFormateada.getHours()
     const minutos = fechaFormateada.getMinutes()
 
-    const horaFinal = `${hora}:${minutos}`
+    const horaFinal = `${hora}:${minutos < 10 ? `0${minutos}` : minutos}`
     return horaFinal
 }
 
@@ -409,5 +409,3 @@ export const basicBarOptions = (props) => {
         ]
       };
 }
-
-

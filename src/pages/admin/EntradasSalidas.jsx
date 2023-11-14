@@ -416,7 +416,7 @@ export default function EntradasSalidas() {
                       {
                           filtrados.length === 0 ? (
                               <tr>
-                                  <td colSpan={3} className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                  <td colSpan={5} className="py-2 text-left border-b border-gray-400 text-emerald-900">
                                       No hay entradas y salidas
                                   </td>
                               </tr>

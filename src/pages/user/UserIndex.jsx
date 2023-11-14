@@ -1,6 +1,6 @@
 import EmpleadoInfo from "../../components/admin/EmpleadoInfo";
 import TablaEmpleado from "../admin/TablaEmpleado";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getDatosEmpleadoAction } from "../../actions/empleadosAction"
@@ -9,10 +9,47 @@ export default function UserIndex() {
  
     const dispatch = useDispatch();
     const { loading, datos, id } = useSelector((state) => state.empleado);
+    const [checks, setChecks ] = useState([])
+    const [filtro, setFiltro] = useState({ departamento: "",categoria: "",fecha: '',})
+
+    const fechaMaxima = () => {
+      const fechaMax = new Date()
+      fechaMax.setFullYear(fechaMax.getFullYear() )
+  
+      const fechaFormateada = fechaMax.toISOString().split('T')[0]
+      return fechaFormateada
+    }
   
     useEffect(() => {
       dispatch(getDatosEmpleadoAction(id));
     }, []);
+
+    const filtrarYOrdenarChecks = () => {
+      let checksFiltrados = [...datos?.checks] 
+  
+     
+      
+      if(filtro.fecha.length !== 0){
+        checksFiltrados = checksFiltrados.filter(
+          entrada => {
+            const formatDate = entrada.fecha_entrada.split('T')[0]
+           
+            if(formatDate === filtro.fecha){
+              return formatDate
+            }
+          }
+        )
+      }
+  
+      
+  
+      setChecks(checksFiltrados)
+    }
+
+    useEffect(()=> {
+      filtrarYOrdenarChecks()
+
+    },[filtro])
 
   return (
     <section className="flex flex-col">
@@ -40,7 +77,8 @@ export default function UserIndex() {
                   <h2 className="text-emerald-900 text-2xl font-semibold mt-5">
                       Historial de entradas y salidas
                   </h2>
-                  <TablaEmpleado empleadoActual={datos} />   
+                  <input type="date" value={filtro.fecha} onChange={e => setFiltro({...filtro, fecha: e.target.value})} max={fechaMaxima()}/>
+                  <TablaEmpleado checks={checks}/>   
                 {/* <pre className="text-sm text-emerald-950 font-semibold">
                   {JSON.stringify(datos, null, 2)}
                 </pre> */}

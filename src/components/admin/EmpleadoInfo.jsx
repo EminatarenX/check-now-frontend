@@ -20,8 +20,8 @@ export default function EmpleadoInfo({empleado}) {
     }
 
     const optionsCircle = [
-        {value: 1000,name: 'Sueldo',itemStyle: {color: 'rgb(5 150 105/ .70'}}, 
-        {value: 500,name: 'Gastos',itemStyle: {color: `rgb(239 68 68 / .80`} }
+        {value: diasTrabajados(empleado.checks),name: 'Dias trabajados',itemStyle: {color: 'rgb(5 150 105/ .70'}}, 
+        {value: 26,name: 'Dias del mes',itemStyle: {color: `rgb(239 68 68 / .80`} }
     ]
     const optionsBar = [
         {value: diasTrabajados(empleado.checks),name: 'Dias trabajados'}, 
@@ -39,7 +39,7 @@ export default function EmpleadoInfo({empleado}) {
             {empleado.usuario.nombre} {empleado.usuario.apellidos}
         </h2>
 
-        <div className="bg-slate-100 rounded-lg p-2 flex flex-col lg:flex-row mt-5">
+        <div className="bg-slate-100 rounded-lg p-2 flex flex-col lg:flex-row mt-5 ">
             <div className="flex flex-col lg:w-1/3 gap-4">
                 <div className="flex items-center justify-between gap-5 text-emerald-900">
                     <h2 className="text-2xl">{empleado.plaza.nombre}</h2>
@@ -62,11 +62,12 @@ export default function EmpleadoInfo({empleado}) {
             </div>
             
             <div className="w-full flex flex-col items-end">
-                <BasicBar 
+                {/* <BasicBar 
                     height={"300px"}
                     width={"100%"}
                     option={basicBarOptions(optionsBar)}
-                />
+                /> */}
+                <RoundChart height={"300px"} width={"100%"} option={checks(optionsCircle)} />
                
                     
             </div>

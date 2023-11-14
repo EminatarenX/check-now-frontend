@@ -126,7 +126,7 @@ export default function Trabajadores() {
             <input
               type="text"
               placeholder="Buscar nombre"
-              className="placeholder:text-emerald-500 bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none"
+              className="placeholder:text-neutral-400 bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none"
               onChange={(e) =>
                 setFiltro({ ...filtro, empleado: e.target.value })
               }
