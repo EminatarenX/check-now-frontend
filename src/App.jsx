@@ -47,7 +47,7 @@ function App() {
         dispatch(obtenerPerfilAction(token))
 
       }else {
-        navigate('/login') //este es el cambio que hice
+        navigate('/') 
       }
     }
     verificar()
