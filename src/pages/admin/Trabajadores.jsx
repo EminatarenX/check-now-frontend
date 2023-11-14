@@ -69,7 +69,7 @@ export default function Trabajadores() {
 
   return (
     <main className="bg-emerald-950">
-      <section className="bg-white min-h-[500px] rounded-tl-[100px] rounded-br-[100px] p-10 lg:p-20">
+      <section className="bg-white min-h-[500px] rounded-tl-[100px] rounded-bl-xl p-10 lg:p-20">
         <h1 className="text-emerald-900 text-4xl font-semibold">
           Listado de trabajadores
         </h1>
@@ -133,8 +133,10 @@ export default function Trabajadores() {
             />
           </ul>
         </nav>
-        <table className="table-auto bg-white p-2 rounded overflow-y-auto max-h-[600px] gap-1 mt-5 w-full">
-          <thead>
+        <div className="overflow-x-scroll overflow-y-scroll lg:overflow-x-hidden min-h-[400px] max-h-[400px]">
+
+        <table className="table-auto bg-white p-2 rounded min-w-[800px] gap-1 mt-5 w-full">
+          <thead  className="sticky top-0 bg-white">
             <tr>
               <th className="py-2 text-left border-b border-gray-400 text-emerald-900">Nombre</th>
               <th className="py-2 text-left border-b border-gray-400 text-emerald-900">Apellidos</th>
@@ -146,7 +148,7 @@ export default function Trabajadores() {
           <tbody>
             {filtrados.length === 0 ? (
               <tr >
-                <td colSpan="4" className="text-emerald-500 text-center p-4">No hay trabajadores</td>
+                <td colSpan="4" className="text-emerald-600 text-center p-4">No hay trabajadores</td>
                 </tr>
             ) : (
               filtrados.map((empleado, i) => (
@@ -155,6 +157,7 @@ export default function Trabajadores() {
             )}
           </tbody>
         </table>
+        </div>
       </section>
     </main>
   );

@@ -20,7 +20,7 @@ export default function EntradasSalidas() {
     {
       nombre: 'Emiliano',
       apellido: 'Gonzalez',
-      fecha: '2021-10-01',
+      fecha: '2023-11-13',
       departamento: 'contaduria',
       horaEntrada: '08:00',
 
@@ -29,7 +29,7 @@ export default function EntradasSalidas() {
     {
       nombre: 'Emiliano',
       apellido: 'Gonzalez',
-      fecha: '2021-10-01',
+      fecha: '2023-11-13',
       departamento: 'contaduria',
       horaEntrada: '08:00',
 
@@ -38,7 +38,7 @@ export default function EntradasSalidas() {
     {
       nombre: 'Emiliano',
       apellido: 'Gonzalez',
-      fecha: '2021-10-01',
+      fecha: '2023-11-13',
       plaza: 'Contador',
       horaEntrada: '08:00',
       departamento: 'contaduria',
@@ -47,12 +47,265 @@ export default function EntradasSalidas() {
     {
       nombre: 'Emiliano',
       apellido: 'Gonzalez',
-      fecha: '2021-10-01',
+      fecha: '2023-11-13',
       plaza: 'Contador',
       horaEntrada: '08:00',
       departamento: 'contaduria',
 
     },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-13',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-13',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-13',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-13',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-11',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-11',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-11',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-11',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-10',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    {
+      nombre: 'Emiliano',
+      apellido: 'Gonzalez',
+      fecha: '2023-11-09',
+      plaza: 'Contador',
+      horaEntrada: '08:00',
+      departamento: 'contaduria',
+
+    },
+    
   ])
   const filtrarYOrdenarChecks = () => {
     let checksFiltrados = [...entradas] 
@@ -79,6 +332,15 @@ export default function EntradasSalidas() {
 
     setFiltrados(checksFiltrados)
   }
+
+  const fechaMaxima = () => {
+    const fechaMax = new Date()
+    fechaMax.setFullYear(fechaMax.getFullYear() )
+
+    const fechaFormateada = fechaMax.toISOString().split('T')[0]
+    return fechaFormateada
+  }
+
   useEffect(()=> {
     dispatch(obtenerDepartamentosAction())
   }, [])
@@ -119,14 +381,17 @@ export default function EntradasSalidas() {
             </select>
               <input
               type='date'
+              name='fecha'
+              max={fechaMaxima()}
               onChange={e => setFiltro({...filtro, fecha: e.target.value})}
               className='bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'/>
             </ul>
           </nav>
 
+          <div className="overflow-x-scroll overflow-y-scroll lg:overflow-x-hidden min-h-[400px] max-h-[400px]">
 
-          <table className='table-auto bg-white p-2 rounded overflow-y-auto max-h-[600px] gap-1 mt-5 w-full'>
-          <thead>
+          <table className='table-auto bg-white p-2 min-w-[800px] rounded gap-1 mt-5 w-full'>
+          <thead className="sticky top-0 bg-white">
                     
                     <tr>
                       <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
@@ -157,20 +422,20 @@ export default function EntradasSalidas() {
                               </tr>
                           ) : (
                               filtrados.map((entrada,i) => (
-                                  <tr className={`${i % 2 === 0 && 'bg-neutral-100'}`} key={i}>
-                                    <td className={` py-2 text-left border-b border-gray-400 text-emerald-900`}>
+                                  <tr className={`${(i+1) % 2 === 0 ? 'bg-white' : 'bg-neutral-100'} rounded w-full shadow animate-entrada border-b`} key={i}>
+                                    <td className={"text-emerald-950 text-sm capitalize py-1"}>
                                           {entrada.nombre} {entrada.apellido}
                                       </td>
-                                      <td className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                      <td className="text-emerald-950 text-sm ">
                                           {entrada.departamento}
                                       </td>
-                                      <td className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                      <td className="text-emerald-950 text-sm pl-8">
                                           {obtenerHoraEntrada(entrada.fecha)}
                                       </td>
-                                      <td className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                      <td className="text-emerald-950 text-sm pl-8">
                                           {obtenerHoraEntrada(entrada.fecha)}
                                       </td>
-                                      <td className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                      <td className="text-emerald-950 text-sm ">
                                           {entrada.comentarios}
                                       </td>
                                   </tr>
@@ -182,6 +447,7 @@ export default function EntradasSalidas() {
           
         </table>
 
+      </div>
 
       </section>
     </main>
