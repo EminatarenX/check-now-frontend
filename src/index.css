@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Body = bg-gradiend-to-r fron-emerald-800 to-emerald-500 */
+
+body {
+  background: linear-gradient(to left, rgb(16 185 129), rgb(6 95 70));
+}
