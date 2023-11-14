@@ -7,7 +7,10 @@ import {
     ACCEDER_EMPRESA_ERROR,
     EMPLEADO_LOGIN,
     EMPLEADO_LOGIN_EXITO,
-    EMPLEADO_LOGIN_ERROR
+    EMPLEADO_LOGIN_ERROR,
+    GET_EMPLEADO,
+    GET_EMPLEADO_EXITO,
+    GET_EMPLEADO_ERROR
 } from '../types'
 import { toast } from 'react-toastify'
 import clienteAxios from '../config/axios'
@@ -137,5 +140,45 @@ const loginEmpleadoExito = (empleado) => ({
 
 const loginEmpleadoError = (error) => ({
     type: EMPLEADO_LOGIN_ERROR,
+    payload: error
+})
+
+export function getDatosEmpleadoAction (id) {
+    return async dispatch => {
+        dispatch(getEmpleado())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios.get(`/empleados/admin/${id}`, config)
+            dispatch(getEmpleadoExito(data.empleado))
+        } catch (error) {
+            console.log(error)
+            dispatch(getEmpleadoError(error))
+        }
+    }
+}
+
+const getEmpleado = () => ({
+    type: GET_EMPLEADO,
+    payload: true
+})
+
+const getEmpleadoExito = (empleado) => ({
+    type: GET_EMPLEADO_EXITO,
+    payload: empleado
+})
+
+const getEmpleadoError = (error) => ({
+    type: GET_EMPLEADO_ERROR,
     payload: error
 })

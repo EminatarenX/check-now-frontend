@@ -7,11 +7,15 @@ import {
     ACCEDER_EMPRESA_ERROR,
     EMPLEADO_LOGIN,
     EMPLEADO_LOGIN_EXITO,
-    EMPLEADO_LOGIN_ERROR
+    EMPLEADO_LOGIN_ERROR,
+    GET_EMPLEADO,
+    GET_EMPLEADO_EXITO,
+    GET_EMPLEADO_ERROR
 } from '../types'
 
 const initialState = {
-    informacion_personal: null,
+    id: null,
+    datos: null,
     empresa: null,
     plaza: null,
     entradas: [],
@@ -26,6 +30,8 @@ export default function empleadosReducer ( state = initialState, action){
     switch (action.type){
         case ACCEDER_EMPRESA_ERROR:
         case BUSCAR_PLAZA_USER_ERROR:     
+        case EMPLEADO_LOGIN_ERROR:
+        case GET_EMPLEADO_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -68,7 +74,21 @@ export default function empleadosReducer ( state = initialState, action){
                 loading: false,
                 empresa: action.payload ? action.payload.empresa : null,
                 plaza: action.payload ? action.payload.plaza : null,
+                id: action.payload ? action.payload._id : null,
                 error: null
+            }
+        case GET_EMPLEADO:
+            return {
+                ...state,
+                loading: action.payload,
+                error: null
+            }
+        case GET_EMPLEADO_EXITO:
+            return {
+                ...state,
+                loading: false,
+                datos: action.payload,
+
             }
         default: 
             return state
