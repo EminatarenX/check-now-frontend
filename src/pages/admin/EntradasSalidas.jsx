@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react"
+import { obtenerHoraEntrada } from "../../helpers"
 import Entrada from "../../components/admin/Entrada"
 
 // Redux
@@ -40,7 +41,7 @@ export default function EntradasSalidas() {
       fecha: '2021-10-01',
       plaza: 'Contador',
       horaEntrada: '08:00',
-
+      departamento: 'contaduria',
 
     },
     {
@@ -49,7 +50,7 @@ export default function EntradasSalidas() {
       fecha: '2021-10-01',
       plaza: 'Contador',
       horaEntrada: '08:00',
-
+      departamento: 'contaduria',
 
     },
   ])
@@ -105,8 +106,8 @@ export default function EntradasSalidas() {
 
               {
                 departamentos.length === 0 ? null :
-                departamentos.map( departamento => (
-                  <option className='uppercase' value={departamento.nombre} >{departamento.nombre.replace(/-/g, " ").toUpperCase()}</option>
+                departamentos.map( (departamento,i) => (
+                  <option key={i} className='uppercase' value={departamento.nombre} >{departamento.nombre.replace(/-/g, " ").toUpperCase()}</option>
                 ))
               }
             </select>
@@ -124,19 +125,62 @@ export default function EntradasSalidas() {
           </nav>
 
 
-          <article className='flex flex-col bg-emerald-950 rounded overflow-y-auto max-h-[600px] p-5 gap-4 mt-5'>
-          {
-            filtrados.length === 0 ? (
-
-                <p className='text-emerald-500 text-center'>No hay registros</p>
-            )  :  (
-
-              filtrados.map(  (entrada, i) => (
-                
-                  <Entrada key={i} entrada={entrada} />
-              )) 
-            )}
-        </article>
+          <table className='table-auto bg-white p-2 rounded overflow-y-auto max-h-[600px] gap-1 mt-5 w-full'>
+          <thead>
+                    
+                    <tr>
+                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                        Nombre del trabajador
+                      </th>
+                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                        Departamento
+                      </th>
+                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                        Hora de Entrada
+                      </th>
+                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                        Hora de salida
+                      </th>
+                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                        Comentarios
+                      </th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {
+                          filtrados.length === 0 ? (
+                              <tr>
+                                  <td colSpan={3} className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                      No hay entradas y salidas
+                                  </td>
+                              </tr>
+                          ) : (
+                              filtrados.map((entrada,i) => (
+                                  <tr className={`${i % 2 === 0 && 'bg-neutral-100'}`} key={i}>
+                                    <td className={` py-2 text-left border-b border-gray-400 text-emerald-900`}>
+                                          {entrada.nombre} {entrada.apellido}
+                                      </td>
+                                      <td className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                          {entrada.departamento}
+                                      </td>
+                                      <td className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                          {obtenerHoraEntrada(entrada.fecha)}
+                                      </td>
+                                      <td className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                          {obtenerHoraEntrada(entrada.fecha)}
+                                      </td>
+                                      <td className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                                          {entrada.comentarios}
+                                      </td>
+                                  </tr>
+                              )
+                              )
+                          )
+                      }
+                  </tbody>
+          
+        </table>
 
 
       </section>

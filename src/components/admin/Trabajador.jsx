@@ -1,14 +1,14 @@
+import { Link } from "react-router-dom";
+export default function Trabajador({ empleado, i }) {
 
-export default function Trabajador({empleado}) {
 
-    
   return (
-    <div className="bg-white flex justify-between rounded w-full px-2 py-5 shadow animate-entrada">
-       
-            <p className="text-emerald-950 text-lg font-semibold capitalize">{empleado.usuario.nombre}</p>
-            {/* <p className="text-white text-lg font-semibold">{empleado.usuario.correo}</p> */}
-         
-
-    </div>
-  )
+    <tr key={empleado._id} className={`${(i+1) % 2 === 0 ? 'bg-white' : 'bg-neutral-100'} rounded w-full shadow animate-entrada border-b`}>
+      <td className="text-emerald-950 text-sm capitalize py-1">{empleado.usuario.nombre}</td>
+      <td className="text-emerald-950 text-sm capitalize">{empleado.usuario.apellidos}</td>
+      <td className="text-emerald-950 text-sm ">{empleado.usuario.correo}</td>
+      <td className="text-emerald-950 text-sm ">{empleado.usuario.telefono}</td>
+      <td className="text-emerald-700 cursor-pointer text-sm"><Link to={`/admin/trabajadores/${empleado._id}`}>Ver detalles</Link></td>
+    </tr>
+  );
 }

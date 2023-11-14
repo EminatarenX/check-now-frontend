@@ -16,7 +16,7 @@ const RoundChart = ({ option, height }) => {
     }
   }, [option]);
 
-  return <div ref={chartRef} style={{width: '100%', height }} />;
+  return <div ref={chartRef} style={{width: '100%', height:height }} />;
 };
 
 export default RoundChart;

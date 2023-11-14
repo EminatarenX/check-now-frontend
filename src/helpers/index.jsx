@@ -17,6 +17,15 @@ export const formatearFecha = (fecha) => {
     return fechaFinal
 }
 
+export const obtenerHoraEntrada = (fecha) => {
+    const fechaFormateada = new Date(fecha)
+    const hora = fechaFormateada.getHours()
+    const minutos = fechaFormateada.getMinutes()
+
+    const horaFinal = `${hora}:${minutos}`
+    return horaFinal
+}
+
 export const accionesDashboard = [
     {
         accion: 'Departamentos',
@@ -394,7 +403,7 @@ export const basicBarOptions = (props) => {
             data: props.map(item => item.value),
             type: 'bar',
             itemStyle: {
-                color: 'rgb(5 150 105/ .70)' 
+                color: `${props[0].value < 15 && props[0].value > 10 ? 'rgb(239 68 68 / .80)' : 'rgb(5 150 105/ .70)'}` 
             }
           }
         ]

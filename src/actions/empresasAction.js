@@ -53,6 +53,9 @@ import {
     ELIMINAR_PLAZA,
     ELIMINAR_PLAZA_ERROR,
     ELIMINAR_PLAZA_EXITO,
+    GET_EMPLEADO,
+    GET_EMPLEADO_ERROR,
+    GET_EMPLEADO_EXITO
 
 } from '../types'
 
@@ -826,5 +829,45 @@ const eliminarPlazaExito = (id) => ({
 
 const eliminarPlazaError = (error) => ({
     type: ELIMINAR_PLAZA_ERROR,
+    payload: error
+})
+
+export function getEmpleadoAction(id){
+    return async dispatch => {
+        dispatch(getEmpleado())
+
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios.get(`/empleados/admin/${id}`, config)
+            dispatch(getEmpleadoExito(data.empleado))
+        } catch (error) {
+            console.log(error)
+            dispatch(getEmpleadoError(error))
+        }
+    }
+}
+
+const getEmpleado = () => ({
+    type: GET_EMPLEADO,
+    payload: true
+})
+
+const getEmpleadoExito = (empleado) => ({
+    type: GET_EMPLEADO_EXITO,
+    payload: empleado
+})
+
+const getEmpleadoError = (error) => ({
+    type: GET_EMPLEADO_ERROR,
     payload: error
 })

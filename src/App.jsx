@@ -26,6 +26,7 @@ import EntradasSalidas from './pages/admin/EntradasSalidas'
 import Departamentos from './pages/admin/Departamentos'
 import Categoria from './pages/admin/Categoria'
 import Plaza from './pages/admin/Plaza'
+import Empleado from './pages/admin/Empleado'
 
 import { obtenerPerfilAction } from './actions/usuariosActions'
 import UserConfig from './pages/user/UserConfig'
@@ -106,6 +107,7 @@ function App() {
             <Route path='entradas-salidas' element={<EntradasSalidas/>} />
             <Route path="departamentos/:departamento" element={<Categoria/>} />
             <Route path='departamentos/:departamento/:plaza' element={<Plaza/>} />
+            <Route path='trabajadores/:empleado' element={<Empleado />} />
           </Route>
 
           <Route path='/dashboard' element={<UserProtection/>}>

@@ -52,8 +52,10 @@ import {
     EDITAR_PLAZA_EXITO,
     ELIMINAR_PLAZA,
     ELIMINAR_PLAZA_ERROR,
-    ELIMINAR_PLAZA_EXITO   
-
+    ELIMINAR_PLAZA_EXITO,
+    GET_EMPLEADO,
+    GET_EMPLEADO_ERROR,
+    GET_EMPLEADO_EXITO
 
 } from '../types'
 
@@ -65,6 +67,7 @@ const initialState = {
     solicitudes: [],
     categorias: [],
     plazas: [], 
+    empleadoActual: null,
     plazaActual: null,
     loading: false,
     error: null,
@@ -115,6 +118,7 @@ export default function empresasReducer( state = initialState, action){
         case OBTENER_EMPLEADOS_ERROR:
         case EDITAR_PLAZA_ERROR:
         case ELIMINAR_PLAZA_ERROR:
+        case GET_EMPLEADO_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -349,7 +353,19 @@ export default function empresasReducer( state = initialState, action){
                     loading: false,
                     plazas: state.plazas.filter(plaza => plaza._id !== action.payload)
                 }
-
+            case GET_EMPLEADO:
+                return {
+                    ...state,
+                    loading: action.payload,
+                    empleadoActual: null,
+                    error: null,
+                }
+            case GET_EMPLEADO_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    empleadoActual: action.payload
+                }
         default: 
             return state
     }
