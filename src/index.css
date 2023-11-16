@@ -6,4 +6,12 @@
 
 body {
   background: linear-gradient(to left, rgb(16 185 129), rgb(6 95 70));
+ 
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
 }

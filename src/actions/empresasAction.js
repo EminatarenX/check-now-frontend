@@ -55,7 +55,10 @@ import {
     ELIMINAR_PLAZA_EXITO,
     GET_EMPLEADO,
     GET_EMPLEADO_ERROR,
-    GET_EMPLEADO_EXITO
+    GET_EMPLEADO_EXITO,
+    GET_CHECKS_ADMIN,
+    GET_CHECKS_ADMIN_ERROR,
+    GET_CHECKS_ADMIN_EXITO
 
 } from '../types'
 
@@ -870,4 +873,57 @@ const getEmpleadoExito = (empleado) => ({
 const getEmpleadoError = (error) => ({
     type: GET_EMPLEADO_ERROR,
     payload: error
+})
+
+export function getChecksAdminAction(){
+    return async dispatch => {
+        dispatch(getChecksAdmin())
+        const token = localStorage.getItem('token')
+        if(!token) return 
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios("/checks/empresa", config)
+            
+            dispatch(getChecksAdminExito(data.checks))
+            
+        } catch (error) {
+            console.log(error)
+            dispatch(getChecksAdminError(error))
+            toast.error('No se pudieron obtener los registros')
+        }
+    }
+}
+
+const getChecksAdmin = () => ({
+    type: GET_CHECKS_ADMIN,
+    payload: true
+})
+
+const getChecksAdminExito = (checks) => ({
+    type: GET_CHECKS_ADMIN_EXITO,
+    payload: checks
+})
+
+const getChecksAdminError = (error) => ({
+    type: GET_CHECKS_ADMIN_ERROR,
+    payload: error
+})
+
+export function nuevoCheckSocket(check){
+    return async dispatch => {
+        dispatch(nuevoCheck(check))
+    }
+}
+
+const nuevoCheck = (check) => ({
+    type: 'NUEVO_CHECK_SOCKET',
+    payload: check
 })

@@ -50,7 +50,7 @@ export default function Plaza() {
       />
     }
     <main className="bg-emerald-950">
-      <section className="bg-white rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20 ">
+      <section className="bg-white rounded-tl-[100px] p-14 lg:p-20 ">
         {loading || !plaza ? null : (
           <h1 className="text-4xl text-emerald-950 font-semibold">
             {plaza.nombre}

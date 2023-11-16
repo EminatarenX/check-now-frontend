@@ -10,7 +10,13 @@ import {
     EMPLEADO_LOGIN_ERROR,
     GET_EMPLEADO,
     GET_EMPLEADO_EXITO,
-    GET_EMPLEADO_ERROR
+    GET_EMPLEADO_ERROR,
+    REGISTRAR_ENTRADA_ERROR, 
+    REGISTRAR_ENTRADA, 
+    REGISTRAR_ENTRADA_EXITO,
+    REGISTRAR_SALIDA,
+    REGISTRAR_SALIDA_ERROR,
+    REGISTRAR_SALIDA_EXITO,
 } from '../types'
 import { toast } from 'react-toastify'
 import clienteAxios from '../config/axios'
@@ -122,7 +128,7 @@ export function loginEmpleadoAction () {
            
             dispatch(loginEmpleadoExito(data.empleado))
         } catch (error) {
-            console.log(error)
+            
             dispatch(loginEmpleadoError(error))
         }
     }
@@ -180,5 +186,92 @@ const getEmpleadoExito = (empleado) => ({
 
 const getEmpleadoError = (error) => ({
     type: GET_EMPLEADO_ERROR,
+    payload: error
+})
+
+export function registrarEntradaAction (entrada) {
+    return async dispatch => {
+        dispatch(registrarEntrada())
+        const token = localStorage.getItem('token')
+        if(!token) toast.error('Su sesión expiro')
+
+        const config = {
+            headers: {
+                'Content-Type' : 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios.post('/checks', entrada, config)
+            toast.success('Entrada registrada!')
+            dispatch(registrarEntradaExito(data.check))
+            socket.emit('nueva entrada', data.check)
+            
+        } catch (error) {
+            
+            toast.error(error.response.data.msg)
+            dispatch(registrarEntradaError(error))
+        }
+    }
+
+}
+
+const registrarEntrada = () => ({
+    type: REGISTRAR_ENTRADA,
+    payload: true
+})
+
+const registrarEntradaExito = (entrada) => ({
+    type: REGISTRAR_ENTRADA_EXITO,
+    payload: entrada
+})
+
+const registrarEntradaError = (error) => ({
+    type: REGISTRAR_ENTRADA_ERROR,
+    payload: error
+})
+
+export function registrarSalidaAction () {
+    return async dispatch => {
+        dispatch(registrarSalida())
+        const token = localStorage.getItem('token')
+        if(!token) toast.error('Su sesión expiro')
+
+        const config = {
+            headers: {
+                'Content-Type' : 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios('/checks/salida', config)
+            toast.success('Salida registrada!')
+            dispatch(registrarSalidaExito(data.check))
+            
+            
+        } catch (error) {
+            
+            toast.error(error.response.data.msg)
+            dispatch(registrarSalidaError(error))
+        }
+    }
+}
+
+const registrarSalida = () => ({
+    type: REGISTRAR_SALIDA,
+    payload: true
+})
+
+const registrarSalidaExito = (salida) => ({
+    type: REGISTRAR_SALIDA_EXITO,
+    payload: salida
+})
+
+const registrarSalidaError = (error) => ({
+    type: REGISTRAR_SALIDA_ERROR,
     payload: error
 })

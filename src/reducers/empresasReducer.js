@@ -55,7 +55,10 @@ import {
     ELIMINAR_PLAZA_EXITO,
     GET_EMPLEADO,
     GET_EMPLEADO_ERROR,
-    GET_EMPLEADO_EXITO
+    GET_EMPLEADO_EXITO,
+    GET_CHECKS_ADMIN,
+    GET_CHECKS_ADMIN_ERROR,
+    GET_CHECKS_ADMIN_EXITO
 
 } from '../types'
 
@@ -67,6 +70,7 @@ const initialState = {
     solicitudes: [],
     categorias: [],
     plazas: [], 
+    checks: [],
     empleadoActual: null,
     plazaActual: null,
     loading: false,
@@ -119,6 +123,7 @@ export default function empresasReducer( state = initialState, action){
         case EDITAR_PLAZA_ERROR:
         case ELIMINAR_PLAZA_ERROR:
         case GET_EMPLEADO_ERROR:
+        case GET_CHECKS_ADMIN_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -365,6 +370,23 @@ export default function empresasReducer( state = initialState, action){
                     ...state,
                     loading: false,
                     empleadoActual: action.payload
+                }
+            case GET_CHECKS_ADMIN: 
+                return {
+                    ...state,
+                    loading: action.payload,
+                    error: null
+                }
+            case GET_CHECKS_ADMIN_EXITO: 
+                return {
+                    ...state,
+                    loading: false,
+                    checks: action.payload
+                }
+            case 'NUEVO_CHECK_SOCKET':
+                return {
+                    ...state,
+                    checks: [...state.checks, action.payload]
                 }
         default: 
             return state

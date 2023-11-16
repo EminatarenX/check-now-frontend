@@ -1,20 +1,20 @@
 
 import { useEffect, useState } from "react"
 import { obtenerHoraEntrada } from "../../helpers"
-import Entrada from "../../components/admin/Entrada"
+import socket from '../../helpers/socket'
 
 // Redux
 import { useSelector, useDispatch } from "react-redux"
-import { obtenerDepartamentosAction } from "../../actions/empresasAction"
+import { obtenerDepartamentosAction, obtenerCategoriasAction, getChecksAdminAction, nuevoCheckSocket } from "../../actions/empresasAction"
 
 export default function EntradasSalidas() {
   const dispatch = useDispatch()
   const [filtro, setFiltro] = useState({
-    departamento: "",
-    categoria: "",
-    fecha: '',
+    departamento: "todos",
+    categoria: "todos",
+    fecha: "todos",
   })
-  const departamentos = useSelector( state => state.empresa.departamentos)
+  const {departamentos, categorias, checks, loading} = useSelector( state => state.empresa)
   const [ filtrados, setFiltrados ] = useState([])
   const [entradas, setEntradas] = useState([
     {
@@ -26,309 +26,37 @@ export default function EntradasSalidas() {
 
 
     },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-13',
-      departamento: 'contaduria',
-      horaEntrada: '08:00',
-
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-13',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-13',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-13',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-13',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-13',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-13',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-11',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-11',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-11',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-11',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-10',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
-    {
-      nombre: 'Emiliano',
-      apellido: 'Gonzalez',
-      fecha: '2023-11-09',
-      plaza: 'Contador',
-      horaEntrada: '08:00',
-      departamento: 'contaduria',
-
-    },
+ 
     
   ])
   const filtrarYOrdenarChecks = () => {
-    let checksFiltrados = [...entradas] 
+
+    let checksFiltrados = [...checks] 
 
     if( filtro.departamento && filtro.departamento !== 'todos'){
       checksFiltrados = checksFiltrados.filter(
-        entrada => entrada.departamento === filtro.departamento
+        entrada => entrada.empleado.plaza.categoria.departamento._id === filtro.departamento
       )
     }
 
     if(filtro.categoria && filtro.categoria !== 'todos'){
       checksFiltrados = checksFiltrados.filter(
-        entrada => entrada.categoria === filtro.categoria
+        entrada => entrada.empleado.plaza.categoria._id === filtro.categoria
       )
     }
 
-    if(filtro.fecha){
+    if(filtro.fecha !== 'todos'){
+
       checksFiltrados = checksFiltrados.filter(
-        entrada => entrada.fecha === filtro.fecha
+        entrada => {
+          const entradaFormateada = entrada.fecha_entrada.split('T')[0]
+          if(entradaFormateada === filtro.fecha){
+            return entrada
+          }
+        }
       )
     }
 
-    checksFiltrados.sort((a, b) => a.nombre.localeCompare(b.nombre))
 
     setFiltrados(checksFiltrados)
   }
@@ -343,17 +71,31 @@ export default function EntradasSalidas() {
 
   useEffect(()=> {
     dispatch(obtenerDepartamentosAction())
+    dispatch(getChecksAdminAction())
   }, [])
 
   useEffect(() => {
     
     filtrarYOrdenarChecks()
-
+    if(filtro.departamento !== 'todos'){
+   
+        dispatch(obtenerCategoriasAction(filtro.departamento))
+        
+      }
+    
+      
   }, [filtro])
+
+  useEffect(() => {
+    socket.on('entrada recibida', (check) => {
+    
+      dispatch(nuevoCheckSocket(check))
+    })
+  })
 
   return (
     <main className="bg-emerald-950">
-      <section className="bg-white rounded-tl-[100px] min-h-[500px] rounded-br-[100px] p-14 lg:p-20">
+      <section className="bg-white rounded-tl-[100px] min-h-[500px]  p-14 lg:p-20">
         <h1 className="text-emerald-900 text-4xl font-semibold">Registro de entradas y salidas</h1>
         <p className="text-lg text-emerald-600 mt-2">Aqui podras ver todas las entradas y salidas de tus trabajadores</p>
 
@@ -369,7 +111,7 @@ export default function EntradasSalidas() {
               {
                 departamentos.length === 0 ? null :
                 departamentos.map( (departamento,i) => (
-                  <option key={i} className='uppercase' value={departamento.nombre} >{departamento.nombre.replace(/-/g, " ").toUpperCase()}</option>
+                  <option key={i} className='uppercase' name={'departamento'} value={departamento._id} >{departamento.nombre.replace(/-/g, " ").toUpperCase()}</option>
                 ))
               }
             </select>
@@ -377,7 +119,12 @@ export default function EntradasSalidas() {
               className='bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
             >
               <option className="uppercase" value="todos">CATEGORIA / EQUIPO ( TODOS )</option>
-
+              {
+                categorias.length === 0 ? null :
+                categorias.map ( categoria => (
+                  <option className="uppercase" key={categoria._id} value={categoria._id}>{categoria.nombre}</option>
+                ))
+              }
             </select>
               <input
               type='date'
@@ -397,16 +144,16 @@ export default function EntradasSalidas() {
                       <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
                         Nombre del trabajador
                       </th>
-                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                      <th className="py-2 text-center border-b border-gray-400 text-emerald-900">
                         Departamento
                       </th>
-                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                      <th className="py-2 text-center border-b border-gray-400 text-emerald-900">
                         Hora de Entrada
                       </th>
-                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                      <th className="py-2 text-center border-b border-gray-400 text-emerald-900">
                         Hora de salida
                       </th>
-                      <th className="py-2 text-left border-b border-gray-400 text-emerald-900">
+                      <th className="py-2 text-center border-b border-gray-400 text-emerald-900">
                         Comentarios
                       </th>
                       
@@ -420,22 +167,26 @@ export default function EntradasSalidas() {
                                       No hay entradas y salidas
                                   </td>
                               </tr>
+                          ) : loading ? (
+                            <tr>
+                              <td colSpan={5}>Cargando</td>
+                            </tr>
                           ) : (
                               filtrados.map((entrada,i) => (
                                   <tr className={`${(i+1) % 2 === 0 ? 'bg-white' : 'bg-neutral-100'} rounded w-full shadow animate-entrada border-b`} key={i}>
                                     <td className={"text-emerald-950 text-sm capitalize py-1"}>
-                                          {entrada.nombre} {entrada.apellido}
+                                          {entrada.empleado.usuario.nombre} {entrada.empleado.usuario.apellidos}
                                       </td>
-                                      <td className="text-emerald-950 text-sm ">
-                                          {entrada.departamento}
+                                      <td className="text-emerald-950 text-sm text-center">
+                                          {entrada.empleado.plaza.categoria.departamento.nombre}
                                       </td>
-                                      <td className="text-emerald-950 text-sm pl-8">
-                                          {obtenerHoraEntrada(entrada.fecha)}
+                                      <td className="text-emerald-950 text-sm text-center">
+                                          {obtenerHoraEntrada(entrada.fecha_entrada)}
                                       </td>
-                                      <td className="text-emerald-950 text-sm pl-8">
-                                          {obtenerHoraEntrada(entrada.fecha)}
+                                      <td className="text-emerald-950 text-sm text-center">
+                                          {entrada.fecha_salida ? obtenerHoraEntrada(entrada.fecha_salida) : 'No registrada'}
                                       </td>
-                                      <td className="text-emerald-950 text-sm ">
+                                      <td className="text-emerald-950 text-sm text-center">
                                           {entrada.comentarios}
                                       </td>
                                   </tr>

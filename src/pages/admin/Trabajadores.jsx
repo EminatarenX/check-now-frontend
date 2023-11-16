@@ -69,7 +69,7 @@ export default function Trabajadores() {
 
   return (
     <main className="bg-emerald-950">
-      <section className="bg-white min-h-[500px] rounded-tl-[100px] rounded-bl-xl p-10 lg:p-20">
+      <section className="bg-white min-h-[500px] rounded-tl-[100px] p-10 lg:p-20">
         <h1 className="text-emerald-900 text-4xl font-semibold">
           Listado de trabajadores
         </h1>

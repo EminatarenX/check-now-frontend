@@ -47,6 +47,7 @@ export default function AdminLayout() {
         <nav className={`absolute ${rutaActual === "/admin" ? 'hidden' : 'lg:flex'} bottom-0 hidden lg:left-32 justify-center animate-entrada`}>
           <Link className={` bg-white rounded-t-2xl text-emerald-900 font-medium p-2 text-sm`} to={'/admin'}>Inicio</Link>
           <Link className={`${rutaActual === '/admin/departamentos' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl font-medium p-2 text-sm`} to={'/admin/departamentos'}>Departamentos</Link>
+          <Link className={`${rutaActual === '/admin/nominas' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl  font-medium p-2 text-sm`} to={'/admin/nominas'}>Nominas</Link>
           <Link className={`${rutaActual === '/admin/entradas-salidas' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl font-medium p-2 text-sm`} to={'/admin/entradas-salidas'}>Entradas / Salidas</Link>
           <Link className={`${rutaActual === '/admin/trabajadores' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'} rounded-t-2xl font-medium p-2 text-sm`} to={'/admin/trabajadores'}>Trabajadores</Link>
           <Link className={`${rutaActual === '/admin/solicitudes' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl  font-medium p-2 text-sm`} to={'/admin/solicitudes'}>Solicitudes</Link>

@@ -3,7 +3,7 @@ import TablaEmpleado from "../admin/TablaEmpleado";
 import { useEffect, useState } from "react";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getDatosEmpleadoAction } from "../../actions/empleadosAction"
+import { getDatosEmpleadoAction, registrarEntradaAction, registrarSalidaAction } from "../../actions/empleadosAction"
 
 export default function UserIndex() {
  
@@ -12,7 +12,29 @@ export default function UserIndex() {
     const [checks, setChecks ] = useState([])
     const [filtro, setFiltro] = useState({ departamento: "",categoria: "",fecha: '',})
 
-    const fechaMaxima = () => {
+    const registrarEntrada = (entrada) => {
+      const fecha = new Date()  
+      const hora = fecha.getHours()
+      const minutes = fecha.getMinutes()
+      
+      const entradaArray = entrada.split(':')
+      const horaEntrada = Number(entradaArray[0])
+      const minutosEntrada = Number(entradaArray[1])
+
+      let entradaObject = {comentarios: ''}
+      if(hora <= horaEntrada){
+        if(minutes > 15){
+          entradaObject.comentarios = 'Tarde'
+        }else {
+          entradaObject.comentarios = 'Puntual'
+        }
+      }else if(hora > horaEntrada){
+          entradaObject.comentarios = 'Tarde'
+      }
+      dispatch(registrarEntradaAction(entradaObject))
+    }
+
+    const fechaMaxima = (entrada) => {
       const fechaMax = new Date()
       fechaMax.setFullYear(fechaMax.getFullYear() )
   
@@ -25,6 +47,7 @@ export default function UserIndex() {
     }, []);
 
     const filtrarYOrdenarChecks = () => {
+      
       if(filtro.fecha === "") return
       
       let checksFiltrados = [...datos?.checks] 
@@ -51,7 +74,7 @@ export default function UserIndex() {
     useEffect(()=> {
       filtrarYOrdenarChecks()
 
-    },[filtro])
+    },[filtro, datos?.checks])
 
   return (
     <section className="flex flex-col">
@@ -68,10 +91,18 @@ export default function UserIndex() {
           
               <div className="flex flex-col lg:flex-row gap-5 mt-5">
 
-                  <button className="w-full bg-emerald-100 text-emerald-600 py-3 rounded font-semibold">
+                  <button 
+                    className="w-full bg-emerald-100 text-emerald-600 py-10 lg:py-3 rounded font-semibold" 
+                    onClick={() => registrarEntrada(datos?.plaza.horario_entrada)}
+                    disabled={loading ? true : false}
+                  >
                       Entrar {datos?.plaza?.horario_entrada}
                   </button>
-                  <button className="w-full bg-red-100 text-red-500 py-3 rounded font-semibold">
+                  <button 
+                    className="w-full bg-red-100 text-red-500 py-10 lg:py-3 rounded font-semibold" 
+                    onClick={() => dispatch(registrarSalidaAction())}
+                    disabled={loading ? true : false}
+                  >
                       Salir {datos?.plaza?.horario_salida}
                   </button>
               </div>

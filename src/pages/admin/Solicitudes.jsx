@@ -114,7 +114,7 @@ export default function Solicitudes() {
       )}
       {loading && <Loader />}
       <main className="bg-emerald-950">
-        <section className="bg-white min-h-[500px] rounded-tl-[100px] rounded-br-[100px] p-14 lg:p-20">
+        <section className="bg-white min-h-[500px] rounded-tl-[100px] p-14 lg:p-20">
           <h1 className="text-emerald-900 text-4xl font-semibold">
             Solicitudes de trabajadores
           </h1>
