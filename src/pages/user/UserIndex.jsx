@@ -48,8 +48,12 @@ export default function UserIndex() {
     }, []);
 
     const filtrarYOrdenarChecks = () => {
+
+      if(!datos) return
       
       let checksFiltrados = [...datos?.checks] 
+
+
       if(filtro.fecha.includes('-')){
         checksFiltrados = checksFiltrados.filter(
           entrada => {
