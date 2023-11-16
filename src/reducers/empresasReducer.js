@@ -386,7 +386,7 @@ export default function empresasReducer( state = initialState, action){
             case 'NUEVO_CHECK_SOCKET':
                 return {
                     ...state,
-                    checks: [...state.checks, action.payload]
+                    checks: [...checks, action.payload]
                 }
         default: 
             return state
