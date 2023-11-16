@@ -87,7 +87,7 @@ export default function EntradasSalidas() {
       }
     
       
-  }, [filtro])
+  }, [filtro, checks])
 
   useEffect(() => {
     socket.on('entrada recibida', (check) => {
