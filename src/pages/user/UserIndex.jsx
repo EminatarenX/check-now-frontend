@@ -34,9 +34,10 @@ export default function UserIndex() {
       dispatch(registrarEntradaAction(entradaObject))
     }
 
-    const fechaMaxima = (entrada) => {
+    const fechaMaxima = () => {
       const fechaMax = new Date()
       fechaMax.setFullYear(fechaMax.getFullYear() )
+      
   
       const fechaFormateada = fechaMax.toISOString().split('T')[0]
       return fechaFormateada
@@ -57,10 +58,12 @@ export default function UserIndex() {
       if(filtro.fecha.length !== 0){
         checksFiltrados = checksFiltrados.filter(
           entrada => {
-            const formatDate = entrada.fecha_entrada.split('T')[0]
-           
-            if(formatDate === filtro.fecha){
-              return formatDate
+            const fechaFiltro = new Date(filtro.fecha)
+            const fechaCheck = new Date(entrada.fecha_entrada)
+            const fechaFiltroFormateada = `${fechaFiltro.getFullYear()}-${fechaFiltro.getMonth() + 1}-${fechaFiltro.getDate()+1}`
+            const fechaCheckFormateada = `${fechaCheck.getFullYear()}-${fechaCheck.getMonth() + 1}-${fechaCheck.getDate()}`
+            if(fechaFiltroFormateada === fechaCheckFormateada){
+              return entrada
             }
           }
         )

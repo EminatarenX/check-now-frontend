@@ -49,8 +49,11 @@ export default function EntradasSalidas() {
 
       checksFiltrados = checksFiltrados.filter(
         entrada => {
-          const entradaFormateada = entrada.fecha_entrada.split('T')[0]
-          if(entradaFormateada === filtro.fecha){
+          const fechaFiltro = new Date(filtro.fecha)
+          const fechaCheck = new Date(entrada.fecha_entrada)
+          const fechaFiltroFormateada = `${fechaFiltro.getFullYear()}-${fechaFiltro.getMonth() + 1}-${fechaFiltro.getDate()+1}`
+          const fechaCheckFormateada = `${fechaCheck.getFullYear()}-${fechaCheck.getMonth() + 1}-${fechaCheck.getDate()}`
+          if(fechaFiltroFormateada === fechaCheckFormateada){
             return entrada
           }
         }
