@@ -49,13 +49,8 @@ export default function UserIndex() {
 
     const filtrarYOrdenarChecks = () => {
       
-      if(filtro.fecha === "") return
-      
       let checksFiltrados = [...datos?.checks] 
-  
-     
-      
-      if(filtro.fecha.length !== 0){
+      if(filtro.fecha.includes('-')){
         checksFiltrados = checksFiltrados.filter(
           entrada => {
             const fechaFiltro = new Date(filtro.fecha)
@@ -67,17 +62,21 @@ export default function UserIndex() {
             }
           }
         )
+        setChecks(checksFiltrados)
+      }else{
+        setChecks(checksFiltrados)
       }
-  
       
-  
-      setChecks(checksFiltrados)
     }
 
     useEffect(()=> {
       filtrarYOrdenarChecks()
 
     },[filtro, datos?.checks])
+
+    useEffect(()=> {
+      console.log(filtro)
+    })
 
   return (
     <section className="flex flex-col">

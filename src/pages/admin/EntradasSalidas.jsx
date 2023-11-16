@@ -12,7 +12,7 @@ export default function EntradasSalidas() {
   const [filtro, setFiltro] = useState({
     departamento: "todos",
     categoria: "todos",
-    fecha: "todos",
+    fecha: "",
   })
   const {departamentos, categorias, checks, loading} = useSelector( state => state.empresa)
   const [ filtrados, setFiltrados ] = useState([])
@@ -45,7 +45,7 @@ export default function EntradasSalidas() {
       )
     }
 
-    if(filtro.fecha !== 'todos'){
+    if(filtro.fecha.includes('-')){
 
       checksFiltrados = checksFiltrados.filter(
         entrada => {
