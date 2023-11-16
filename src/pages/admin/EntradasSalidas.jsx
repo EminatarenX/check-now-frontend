@@ -14,7 +14,7 @@ export default function EntradasSalidas() {
     categoria: "todos",
     fecha: "",
   })
-  const {departamentos, categorias, checks, loading} = useSelector( state => state.empresa)
+  const {departamentos, categorias, checks, loading, datos} = useSelector( state => state.empresa)
   const [ filtrados, setFiltrados ] = useState([])
   const [entradas, setEntradas] = useState([
     {
@@ -75,6 +75,7 @@ export default function EntradasSalidas() {
   useEffect(()=> {
     dispatch(obtenerDepartamentosAction())
     dispatch(getChecksAdminAction())
+    socket.emit('checks admin', datos._id)
   }, [])
 
   useEffect(() => {
