@@ -95,7 +95,16 @@ export default function Plaza() {
 
                 <div>
                   <h2 className="text-emerald-900 text-2xl font-semibold mt-5">
-                    Salario
+                    Salario diario
+                  </h2>
+                  <p className="text-emerald-900 text-lg">
+                    {plaza.salario.toLocaleString('en-US', { style: 'currency', currency: 'USD'})}
+                  </p>
+                </div>
+
+                <div>
+                  <h2 className="text-emerald-900 text-2xl font-semibold mt-5">
+                    Salario quincenal <span className={'text-gray-400'}>( sin deducciones )</span>
                   </h2>
                   <p className="text-emerald-900 text-lg">
                     {formatearDinero(plaza.salario)}

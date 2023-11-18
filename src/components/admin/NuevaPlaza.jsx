@@ -94,7 +94,7 @@ export default function NuevaPlaza({setModalPlaza, categorias}) {
       />
       
       <input type="text"
-        placeholder="Sueldo de la plaza o vacante (ej: $10,000 MXN)"
+        placeholder="Sueldo diario (ej: 207.44 MXN)"
         value={formularioPlaza.salario}
         onChange={e => setFormularioPlaza({ ...formularioPlaza, salario: e.target.value })}
         className={`bg-transparent text-emerald-900  border-b-2 border-emerald-300 focus:outline-none p-3 placeholder:text-emerald-700  transition-all`}

@@ -2,7 +2,7 @@ import { iconosDepartamentos, checks, basicBarOptions } from "../../helpers"
 import React from "react"
 import RoundChart from "../charts/RoudChart"
 import { formatearDinero } from "../../helpers"
-import BasicBar from "../charts/BasicChart"
+
 
 export default function EmpleadoInfo({empleado}) {
 
@@ -51,10 +51,13 @@ export default function EmpleadoInfo({empleado}) {
                     <span className="font-semibold">Numero telefónico: </span>+52 {empleado.usuario.telefono}
                 </p>
                 <p className="text-emerald-900">
-                    <span className="font-semibold">Descripcion:</span> {empleado.plaza.descripcion}
+                    <span className="font-semibold">Descripción:</span> {empleado.plaza.descripcion}
                 </p>
                 <p className="text-emerald-900">
-                    <span className="font-semibold">Sueldo:</span> {formatearDinero(empleado.plaza.salario)}
+                    <span className="font-semibold">Sueldo quincenal <span className="text-xs">( sin deducciones )</span>:<br/></span> {formatearDinero(empleado.plaza.salario)}
+                </p>
+                <p className="text-emerald-900">
+                    <span className="font-semibold">Sueldo por días laborados <span className="text-xs">( sin deducciones )</span>:<br/></span> {empleado.plaza.salario.toLocaleString('en-US', { style: 'currency', currency: 'USD'})}
                 </p>
                 <p className="text-emerald-900">
                     <span className="font-semibold">Habilidades:</span> {empleado.plaza.habilidades}
