@@ -64,14 +64,20 @@ export default function EmpleadoInfo({empleado}) {
                 </p>
             </div>
             
-            <div className="w-full flex flex-col items-end">
+            <div className="w-full flex flex-col items-center">
                 {/* <BasicBar 
                     height={"300px"}
                     width={"100%"}
                     option={basicBarOptions(optionsBar)}
                 /> */}
                 <RoundChart height={"300px"} width={"100%"} option={checks(optionsCircle)} />
-               
+                <p className="text-emerald-900 text-2xl font-semibold mt-5 mr-2">
+                <span className="font-semibold">Dias de vacaciones anuales:</span> {empleado.dias_vacaciones}
+                </p>
+                <p className="text-emerald-900 text-2xl font-semibold mt-5 mr-2">
+                <span className="font-semibold">Dias de aginaldo:</span> {empleado.dias_aguinaldo}
+                </p>
+
                     
             </div>
         </div>
