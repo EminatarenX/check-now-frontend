@@ -9,12 +9,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   obtenerCategoriasAction,
   obtenerEmpleadosAction,
-  generarNominaAction
+  generarNominaAction,
+  obtenerNominasAction
 } from "../../actions/empresasAction";
 
 export default function Nominas() {
   const dispatch = useDispatch();
-  const { nominas, loading, departamentos, categorias, empleados } =
+  const { nominas, loadingNomina, mensaje, loading, departamentos, categorias, empleados } =
     useSelector((state) => state.empresa);
 
   const [filtro, setFiltro] = useState({departamento: "todos",categoria: "",empleado: "",});
@@ -133,9 +134,6 @@ export default function Nominas() {
 
   };
 
-  const descargarPdf = () => {
-
-  }
 
   useEffect(() => {
     filtrarYOrdenarTrabajadores();
@@ -145,6 +143,7 @@ export default function Nominas() {
   }, [filtro]);
 
   useEffect(() => {
+    dispatch(obtenerNominasAction());
     dispatch(obtenerEmpleadosAction());
   }, []);
 
@@ -282,12 +281,13 @@ export default function Nominas() {
             Recibos generados
           </h2>
           {
-            nominas.length === 0 ? <p className="text-neutral-600 mt-5">No hay registros</p> : (
+            nominas.length === 0 ? <p className="text-neutral-600 mt-5">{mensaje}</p> : 
+            loadingNomina ? <p className="text-neutral-600 mt-5 text-center">cargando</p> :(
              
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-10 gap-2">
                     {
                       nominas.map( nomina => (
-                        <button key={nomina._id} className="flex flex-col items-center"
+                        <button key={nomina._id} className="flex flex-col items-center animate-entrada"
                           onClick={() => window.open(nomina.url)}
                           type="button"
                         >

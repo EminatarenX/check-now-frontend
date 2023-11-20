@@ -61,7 +61,10 @@ import {
     GET_CHECKS_ADMIN_EXITO,
     GENERAR_NOMINA,
     GENERAR_NOMINA_EXITO,
-    GENERAR_NOMINA_ERROR
+    GENERAR_NOMINA_ERROR,
+    OBTENER_NOMINAS_EMPRESA,
+    OBTENER_NOMINAS_EMPRESA_ERROR,
+    OBTENER_NOMINAS_EMPRESA_EXITO
 
 } from '../types'
 
@@ -978,5 +981,45 @@ const generarNominaExito = (nomina) => ({
 
 const generarNominaError = (error) => ({
     type: GENERAR_NOMINA_ERROR,
+    payload: error
+})
+
+export function obtenerNominasAction() {
+    return async dispatch => {
+        dispatch(obtenerNominas())
+        const token = localStorage.getItem('token')
+        if(!token) return
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        
+        }
+
+        try {
+            const { data } = await clienteAxios.get('/nominas', config)
+            dispatch(obtenerNominasExito(data.nominas))
+           
+        } catch (error) {
+          
+            dispatch(obtenerNominasError(error))
+        }
+    }
+}
+
+const obtenerNominas = () => ({
+    type: OBTENER_NOMINAS_EMPRESA,
+    payload: true
+})
+
+const obtenerNominasExito = (nominas) => ({
+    type: OBTENER_NOMINAS_EMPRESA_EXITO,
+    payload: nominas
+})
+
+const obtenerNominasError = (error) => ({
+    type: OBTENER_NOMINAS_EMPRESA_ERROR,
     payload: error
 })

@@ -50,27 +50,33 @@ function App() {
         navigate('/') 
       }
     }
-    verificar()
+
+    if(location.pathname === '/login'){
+      verificar()
+
+    }
 
     
 
-  },[])
+  },[location.pathname])
 
   useEffect(() => {
 
     // Observar cambios en el estado de usuario
-    if (usuario) {
+    
+      if (usuario) {
 
-      if (usuario.role === 'admin') {
-        navigate('/admin')
-      } else if (usuario.role === 'user') {
-        navigate('/dashboard')
-      }else if(usuario.role === 'new') {
-        navigate('/new-user')
-      }else {
-        navigate(`/`)
+        if (usuario.role === 'admin') {
+          navigate('/admin')
+        } else if (usuario.role === 'user') {
+          navigate('/dashboard')
+        }else if(usuario.role === 'new') {
+          navigate('/new-user')
+        }else {
+          navigate(`/`)
+        }
       }
-    }
+    
   }, [usuario])
 
   //otro cambio que podria generar problemas

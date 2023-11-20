@@ -54,6 +54,8 @@ export default function RecoveryPassword() {
         draggable: true,
         theme: "colored",
       })
+
+      return
     }
 
     dispatch(recoveryPasswordAction({password, token}))
