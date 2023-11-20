@@ -71,32 +71,6 @@ export default function AdminConfig() {
 
     }
 
-    const obtenerUbicacion = () => {
-        const options = {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0
-            };
-        const success = (pos) => {
-            let crd = pos.coords;
-            setLocation({
-                lat: crd.latitude,
-                long: crd.longitude
-            })
-            console.log('Your current position is:');
-            console.log(`Latitude : ${crd.latitude}`);
-            console.log(`Longitude: ${crd.longitude}`);
-            console.log(`More or less ${crd.accuracy} meters.`);
-        }
-        const error = (err) => {
-            console.warn(`ERROR(${err.code}): ${err.message}`);
-        }
-        navigator.geolocation.getCurrentPosition(success, error, options);
-        
-
-
-
-    };
 
     useEffect(()=> {
         if(usuario) {
@@ -235,20 +209,15 @@ export default function AdminConfig() {
                     </button>
 
                 </article>  
-                <article  className='flex flex-col justify-between'>
-                    <h2 className='text-emerald-900 text-3xl font-semibold'>Ubicacion</h2>
 
-                    <p className='text-emerald-900 text-lg mt-5'>Latitud: {location.lat}</p>
-                    <p className='text-emerald-900 text-lg mt-5'>Longitud: {location.long}</p>
-                    <button onClick={obtenerUbicacion} className='bg-emerald-800 text-white font-semibold p-3 w-full rounded shadow mt-5'>Configurar ubicacion</button>
-                </article>
                 <article className='flex flex-col justify-between'>
                     <h2 className='text-emerald-900 text-3xl font-semibold mb-5'>Seguridad</h2>
-                    <input className={`bg-transparent block text-emerald-800 w-full placeholder:opacity-50  border-b-2 border-emerald-300 focus:outline-none py-2 placeholder:text-emerald-800  transition-all`} placeholder='Cambiar contraseña'/>
+                    <input className={`bg-transparent block text-emerald-800 w-full placeholder:opacity-50  border-b-2 border-emerald-300 focus:outline-none py-2 placeholder:text-emerald-800  transition-all`} placeholder='Contraseña actual'/>
+                    <input className={`bg-transparent block text-emerald-800 w-full placeholder:opacity-50  border-b-2 border-emerald-300 focus:outline-none py-2 placeholder:text-emerald-800  transition-all`} placeholder='Contraseña nueva'/>
                     <button className='bg-emerald-800 text-white font-semibold p-3 w-full rounded shadow mt-5'>Cambiar contraseña</button>
                 </article>
-                <article className='flex flex-col justify-between'>
-                    <h2 className='text-emerald-900 text-3xl font-semibold mb-5'>Eliminar cuenta</h2>
+                <article className='flex flex-col justify-end'>
+                    <h2 className='text-emerald-900 text-3xl font-semibold mb-5 text-center'>Eliminar cuenta</h2>
                     <button className='bg-emerald-800 text-white font-semibold p-3 w-full rounded shadow mt-5'>Eliminar cuenta</button>
                 </article>
             </section>

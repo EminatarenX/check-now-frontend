@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Scanner from "../../components/Scanner";
-
+import { formatearDinero } from "../../helpers";
 
 import { Html5QrcodeScanner } from "html5-qrcode";
 import UserIndex from "./UserIndex";
@@ -99,7 +99,7 @@ export default function UserDashboard() {
             <p className="text-slate-500">Categoria: {buscarPlaza.categoria.nombre}</p>
             <p className="text-slate-500">Departamento: {buscarPlaza.categoria.departamento.nombre}</p>
             <p className="text-slate-500">Empresa: {buscarPlaza.categoria.departamento.empresa.nombre}</p>
-            <p className="text-slate-500">Salario: {buscarPlaza.salario}</p>
+            <p className="text-slate-500">Salario quincenal: {formatearDinero(buscarPlaza.salario)}</p>
             <p className="text-slate-500">Descripcion: {buscarPlaza.descripcion}</p>
             <p className="text-slate-500">Horario de entrada: {buscarPlaza.horario_entrada}</p>
             <p className="text-slate-500">Horario de salida: {buscarPlaza.horario_salida}</p>

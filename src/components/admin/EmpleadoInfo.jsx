@@ -2,7 +2,7 @@ import { iconosDepartamentos, checks, basicBarOptions } from "../../helpers"
 import React from "react"
 import RoundChart from "../charts/RoudChart"
 import { formatearDinero } from "../../helpers"
-import BasicBar from "../charts/BasicChart"
+
 
 export default function EmpleadoInfo({empleado}) {
 
@@ -20,8 +20,8 @@ export default function EmpleadoInfo({empleado}) {
     }
 
     const optionsCircle = [
-        {value: diasTrabajados(empleado.checks),name: 'Dias trabajados',itemStyle: {color: 'rgb(5 150 105/ .70'}}, 
-        {value: 26,name: 'Dias del mes',itemStyle: {color: `rgb(239 68 68 / .80`} }
+        {value: diasTrabajados(empleado.checks),name: 'Dias asistiendo',itemStyle: {color: 'rgb(5 150 105/ .70'}}, 
+        {value: 15-diasTrabajados(empleado.checks),name: 'Dias restantes',itemStyle: {color: `rgb(239 68 68 / .80`} }
     ]
     const optionsBar = [
         {value: diasTrabajados(empleado.checks),name: 'Dias trabajados'}, 
@@ -51,24 +51,33 @@ export default function EmpleadoInfo({empleado}) {
                     <span className="font-semibold">Numero telefónico: </span>+52 {empleado.usuario.telefono}
                 </p>
                 <p className="text-emerald-900">
-                    <span className="font-semibold">Descripcion:</span> {empleado.plaza.descripcion}
+                    <span className="font-semibold">Descripción:</span> {empleado.plaza.descripcion}
                 </p>
                 <p className="text-emerald-900">
-                    <span className="font-semibold">Sueldo:</span> {formatearDinero(empleado.plaza.salario)}
+                    <span className="font-semibold">Sueldo quincenal <span className="text-xs">( sin deducciones )</span>:<br/></span> {formatearDinero(empleado.plaza.salario)}
+                </p>
+                <p className="text-emerald-900">
+                    <span className="font-semibold">Sueldo por días laborados <span className="text-xs">( sin deducciones )</span>:<br/></span> {empleado.plaza.salario.toLocaleString('en-US', { style: 'currency', currency: 'USD'})}
                 </p>
                 <p className="text-emerald-900">
                     <span className="font-semibold">Habilidades:</span> {empleado.plaza.habilidades}
                 </p>
             </div>
             
-            <div className="w-full flex flex-col items-end">
+            <div className="w-full flex flex-col items-center">
                 {/* <BasicBar 
                     height={"300px"}
                     width={"100%"}
                     option={basicBarOptions(optionsBar)}
                 /> */}
                 <RoundChart height={"300px"} width={"100%"} option={checks(optionsCircle)} />
-               
+                <p className="text-emerald-900 text-2xl font-semibold mt-5 mr-2">
+                <span className="font-semibold">Dias de vacaciones anuales:</span> {empleado.dias_vacaciones}
+                </p>
+                <p className="text-emerald-900 text-2xl font-semibold mt-5 mr-2">
+                <span className="font-semibold">Dias de aginaldo:</span> {empleado.dias_aguinaldo}
+                </p>
+
                     
             </div>
         </div>

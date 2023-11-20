@@ -58,7 +58,13 @@ import {
     GET_EMPLEADO_EXITO,
     GET_CHECKS_ADMIN,
     GET_CHECKS_ADMIN_ERROR,
-    GET_CHECKS_ADMIN_EXITO
+    GET_CHECKS_ADMIN_EXITO,
+    GENERAR_NOMINA,
+    GENERAR_NOMINA_ERROR,
+    GENERAR_NOMINA_EXITO,
+    OBTENER_NOMINAS_EMPRESA,
+    OBTENER_NOMINAS_EMPRESA_ERROR,
+    OBTENER_NOMINAS_EMPRESA_EXITO
 
 } from '../types'
 
@@ -74,6 +80,7 @@ const initialState = {
     empleadoActual: null,
     plazaActual: null,
     loading: false,
+    loadingNomina: false,
     error: null,
     mensaje: null
 }
@@ -124,6 +131,7 @@ export default function empresasReducer( state = initialState, action){
         case ELIMINAR_PLAZA_ERROR:
         case GET_EMPLEADO_ERROR:
         case GET_CHECKS_ADMIN_ERROR:
+        case GENERAR_NOMINA_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -387,6 +395,37 @@ export default function empresasReducer( state = initialState, action){
                 return {
                     ...state,
                     checks: [...state.checks, action.payload]
+                }
+            case GENERAR_NOMINA:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null
+                }
+            case GENERAR_NOMINA_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    nominas: [...state.nominas, action.payload]
+                }
+            case OBTENER_NOMINAS_EMPRESA:
+                return {
+                    ...state,
+                    loadingNomina: action.payload,
+                    error: null
+                }
+            case OBTENER_NOMINAS_EMPRESA_EXITO:
+                return {
+                    ...state,
+                    loadingNomina: false,
+                    nominas: action.payload
+                }
+            case OBTENER_NOMINAS_EMPRESA_ERROR:
+                return {
+                    ...state,
+                    loadingNomina: false,
+                    error: action.payload,
+                    mensaje: action.payload.response.data.msg
                 }
         default: 
             return state

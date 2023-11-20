@@ -12,7 +12,7 @@ export default function Plaza({ plaza }) {
             {iconosDepartamentos[0].icon()}
             <div>
                 <p className="font-semibold text-white">{nombre}</p>
-                <p className="text-sm text-emerald-100">{formatearDinero(salario)}</p>
+                <p className="text-sm text-emerald-100">{formatearDinero(salario) }</p>
             </div>
 
         </Link>

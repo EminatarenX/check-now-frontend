@@ -40,7 +40,7 @@ export const accionesDashboard = [
         path: '/admin/departamentos'
     },
     {
-        accion: 'Nominas',
+        accion: 'Nóminas',
         classes: 'bg-emerald-500 ',
         icon: () => (
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-[150px] h-[150px]">
@@ -337,7 +337,8 @@ export const iconosDepartamentos = [
 ]
 
 export const formatearDinero = (cantidad) => {
-    return cantidad.toLocaleString('en-US', { style: 'currency', currency: 'USD'})
+    const salario = Number(cantidad) * 15
+    return salario.toLocaleString('en-US', { style: 'currency', currency: 'USD'})
 }
 
 export const checks = (props) => {
