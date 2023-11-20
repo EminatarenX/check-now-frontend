@@ -4,7 +4,6 @@ import Trabajador from "../../components/admin/Trabajador";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import {
-  obtenerDepartamentosAction,
   obtenerEmpleadosAction,
   obtenerCategoriasAction,
 } from "../../actions/empresasAction";

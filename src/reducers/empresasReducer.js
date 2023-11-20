@@ -58,7 +58,10 @@ import {
     GET_EMPLEADO_EXITO,
     GET_CHECKS_ADMIN,
     GET_CHECKS_ADMIN_ERROR,
-    GET_CHECKS_ADMIN_EXITO
+    GET_CHECKS_ADMIN_EXITO,
+    GENERAR_NOMINA,
+    GENERAR_NOMINA_ERROR,
+    GENERAR_NOMINA_EXITO
 
 } from '../types'
 
@@ -124,6 +127,7 @@ export default function empresasReducer( state = initialState, action){
         case ELIMINAR_PLAZA_ERROR:
         case GET_EMPLEADO_ERROR:
         case GET_CHECKS_ADMIN_ERROR:
+        case GENERAR_NOMINA_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -387,6 +391,18 @@ export default function empresasReducer( state = initialState, action){
                 return {
                     ...state,
                     checks: [...state.checks, action.payload]
+                }
+            case GENERAR_NOMINA:
+                return {
+                    ...state,
+                    loading: true,
+                    error: null
+                }
+            case GENERAR_NOMINA_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    nominas: [...state.nominas, action.payload]
                 }
         default: 
             return state

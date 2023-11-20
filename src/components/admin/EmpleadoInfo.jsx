@@ -20,8 +20,8 @@ export default function EmpleadoInfo({empleado}) {
     }
 
     const optionsCircle = [
-        {value: diasTrabajados(empleado.checks),name: 'Dias trabajados',itemStyle: {color: 'rgb(5 150 105/ .70'}}, 
-        {value: 26,name: 'Dias del mes',itemStyle: {color: `rgb(239 68 68 / .80`} }
+        {value: diasTrabajados(empleado.checks),name: 'Dias asistiendo',itemStyle: {color: 'rgb(5 150 105/ .70'}}, 
+        {value: 15-diasTrabajados(empleado.checks),name: 'Dias restantes',itemStyle: {color: `rgb(239 68 68 / .80`} }
     ]
     const optionsBar = [
         {value: diasTrabajados(empleado.checks),name: 'Dias trabajados'}, 

@@ -58,7 +58,10 @@ import {
     GET_EMPLEADO_EXITO,
     GET_CHECKS_ADMIN,
     GET_CHECKS_ADMIN_ERROR,
-    GET_CHECKS_ADMIN_EXITO
+    GET_CHECKS_ADMIN_EXITO,
+    GENERAR_NOMINA,
+    GENERAR_NOMINA_EXITO,
+    GENERAR_NOMINA_ERROR
 
 } from '../types'
 
@@ -926,4 +929,51 @@ export function nuevoCheckSocket(check){
 const nuevoCheck = (check) => ({
     type: 'NUEVO_CHECK_SOCKET',
     payload: check
+})
+
+export function generarNominaAction(empleado){
+    return async dispatch => {
+        dispatch(generarNomina())
+        const token = localStorage.getItem('token')
+
+        if(!token) return
+
+        const config = {
+            headers:{
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = await clienteAxios.post('/nominas', empleado, config)
+
+            dispatch(generarNominaExito(data.nomina))
+
+            window.open(data.url)
+
+            return { msg: 'Recibo de nómina generado'}
+            
+        } catch (error) {
+            console.log(error)
+            toast.error(error.response.data.msg)
+            dispatch(generarNominaError(error))
+        }
+    }
+}
+
+const generarNomina = () => ({
+    type: GENERAR_NOMINA,
+    payload: true
+})
+
+const generarNominaExito = (nomina) => ({
+    type: GENERAR_NOMINA_EXITO,
+    payload: true
+})
+
+const generarNominaError = (error) => ({
+    type: GENERAR_NOMINA_ERROR,
+    payload: error
 })
