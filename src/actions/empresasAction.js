@@ -949,8 +949,11 @@ export function generarNominaAction(empleado){
 
             const { data } = await clienteAxios.post('/nominas', empleado, config)
 
-            dispatch(generarNominaExito(data.nomina))
-
+            let nomina = data.nomina
+            nomina.url = data.url
+            
+            dispatch(generarNominaExito(nomina))
+            
             window.open(data.url)
 
             return { msg: 'Recibo de nómina generado'}
@@ -970,7 +973,7 @@ const generarNomina = () => ({
 
 const generarNominaExito = (nomina) => ({
     type: GENERAR_NOMINA_EXITO,
-    payload: true
+    payload: nomina
 })
 
 const generarNominaError = (error) => ({

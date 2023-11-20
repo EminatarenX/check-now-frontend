@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import {
+  DocumentIcon
+} from "@heroicons/react/20/solid";
+import {formatearFecha} from '../../helpers/index'
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -49,6 +53,7 @@ export default function Nominas() {
     );
     setFiltrados(empleadosFiltrados);
   };
+
 
   const generarNomina = async (empleado) => {
 
@@ -128,6 +133,10 @@ export default function Nominas() {
 
   };
 
+  const descargarPdf = () => {
+
+  }
+
   useEffect(() => {
     filtrarYOrdenarTrabajadores();
 
@@ -205,7 +214,7 @@ export default function Nominas() {
               />
             </ul>
           </nav>
-          <div className="overflow-x-scroll overflow-y-scroll lg:overflow-x-hidden min-h-[400px] max-h-[400px]">
+          <div className="overflow-x-scroll overflow-y-scroll lg:overflow-x-hidden min-h-[200px] max-h-[400px]">
             <table className="table-auto bg-white p-2 rounded min-w-[800px] gap-1 mt-5 w-full">
               <thead className="sticky top-0 bg-white">
                 <tr>
@@ -268,6 +277,32 @@ export default function Nominas() {
               </tbody>
             </table>
           </div>
+
+          <h2 className="text-emerald-900 text-4xl font-semibold mt-10">
+            Recibos generados
+          </h2>
+          {
+            nominas.length === 0 ? <p className="text-neutral-600 mt-5">No hay registros</p> : (
+             
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-10 gap-2">
+                    {
+                      nominas.map( nomina => (
+                        <button key={nomina._id} className="flex flex-col items-center"
+                          onClick={() => window.open(nomina.url)}
+                          type="button"
+                        >
+                          <DocumentIcon className="text-red-500 h-20"/>
+                          <p className="text-emerald-900 text-center text-sm">{nomina.empleado.usuario.nombre} {nomina.empleado.usuario.apellidos}</p>
+                          <p className="text-emerald-900 text-center text-xs">{formatearFecha(nomina.fecha_emision)}</p>
+                        </button>
+                      ))
+                    }
+                </div>
+            
+
+            )
+          }
+
         </div>
       </section>
       
