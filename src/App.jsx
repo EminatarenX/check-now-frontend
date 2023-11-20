@@ -46,11 +46,8 @@ function App() {
       if(token) {
         dispatch(obtenerPerfilAction(token))
 
-      }else {
-        navigate('/') 
       }
     }
-
     if(location.pathname === '/login'){
       verificar()
 
