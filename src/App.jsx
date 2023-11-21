@@ -48,12 +48,25 @@ function App() {
 
       }
     }
-    if(location.pathname === '/login'){
+    if(location.pathname === '/login' || location.pathname.includes('/admin') || location.pathname.includes('/dashboard') || location.pathname.includes('/new-user') ){
       verificar()
 
     }
 
-    
+  },[])
+
+  useEffect(()=> {
+    const verificar = async() => {
+      const token = localStorage.getItem('token')
+
+      if(token) {
+        dispatch(obtenerPerfilAction(token))
+
+      }
+    }
+    if(location.pathname === '/login'){
+      verificar()
+    }
 
   },[location.pathname])
 

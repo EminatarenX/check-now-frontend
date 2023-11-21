@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useLocation, Link, useNavigate } from 'react-router-dom'
-import { formatearFecha } from '../helpers'
 import '../styles/adminLayout.css'
 import Reloj from './Reloj'
+import Loader from './loaders/loader'
+import { useSelector } from 'react-redux'
 
 export default function AdminLayout() {
   const [fecha, setFecha] = useState(new Date())
+  const { loading } = useSelector(state => state.empresa)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -24,6 +26,12 @@ export default function AdminLayout() {
 
   return (
     <>
+    {
+      loading && (
+        <Loader/>
+      )
+    }
+
       <Reloj reloj={fecha} />
       <header className='bg-emerald-950 p-5 items-end lg:p-5 flex lg:items-start justify-between relative'>
         <div className='mb-0 lg:mb-8'>

@@ -239,7 +239,7 @@ export default function Nominas() {
                     <tr>
                       <td
                         colSpan="4"
-                        className="text-emerald-600 text-center p-4"
+                        className="text-emerald-800 text-center p-4"
                       >
                         No hay trabajadores
                       </td>
@@ -284,9 +284,9 @@ export default function Nominas() {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-10 gap-4 min-h-[200px] mb-20">
               {nominas.length === 0 ? (
-                <p className="text-neutral-600 mt-5">{mensaje}</p>
+                <p className="text-emerald-800 col-span-2">{mensaje}</p>
               ) : loadingNomina ? (
-                <p className="text-neutral-600 mt-5 text-center">cargando</p>
+                <p className="text-emerald-800 text-center">cargando</p>
               ) : (
                 nominas.map((nomina) => (
                   <Nomina key={nomina._id} nomina={nomina} />

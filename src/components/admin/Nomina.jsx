@@ -29,9 +29,9 @@ export default function Nomina({nomina}) {
         cancelButtonColor: 'gray',
         confirmButtonText: 'Sí, eliminar',
         cancelButtonText: 'Cancelar'
-      }).then((result) => {
+      }).then(async (result) => {
         if (result.isConfirmed) {
-          dispatch(eliminarNominaAction(nomina._id));
+          const result = await dispatch(eliminarNominaAction(nomina._id));
         }
       });
     };

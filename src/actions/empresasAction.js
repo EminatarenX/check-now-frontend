@@ -1041,7 +1041,7 @@ export function eliminarNominaAction (id) {
 
         try {
 
-            const { data } = clienteAxios.delete(`/nominas/delete/${id}`, config)
+            const { data } =  await clienteAxios.delete(`/nominas/delete/${id}`, config)
             
             dispatch(eliminarNominaExito(id))
             toast.success(data.msg)
