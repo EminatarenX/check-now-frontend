@@ -64,7 +64,10 @@ import {
     GENERAR_NOMINA_EXITO,
     OBTENER_NOMINAS_EMPRESA,
     OBTENER_NOMINAS_EMPRESA_ERROR,
-    OBTENER_NOMINAS_EMPRESA_EXITO
+    OBTENER_NOMINAS_EMPRESA_EXITO,
+    ELIMINAR_NOMINA_EMPLEADO,
+    ELIMINAR_NOMINA_EMPLEADO_ERROR,
+    ELIMINAR_NOMINA_EMPLEADO_EXITO
 
 } from '../types'
 
@@ -132,6 +135,7 @@ export default function empresasReducer( state = initialState, action){
         case GET_EMPLEADO_ERROR:
         case GET_CHECKS_ADMIN_ERROR:
         case GENERAR_NOMINA_ERROR:
+        case ELIMINAR_NOMINA_EMPLEADO_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -426,6 +430,20 @@ export default function empresasReducer( state = initialState, action){
                     loadingNomina: false,
                     error: action.payload,
                     mensaje: action.payload.response.data.msg
+                }
+            case ELIMINAR_NOMINA_EMPLEADO:
+                return {
+                    ...state,
+                    loading: action.payload,
+                    error: null,
+                    mensaje: null
+                }
+                
+            case ELIMINAR_NOMINA_EMPLEADO_EXITO:
+                return {
+                    ...state,
+                    loading: false,
+                    nominas: state.nominas.filter(nomina => nomina._id !== action.payload)
                 }
         default: 
             return state

@@ -64,7 +64,10 @@ import {
     GENERAR_NOMINA_ERROR,
     OBTENER_NOMINAS_EMPRESA,
     OBTENER_NOMINAS_EMPRESA_ERROR,
-    OBTENER_NOMINAS_EMPRESA_EXITO
+    OBTENER_NOMINAS_EMPRESA_EXITO,
+    ELIMINAR_NOMINA_EMPLEADO,
+    ELIMINAR_NOMINA_EMPLEADO_ERROR,
+    ELIMINAR_NOMINA_EMPLEADO_EXITO
 
 } from '../types'
 
@@ -1021,5 +1024,45 @@ const obtenerNominasExito = (nominas) => ({
 
 const obtenerNominasError = (error) => ({
     type: OBTENER_NOMINAS_EMPRESA_ERROR,
+    payload: error
+})
+
+export function eliminarNominaAction (id) {
+    return async dispatch => {
+        dispatch(eliminarNomina())
+        const token = localStorage.getItem('token')
+        if(!token) return
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+
+            const { data } = clienteAxios.delete(`/nominas/delete/${id}`, config)
+            
+            dispatch(eliminarNominaExito(id))
+            toast.success(data.msg)
+            
+        } catch (error) {
+            dispatch(eliminarNominaError(error.response.data.msg))
+        }
+    }
+}
+
+const eliminarNomina = () => ({
+    type: ELIMINAR_NOMINA_EMPLEADO,
+    payload: true
+})
+
+const eliminarNominaExito = (id) => ({
+    type: ELIMINAR_NOMINA_EMPLEADO_EXITO,
+    payload: id
+})
+
+const eliminarNominaError = (error) => ({
+    type: ELIMINAR_NOMINA_EMPLEADO_ERROR,
     payload: error
 })
