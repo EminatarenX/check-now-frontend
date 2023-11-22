@@ -75,7 +75,7 @@ export default function EmpleadoInfo({empleado}) {
                 <span className="font-semibold">Dias de vacaciones anuales:</span> {empleado.dias_vacaciones}
                 </p>
                 <p className="text-emerald-900 text-2xl font-semibold mt-5 mr-2">
-                <span className="font-semibold">Dias de aginaldo:</span> {empleado.dias_aguinaldo}
+                <span className="font-semibold">Dias de aguinaldo:</span> {empleado.dias_aguinaldo}
                 </p>
 
                     
