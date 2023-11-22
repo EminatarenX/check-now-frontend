@@ -38,9 +38,7 @@ export default function UserConfig() {
 
         <section>
             <h2 className="text-emerald-900 text-2xl font-semibold">Información personal</h2>
-            <div className="flex justify-center">
-            <img src="" alt="imagen-profile" />
-            </div>
+           
             <form className="grid grid-cols-2 gap-5 mt-5"
                 onSubmit={handleInformacionPersonal}
             >
