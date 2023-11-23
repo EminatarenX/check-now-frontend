@@ -22,8 +22,10 @@ export default function UserIndex() {
       const minutosEntrada = Number(entradaArray[1])
 
       let entradaObject = {comentarios: ''}
+      
+      
       if(hora <= horaEntrada){
-        if(minutes > 15){
+        if(minutes > (minutosEntrada + 15)){
           entradaObject.comentarios = 'Tarde'
         }else {
           entradaObject.comentarios = 'Puntual'
@@ -77,10 +79,6 @@ export default function UserIndex() {
       filtrarYOrdenarChecks()
 
     },[filtro, datos?.checks])
-
-    useEffect(()=> {
-      console.log(filtro)
-    })
 
   return (
     <section className="flex flex-col">
