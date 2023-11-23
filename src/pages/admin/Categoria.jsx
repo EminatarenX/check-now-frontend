@@ -137,7 +137,7 @@ export default function Categoria() {
           >
             {
               plazas.length === 0 || categoria === 'todas' ? (
-                <p className='text-emerald-500 text-center lg:col-span-4 mt-10'>No hay plazas</p>
+                <p className='text-emerald-500 text-center lg:col-span-4 mt-10'>Seleccione una categoria</p>
               ) : (
                 
                 plazas.map( plaza => (
