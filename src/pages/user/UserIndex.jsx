@@ -24,7 +24,7 @@ export default function UserIndex() {
       let entradaObject = {comentarios: ''}
       
       
-      if(hora <= horaEntrada){
+      if(hora >= horaEntrada){
         if(minutes > (minutosEntrada + 15)){
           entradaObject.comentarios = 'Tarde'
         }else {
