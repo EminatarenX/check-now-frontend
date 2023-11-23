@@ -108,9 +108,9 @@ export default function EntradasSalidas() {
             <ul className={`flex gap-5 w-full lg:flex-row flex-col`}>
 
             <select name="departamento" onChange={e => setFiltro({...filtro, departamento: e.target.value})}
-              className='bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
+              className='text-sm bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
             >
-              <option value="todos">DEPARTAMENTO ( TODOS )</option>
+              <option value="todos">-- Seleccione un departamento --</option>
 
               {
                 departamentos.length === 0 ? null :
@@ -120,9 +120,9 @@ export default function EntradasSalidas() {
               }
             </select>
             <select name="categoria" onChange={(e) => setFiltro({...filtro, categoria: e.target.value})}
-              className='bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
+              className='text-sm bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'
             >
-              <option className="uppercase" value="todos">CATEGORIA / EQUIPO ( TODOS )</option>
+              <option className="uppercase" value="todos">-- Seleccione una categoria -- </option>
               {
                 categorias.length === 0 ? null :
                 categorias.map ( categoria => (
@@ -135,7 +135,7 @@ export default function EntradasSalidas() {
               name='fecha'
               max={fechaMaxima()}
               onChange={e => setFiltro({...filtro, fecha: e.target.value})}
-              className='bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'/>
+              className='text-sm bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none'/>
             </ul>
           </nav>
 

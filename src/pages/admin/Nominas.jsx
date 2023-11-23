@@ -167,9 +167,9 @@ export default function Nominas() {
                   onChange={(e) =>
                     setFiltro({ ...filtro, departamento: e.target.value })
                   }
-                  className="bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none"
+                  className="text-sm bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none"
                 >
-                  <option value="todos">DEPARTAMENTO </option>
+                  <option value="todos">-- Seleccione un departamento --</option>
 
                   {departamentos.length === 0
                     ? null
@@ -188,10 +188,10 @@ export default function Nominas() {
                   onChange={(e) =>
                     setFiltro({ ...filtro, categoria: e.target.value })
                   }
-                  className="bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none"
+                  className="text-sm bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none"
                 >
                   <option className="uppercase" value="todos">
-                    CATEGORIA / EQUIPO{" "}
+                    -- Seleccione una categoria --
                   </option>
                   {categorias.length === 0
                     ? null
