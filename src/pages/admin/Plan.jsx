@@ -6,6 +6,20 @@ import clienteAxios from '../../config/axios'
 export default function Plan() {
     const [prices, setPrices] = useState([])
     const [ cargando, setCargando ] = useState(false)
+
+    function formatAmount(amountInCents, currency) {
+        const formatter = new Intl.NumberFormat('es-MX', {
+            style: 'currency',
+            currency,
+        });
+    
+        // Convertir el monto de centavos a la unidad de la moneda (dividiendo por 100)
+        const amountInCurrency = amountInCents / 100;
+    
+        // Formatear y devolver el monto en la moneda local
+        return formatter.format(amountInCurrency);
+    }
+    
     
     const obtenerLink = async (price_id) => {
         const token = localStorage.getItem('token')
@@ -25,7 +39,6 @@ export default function Plan() {
 
         try {
             const { data } = await clienteAxios.get(`/pagos/session/${price_id}`, config)
-            console.log(data)
             window.location.href = data.url
             
         } catch (error) {
@@ -57,7 +70,6 @@ export default function Plan() {
                 const { data } = await clienteAxios.get(`/pagos`, config)
                 const pricesOrdenados = data.prices.sort((a, b) => a.unit_amount - b.unit_amount)
                 setPrices(pricesOrdenados)
-                console.log(pricesOrdenados)
             } catch (error) {
                 toast.error('No se pudo obtener el link')
                 console.log(error)
@@ -82,8 +94,8 @@ export default function Plan() {
             ) : prices.length === 0 ?  null : (
                 prices.map( (price, i) => (
                     <section  key={price.id} className='shadow-xl bg-white px-6 max-h-[650px] mt-20 rounded flex flex-col items-center justify-center gap-3'>
-                    <h1 className='text-4xl font-semibold text-emerald-900 text-center z-10'>Check-Now plan {i === 1 ? 'anual' : 'mensual'}</h1>
-                    <p className='text-emerald-900 text-xl text-center z-10'>{i === 1 ? '48,589.00' : '4,899.00'} MXN</p>
+                    <h1 className='text-4xl font-semibold text-emerald-900 text-center z-10'>Check-Now {price.nickname}</h1>
+                    <p className='text-emerald-900 text-xl text-center z-10'>{formatAmount(price.unit_amount, price.currency)} MXN</p>
                     <img src={ChecknowLogo} className='bg-emerald-100 scale-[1.1] rounded-[50%] mt-5' alt=""checklogo />
         
                     <button className='bg-emerald-900 w-full text-white rounded-xl mt-5 px-10 py-4 block text-center z-10'
