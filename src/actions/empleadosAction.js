@@ -212,7 +212,7 @@ export function registrarEntradaAction (entrada) {
         } catch (error) {
             
             toast.error(error.response.data.msg)
-            dispatch(registrarEntradaError(error))
+            dispatch(registrarEntradaError(error.response.data.msg))
         }
     }
 
