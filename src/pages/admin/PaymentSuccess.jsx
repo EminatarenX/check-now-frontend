@@ -3,7 +3,7 @@ export default function PaymentSuccess() {
 
   useEffect(()=> {
     setTimeout(() => {
-      window.location.reload()
+      window.location.href='/admin'
     }, 1500);
   }, [])
 
