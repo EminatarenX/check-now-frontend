@@ -28,13 +28,21 @@ export default function AdminLayout() {
     <>
 
     {
-      user?.payment?.payment_status !== "active" && rutaActual !== '/admin/plan' ? ( 
+      user?.payment?.payment_status !== "active" && rutaActual !== '/admin/planes' ? ( 
         <div className='bg-emerald-950 p-5 h-screen flex fixed w-full z-10 justify-center items-center bg-opacity-80'>
-          <section className='bg-white rounded-[20px] p-10 lg:p-20'>
+          <section className='bg-white rounded-[20px] p-10 lg:py-10 lg:px:20'>
             <h1 className='text-4xl text-emerald-900 font-semibold'>Pago pendiente</h1>
             <p className='text-emerald-900 text-lg'>Para poder acceder a la plataforma debe realizar el pago correspondiente</p>
-            <Link to='/admin/plan' className='bg-emerald-900 text-white rounded-xl px-10 py-2 mt-5 block text-center'>Realizar pago</Link>
-
+            <Link to='/admin/planes' className='bg-emerald-900 text-white rounded-xl px-10 py-3 mt-5 block text-center'>Realizar pago</Link>
+            <button
+              onClick={() => {
+                localStorage.removeItem('token')
+                navigate('/login')
+              }}
+              className='bg-emerald-900 text-white rounded-xl px-10 py-3 mt-5 block text-center w-full'
+            >
+              Cerrar sesion
+            </button>
           </section>
         </div>
 
@@ -67,7 +75,7 @@ export default function AdminLayout() {
             {fecha.getHours() >= 12 ? 'pm' : 'am'}
           </span>
         </p>
-        <nav className={`absolute ${rutaActual === "/admin" ? 'hidden' : 'lg:flex'} bottom-0 hidden lg:left-32 justify-center animate-entrada`}>
+        <nav className={`absolute ${rutaActual === "/admin" ? 'hidden': rutaActual === "/admin/planes" ? "hidden" : 'lg:flex'} bottom-0 hidden lg:left-32 justify-center animate-entrada`}>
           <Link className={` bg-white rounded-t-2xl text-emerald-900 font-medium p-2 text-sm`} to={'/admin'}>Inicio</Link>
           <Link className={`${rutaActual === '/admin/departamentos' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl font-medium p-2 text-sm`} to={'/admin/departamentos'}>Departamentos</Link>
           <Link className={`${rutaActual === '/admin/nominas' ? 'bg-emerald-600 text-emerald-100' : 'bg-white text-emerald-900'}  rounded-t-2xl  font-medium p-2 text-sm`} to={'/admin/nominas'}>Nominas</Link>

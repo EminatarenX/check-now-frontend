@@ -127,7 +127,7 @@ function App() {
             <Route path="departamentos/:departamento" element={<Categoria/>} />
             <Route path='departamentos/:departamento/:plaza' element={<Plaza/>} />
             <Route path='trabajadores/:empleado' element={<Empleado />} />
-            <Route path='plan' element={<Plan/>} />
+            <Route path='planes' element={<Plan/>} />
             
           </Route>
 
