@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 export default function AdminLayout() {
   const [fecha, setFecha] = useState(new Date())
   const { loading } = useSelector(state => state.empresa)
-
+  const { user } = useSelector(state => state.usuarios)
   const navigate = useNavigate()
   const location = useLocation()
   const rutaActual = location.pathname
@@ -26,6 +26,21 @@ export default function AdminLayout() {
 
   return (
     <>
+
+    {
+      user?.payment?.payment_status !== "active" && rutaActual !== '/admin/plan' ? ( 
+        <div className='bg-emerald-950 p-5 h-screen flex fixed w-full z-10 justify-center items-center bg-opacity-80'>
+          <section className='bg-white rounded-[20px] p-10 lg:p-20'>
+            <h1 className='text-4xl text-emerald-900 font-semibold'>Pago pendiente</h1>
+            <p className='text-emerald-900 text-lg'>Para poder acceder a la plataforma debe realizar el pago correspondiente</p>
+            <Link to='/admin/plan' className='bg-emerald-900 text-white rounded-xl px-10 py-2 mt-5 block text-center'>Realizar pago</Link>
+
+          </section>
+        </div>
+
+      ) : null
+    }
+
     {
       loading && (
         <Loader/>

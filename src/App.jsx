@@ -27,9 +27,11 @@ import Departamentos from './pages/admin/Departamentos'
 import Categoria from './pages/admin/Categoria'
 import Plaza from './pages/admin/Plaza'
 import Empleado from './pages/admin/Empleado'
+import Plan from './pages/admin/Plan'
 
 import { obtenerPerfilAction } from './actions/usuariosActions'
 import UserConfig from './pages/user/UserConfig'
+import PaymentSuccess from './pages/admin/PaymentSuccess'
 
 function App() {
 
@@ -111,6 +113,7 @@ function App() {
             <Route path='/confirmar/:token' element={<ConfirmarCuenta/>} />
             <Route path='/cambiar-password' element={<CambiarContrasenia/>} />
             <Route path='/recovery/:token' element={<RecoveryPassword/>} />
+            <Route path='/payment-confirmation/:session' element={<PaymentSuccess/>} />
           </Route>
 
           <Route path='/admin' element={ <RutaProtegida />}>
@@ -124,6 +127,8 @@ function App() {
             <Route path="departamentos/:departamento" element={<Categoria/>} />
             <Route path='departamentos/:departamento/:plaza' element={<Plaza/>} />
             <Route path='trabajadores/:empleado' element={<Empleado />} />
+            <Route path='plan' element={<Plan/>} />
+            
           </Route>
 
           <Route path='/dashboard' element={<UserProtection/>}>
