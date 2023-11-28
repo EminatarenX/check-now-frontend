@@ -84,9 +84,6 @@ export default function Plan() {
   return (
     // <main className='bg-slate-200 p-2 lg:p-14 flex justify-evenly items-center gap-5 flex-col lg:flex-row'>
          <main className='bg-slate-200 p-2 lg:p-4 flex justify-evenly items-center gap-5 flex-col'>
-        {
-            // TODO: realzar una pagina de un plan mensual de 4999 pesos mxn con un boton de pagar con cualquier metodo de pago
-        }
        
         {
             cargando ? (
@@ -95,15 +92,6 @@ export default function Plan() {
                 </div>
             ) : prices.length === 0 ?  null : (
                 prices.map( (price, i) => (
-                //     <section  key={price.id} className='shadow-xl bg-white px-6 py-5 w-full lg:w-2/5 rounded flex flex-col items-center justify-center gap-3'>
-                //     <h1 className='text-4xl font-semibold text-emerald-900 text-center '>Check-Now {price.nickname}</h1>
-                //     <p className='text-emerald-900 text-xl text-center '>{formatAmount(price.unit_amount, price.currency)} MXN</p>
-                //     <img src={ChecknowLogo} className='bg-emerald-100 rounded-[50%] mt-2' alt=""checklogo />
-        
-                //     <button className='bg-emerald-900 w-full text-white rounded-xl mt-5 px-10 py-4 block text-center'
-                //     onClick={() =>obtenerLink(price.id)}
-                //     >Suscribirse</button>
-                // </section>
                 <PaymentOption key={price.id} price={price} obtenerLink={obtenerLink} formatAmount={formatAmount} i={i}/>
                 ))
             )
