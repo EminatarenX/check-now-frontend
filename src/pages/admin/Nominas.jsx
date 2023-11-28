@@ -29,6 +29,88 @@ export default function Nominas() {
     empleado: "",
   });
   const [filtrados, setFiltrados] = useState([]);
+  const [nominaCustom, setNominaCustom] = useState({
+    empleado: "",
+    nombre: "",
+    percepciones: [
+      {
+        name: "",
+        value: "",
+      },
+    ],
+    deducciones: [
+      {
+        name: "",
+        value: "",
+      },
+    ],
+    formulario: false,
+  });
+
+  const handlePercepcionChange = (e, index) => {
+    const newPercepciones = [...nominaCustom.percepciones];
+    newPercepciones[index] = {
+      ...newPercepciones[index],
+      [e.target.name]: e.target.value,
+    };
+    setNominaCustom({ ...nominaCustom, percepciones: newPercepciones });
+  };
+
+  const addPercepcion = () => {
+    if(nominaCustom.percepciones[nominaCustom.percepciones.length - 1].name === "" || nominaCustom.percepciones[nominaCustom.percepciones.length - 1].value === "") {
+      return Swal.fire({
+        title: "Error",
+        text: "Debes llenar los campos de la percepcion anterior",
+        icon: "error",
+        confirmButtonColor: "#10B981",
+        confirmButtonText: "Aceptar",
+      });
+    }
+    setNominaCustom({
+      ...nominaCustom,
+      percepciones: [...nominaCustom.percepciones, { name: "", value: "" }],
+    });
+  };
+  // deducciones
+  const handleDeduccionChange = (e, index) => {
+    const newDeducciones = [...nominaCustom.deducciones];
+    newDeducciones[index] = {
+      ...newDeducciones[index],
+      [e.target.name]: e.target.value,
+    };
+    setNominaCustom({ ...nominaCustom, deducciones: newDeducciones });
+  };
+
+  const addDeduccion = () => {
+    if(nominaCustom.deducciones[nominaCustom.deducciones.length - 1].name === "" || nominaCustom.deducciones[nominaCustom.deducciones.length - 1].value === "") {
+      return Swal.fire({
+        title: "Error",
+        text: "Debes llenar los campos de la percepcion anterior",
+        icon: "error",
+        confirmButtonColor: "#10B981",
+        confirmButtonText: "Aceptar",
+      });
+    }
+    setNominaCustom({
+      ...nominaCustom,
+      deducciones: [...nominaCustom.deducciones, { name: "", value: "" }],
+    });
+  };
+
+  const crearNominaCustom = (e) => {
+    e.preventDefault()
+    if(nominaCustom.empleado === "" || nominaCustom.nombre === "") {
+      return Swal.fire({
+        title: "Ups...",
+        text: "Debes llenar todos los campos",
+        icon: "warning",
+        confirmButtonColor: "#10B981",
+        confirmButtonText: "Aceptar",
+      });
+      
+    }
+    console.log(nominaCustom)
+  }
 
   const filtrarYOrdenarTrabajadores = () => {
     let empleadosFiltrados = [...empleados];
@@ -153,7 +235,7 @@ export default function Nominas() {
   return (
     <>
       <main className="bg-emerald-950">
-        <section className="bg-white min-h-[500px] rounded-tl-[100px]  p-14 lg:p-20">
+        <section className="bg-white min-h-[500px] rounded-tl-[100px] p-14 lg:p-20">
           <h1 className="text-emerald-900 text-4xl font-semibold">Recibos</h1>
           <p className="text-lg text-emerald-600 mt-2">
             Genera recibos de nómina para tus empleados.
@@ -169,7 +251,9 @@ export default function Nominas() {
                   }
                   className="text-sm bg-transparent border-b-2 border-emerald-800 text-emerald-800 outline-none"
                 >
-                  <option value="todos">-- Seleccione un departamento --</option>
+                  <option value="todos">
+                    -- Seleccione un departamento --
+                  </option>
 
                   {departamentos.length === 0
                     ? null
@@ -282,7 +366,7 @@ export default function Nominas() {
             <h2 className="text-emerald-900 text-4xl font-semibold mt-10">
               Recibos generados
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-10 gap-4 min-h-[200px] mb-20">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-10 gap-4 min-h-[100px] mb-20">
               {nominas.length === 0 ? (
                 <p className="text-emerald-800 col-span-2">{mensaje}</p>
               ) : loadingNomina ? (
@@ -293,6 +377,136 @@ export default function Nominas() {
                 ))
               )}
             </div>
+
+            <h2 className="text-emerald-900 text-center text-4xl font-semibold mt-10">
+              Genera recibos de nomina que se ajusten a cada empleado
+            </h2>
+            <div className="flex justify-center mt-5">
+              <button
+                className="p-4 bg-emerald-700 text-white rounded"
+                type="button"
+                onClick={() =>
+                  setNominaCustom({
+                    ...nominaCustom,
+                    formulario: !nominaCustom.formulario,
+                  })
+                }
+              >
+                {nominaCustom.formulario
+                  ? "Cerrar formulario"
+                  : "Expander formulario"}
+              </button>
+            </div>
+
+            {nominaCustom.formulario && (
+              <form className="animate-entrada" onSubmit={crearNominaCustom}>
+                <div className="flex flex-col mt-5">
+                  <label htmlFor="empleado">Empleado</label>
+                  <select
+                    className="bg-slate-200 p-2 rounded"
+                    name="empleado"
+                    id="empleado"
+                    onChange={(e) =>
+                      setNominaCustom({
+                        ...nominaCustom,
+                        empleado: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="">-- Seleccione un empleado --</option>
+                    {empleados.map((empleado) => (
+                      <option key={empleado._id} value={empleado._id}>
+                        {empleado.usuario.nombre} {empleado.usuario.apellidos}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex flex-col mt-5">
+                  <label htmlFor="nombre">Nombre de esta nomina</label>
+                  <input
+                    type="text"
+                    name="nombre"
+                    id="nombre"
+                    className="bg-slate-200 p-2 rounded"
+                    onChange={(e) =>
+                      setNominaCustom({
+                        ...nominaCustom,
+                        nombre: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="flex flex-col mt-5">
+                  <label htmlFor="percepciones">Percepciones</label>
+                  {nominaCustom.percepciones.map((percepcion, i) => (
+                    <div key={i} className="flex w-full gap-5 mt-2 relative">
+                      <input
+                        className="w-full bg-slate-200 p-2 rounded"
+                        type="text"
+                        placeholder="Nombre de la percepcion"
+                        name="name"
+                        value={percepcion.name}
+                        onChange={(e) => handlePercepcionChange(e, i)}
+                      />
+                      <input
+                        className="w-full bg-slate-200 p-2 rounded"
+                        type="number"
+                        name="value"
+                        placeholder="Valor o monto de la percepcion"
+                        value={percepcion.value}
+                        onChange={(e) => handlePercepcionChange(e, i)}
+                      />
+                      {i === nominaCustom.percepciones.length - 1 && (
+                        <button
+                          className="bg-emerald-700 text-white text-2xl font-bold rounded px-2 py-1 absolute -right-10 top-0"
+                          type="button"
+                          onClick={addPercepcion}
+                        >
+                          +
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col mt-5">
+                  <label htmlFor="deducciones">Deducciones</label>
+                  {nominaCustom.deducciones.map((deduccion, i) => (
+                    <div key={i} className="flex w-full gap-5 mt-2 relative">
+                      <input
+                        className="w-full bg-slate-200 p-2 rounded"
+                        type="text"
+                        placeholder="Nombre de la deduccion"
+                        name="name"
+                        value={deduccion.name}
+                        onChange={(e) => handleDeduccionChange(e, i)}
+                      />
+                      <input
+                        className="w-full bg-slate-200 p-2 rounded"
+                        type="number"
+                        name="value"
+                        placeholder="Valor o monto de la deduccion"
+                        value={deduccion.value}
+                        onChange={(e) => handleDeduccionChange(e, i)}
+                      />
+                      {i === nominaCustom.deducciones.length - 1 && (
+                        <button
+                          className="bg-emerald-700 text-white text-2xl font-bold rounded px-2 py-1 absolute -right-10 top-0"
+                          type="button"
+                          onClick={addDeduccion}
+                        >
+                          +
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <input
+                  type="submit"
+                  value={"Guardar"}
+                  className="text-white bg-emerald-700 rounded p-3 w-full font-semibold mt-5"
+                />
+              </form>
+            )}
           </div>
         </section>
       </main>
