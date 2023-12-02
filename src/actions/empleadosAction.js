@@ -20,7 +20,8 @@ import {
 } from '../types'
 import { toast } from 'react-toastify'
 import clienteAxios from '../config/axios'
-import socket from '../helpers/socket'
+import { io } from 'socket.io-client'
+let socket = io(import.meta.env.VITE_BACKEND_URL)
 
 
 export function buscarPlazaAction (id) {
@@ -81,7 +82,7 @@ export function accederEmpresaAction (empresa){
         try {
 
             const { data } = await clienteAxios.post("/empleados/solicitud", empresa, config)
-            socket.emit('enviar solicitud', data.solicitud)
+            socket.emit('solicitud', data.solicitud)
             dispatch(accederEmpresaExito(data.empresa))
             toast.success('Solicitud enviada con exito')
 

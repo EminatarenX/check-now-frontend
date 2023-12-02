@@ -28,7 +28,7 @@ export default function AdminLayout() {
     <>
 
     {
-      user?.payment?.payment_status !== "active" && rutaActual !== '/admin/planes' ? ( 
+      user?.payment?.payment_status !== "active" || user?.payment?.payment_status !== 'paid' && rutaActual !== '/admin/planes' ? ( 
         <div className='bg-emerald-950 p-5 h-screen flex fixed w-full z-10 justify-center items-center bg-opacity-80'>
           <section className='bg-white rounded-[20px] p-10 lg:py-10 lg:px:20'>
             <h1 className='text-4xl text-emerald-900 font-semibold'>Pago pendiente</h1>

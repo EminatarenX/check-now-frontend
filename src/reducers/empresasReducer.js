@@ -341,6 +341,11 @@ export default function empresasReducer( state = initialState, action){
                     empleados: action.payload
                 }
             case "NUEVA_SOLICITUD_SOCKET":
+                const existeSolicitud = state.solicitudes.find(solicitud => {
+                    return solicitud._id === action.payload._id
+                })
+                if(existeSolicitud) return state
+                
                 return {
                     ...state,
                     solicitudes: [...state.solicitudes, action.payload]

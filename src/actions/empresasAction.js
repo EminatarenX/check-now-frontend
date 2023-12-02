@@ -752,6 +752,7 @@ const obtenerEmpleadosError = (error) => ({
 
 export function nuevaSolicitudSocketAction (solicitud) {
     return async dispatch => {
+        
         dispatch(nuevaSolicitudSocket(solicitud))
     }
 }

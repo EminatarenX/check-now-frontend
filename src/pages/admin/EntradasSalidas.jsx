@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react"
 import { obtenerHoraEntrada } from "../../helpers"
-import socket from '../../helpers/socket'
 
 // Redux
 import { useSelector, useDispatch } from "react-redux"
@@ -72,11 +71,11 @@ export default function EntradasSalidas() {
     return fechaFormateada
   }
 
-  useEffect(()=> {
-    dispatch(obtenerDepartamentosAction())
-    dispatch(getChecksAdminAction())
-    socket.emit('checks admin', datos._id)
-  }, [])
+  // useEffect(()=> {
+  //   dispatch(obtenerDepartamentosAction())
+  //   dispatch(getChecksAdminAction())
+  //   socket.emit('checks admin', datos._id)
+  // }, [])
 
   useEffect(() => {
     
@@ -90,12 +89,12 @@ export default function EntradasSalidas() {
       
   }, [filtro, checks])
 
-  useEffect(() => {
-    socket.on('entrada recibida', (check) => {
+  // useEffect(() => {
+  //   socket.on('entrada recibida', (check) => {
     
-      dispatch(nuevoCheckSocket(check))
-    })
-  })
+  //     dispatch(nuevoCheckSocket(check))
+  //   })
+  // })
 
   return (
     <main className="bg-emerald-950">

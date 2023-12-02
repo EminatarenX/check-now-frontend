@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { formatearFecha, formatearDinero } from "../../helpers";
 import Loader from "../../components/loaders/loader";
-import socket from "../../helpers/socket";
+import { io } from "socket.io-client";
+let socket
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -40,22 +41,17 @@ export default function Solicitudes() {
 
   useEffect(() => {
     dispatch(obtenerSolicitudesAction());
-
+    socket = io(import.meta.env.VITE_BACKEND_URL)
     socket.emit("solicitudes", empresaId);
+
   }, []);
 
-  useEffect(() => {
-    const handleSolicitudRecibida = (solicitud) => {
+  useEffect(()=> {
+    socket.on("solicitud recibida", (solicitud) => {
+     
       dispatch(nuevaSolicitudSocketAction(solicitud));
-    };
-
-    socket.on("solicitud recibida", handleSolicitudRecibida);
-
-    return () => {
-      socket.off("solicitud recibida", handleSolicitudRecibida);
-      socket.disconnect(); // Asegúrate de cerrar el socket cuando el componente se desmonta
-    };
-  }, [dispatch, socket]);
+    });
+  })
 
   return (
     <>
@@ -134,7 +130,7 @@ export default function Solicitudes() {
             <article className="rounded text-emerald-100 mt-2 flex flex-col gap-2">
               {solicitudes.map((solicitud) => (
                 <div
-                  className="bg-emerald-900 shadow-xl p-2 rounded flex justify-between items-end gap-5 hover:-translate-y-2 hover:cursor-pointer transition-all"
+                  className="bg-emerald-900 shadow-xl p-2 rounded flex justify-between items-end gap-5 hover:-translate-y-2 hover:cursor-pointer transition-all animate-entrada"
                   key={solicitud._id}
                   onClick={() => {
                     setSolicitud(solicitud);
