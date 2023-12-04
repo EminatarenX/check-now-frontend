@@ -401,6 +401,8 @@ export default function empresasReducer( state = initialState, action){
                     checks: action.payload
                 }
             case 'NUEVO_CHECK_SOCKET':
+                const existeCheck = state.checks.find(check => check._id === action.payload._id)
+                if(existeCheck) return state
                 return {
                     ...state,
                     checks: [...state.checks, action.payload]
