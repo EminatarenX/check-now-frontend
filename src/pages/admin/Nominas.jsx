@@ -47,6 +47,8 @@ export default function Nominas() {
     formulario: false,
   });
 
+  const [contador, setContador] = useState(0);
+
   const handlePercepcionChange = (e, index) => {
     const newPercepciones = [...nominaCustom.percepciones];
     newPercepciones[index] = {
@@ -222,10 +224,14 @@ export default function Nominas() {
 
   useEffect(() => {
     filtrarYOrdenarTrabajadores();
+    if(contador === 0) {
+      if (filtro.departamento !== "todos")
+        dispatch(obtenerCategoriasAction(filtro.departamento));
+        setContador(1);
+    }
 
-    if (filtro.departamento !== "todos")
-      dispatch(obtenerCategoriasAction(filtro.departamento));
-  }, [filtro.departamento, filtro.categoria]);
+
+  }, [filtro]);
 
   useEffect(() => {
     dispatch(obtenerNominasAction());
