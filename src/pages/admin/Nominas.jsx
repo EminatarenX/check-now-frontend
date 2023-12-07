@@ -225,7 +225,7 @@ export default function Nominas() {
 
     if (filtro.departamento !== "todos")
       dispatch(obtenerCategoriasAction(filtro.departamento));
-  }, [filtro]);
+  }, [filtro.departamento, filtro.categoria]);
 
   useEffect(() => {
     dispatch(obtenerNominasAction());
