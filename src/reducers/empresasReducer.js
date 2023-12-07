@@ -348,7 +348,7 @@ export default function empresasReducer( state = initialState, action){
                 
                 return {
                     ...state,
-                    solicitudes: [...state.solicitudes, action.payload]
+                    solicitudes: [action.payload, ...state.solicitudes]
                 }
             case EDITAR_PLAZA:
                 return {
@@ -405,7 +405,7 @@ export default function empresasReducer( state = initialState, action){
                 if(existeCheck) return state
                 return {
                     ...state,
-                    checks: [...state.checks, action.payload]
+                    checks: [action.payload,...state.checks]
                 }
             case GENERAR_NOMINA:
                 return {

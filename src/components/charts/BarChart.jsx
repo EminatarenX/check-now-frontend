@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import * as echarts from "echarts";
 
-const BasicBar = ({ option, height }) => {
+const BarChart = ({ option, height }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const BasicBar = ({ option, height }) => {
   return <div ref={chartRef} style={{width: '100%', height }} />;
 };
 
-export default BasicBar;
+export default BarChart;
