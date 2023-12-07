@@ -224,14 +224,9 @@ export default function Nominas() {
 
   useEffect(() => {
     filtrarYOrdenarTrabajadores();
-    if(contador === 0) {
-      if (filtro.departamento !== "todos"){
-        dispatch(obtenerCategoriasAction(filtro.departamento));
-        setContador(1);
-      }
-    }
 
-
+    if (filtro.departamento !== "todos" && filtro.empleado.length === 0)
+      dispatch(obtenerCategoriasAction(filtro.departamento));
   }, [filtro]);
 
   useEffect(() => {
