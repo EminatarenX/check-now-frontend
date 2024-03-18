@@ -77,30 +77,42 @@ export default function Plan() {
       }
     }
     obtenerPrice()
+    console.log(prices)
   }, [])
   // TODO: realzar una pagina de un plan mensual de 4999 pesos mxn con un boton de pagar con cualquier metodo de pago
   return (
     // <main className='bg-slate-200 p-2 lg:p-14 flex justify-evenly items-center gap-5 flex-col lg:flex-row'>
     <main className='bg-slate-200 p-2 lg:p-4 flex justify-evenly items-center gap-5 flex-col'>
-      <button className={"fixed bottom-10 lg:right-10 p-5 rounded bg-emerald-600 text-white "}>
-        <Link to='/admin'>
-          Volver al panel de control
-        </Link>
-      </button>
+
+      <Link to='/admin' className={"fixed bottom-10 lg:right-10 p-5 rounded bg-emerald-600 text-white "}>
+        Volver al panel de control
+      </Link>
+
       {
         cargando ? (
           <div className='bg-white rounded-[100px] p-10 lg:p-20'>
             <h1 className='text-4xl text-emerald-900 font-semibold'>Cargando...</h1>
           </div>
         ) : prices.length === 0 ? null : (
-          prices.map((price, i) => (
-            <PaymentOption key={price.id} price={price} obtenerLink={obtenerLink} formatAmount={formatAmount} i={i} />
+          prices.map((price, i) => {
+            if (i === 0) {
+              return null
+            } else {
+              return (
+                <PaymentOption
+                  key={price.id}
+                  price={price}
+                  formatAmount={formatAmount}
+                  obtenerLink={obtenerLink}
+                />
+              )
+            }
+          }
           ))
-        )
       }
 
 
-    </main>
+    </main >
 
   )
 }
