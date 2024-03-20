@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 export default function Plan() {
   const [prices, setPrices] = useState([])
   const [cargando, setCargando] = useState(false)
+  const [pricesExpensive, setPricesExpensive] = useState([])
+  const [pricesCheap, setPricesCheap] = useState([])
 
   function formatAmount(amountInCents, currency) {
     const formatter = new Intl.NumberFormat('es-MX', {
@@ -68,7 +70,10 @@ export default function Plan() {
       try {
         const { data } = await clienteAxios.get(`/pagos`, config)
         const pricesOrdenados = data.prices.sort((a, b) => a.unit_amount - b.unit_amount)
+
         setPrices(pricesOrdenados)
+        setPricesExpensive([pricesOrdenados[2], pricesOrdenados[4]]);
+        setPricesCheap([pricesOrdenados[1], pricesOrdenados[3]]);
       } catch (error) {
         toast.error('No se pudo obtener el link')
         console.log(error)
@@ -77,7 +82,7 @@ export default function Plan() {
       }
     }
     obtenerPrice()
-    console.log(prices)
+
   }, [])
   // TODO: realzar una pagina de un plan mensual de 4999 pesos mxn con un boton de pagar con cualquier metodo de pago
   return (
@@ -94,21 +99,42 @@ export default function Plan() {
             <h1 className='text-4xl text-emerald-900 font-semibold'>Cargando...</h1>
           </div>
         ) : prices.length === 0 ? null : (
-          prices.map((price, i) => {
-            if (i === 0) {
-              return null
-            } else {
-              return (
-                <PaymentOption
-                  key={price.id}
-                  price={price}
-                  formatAmount={formatAmount}
-                  obtenerLink={obtenerLink}
-                />
-              )
-            }
-          }
+          //         prices.map((price, i) => {
+          //           if (i === 0) {
+          //            return null
+          //          } else {
+          //            return (
+          //              <PaymentOption
+          //                key={price.id}
+          //                price={price}
+          //                formatAmount={formatAmount}
+          //                obtenerLink={obtenerLink}
+          //              />
+          //            )
+          //          }
+          //        }
+          pricesCheap.map((price, i) => (
+            <PaymentOption
+              key={price.id}
+              price={price}
+              formatAmount={formatAmount}
+              obtenerLink={obtenerLink}
+              i={i}
+            />
+          )
           ))
+        //
+        // pricesExpensive.map((price, i) => (
+        //  <PaymentOption
+        //  key={price.id}
+        //  price={price}
+        //  formatAmount={formatAmount}
+        //  obtenerLink={obtenerLink}
+        //  i={i}
+        //  />
+        //  ))
+        //  )
+        //
       }
 
 
