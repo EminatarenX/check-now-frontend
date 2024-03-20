@@ -7,7 +7,8 @@ const includedFeatures = [
   'Obtén estadísticas de cada empleado',
 ]
 
-export default function PaymentOption({price, obtenerLink, formatAmount, i}) {
+export default function PaymentOption({ price, obtenerLink, formatAmount, i }) {
+  console.log(price)
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -15,7 +16,7 @@ export default function PaymentOption({price, obtenerLink, formatAmount, i}) {
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{i === 0 ? "Check-Now" : "Estas listo para dar el siguiente paso?"}</h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
             {
-                i === 0 ? 'Obtén acceso a todas las funcionalidades sin compromisos a largo plazo! Ideal para empresas que prefieren evaluar continuamente nuestras funciones y ajustar su suscripción según su progreso. ' : 'Obtienes un 20% de descuento en tu suscripción mensual y accede a todas las funcionalidades de Check-Now.'
+              i === 0 ? 'Obtén acceso a todas las funcionalidades sin compromisos a largo plazo! Ideal para empresas que prefieren evaluar continuamente nuestras funciones y ajustar su suscripción según su progreso. ' : 'Obtienes un 20% de descuento en tu suscripción mensual y accede a todas las funcionalidades de Check-Now.'
             }
           </p>
         </div>
@@ -23,9 +24,9 @@ export default function PaymentOption({price, obtenerLink, formatAmount, i}) {
           <div className="p-8 sm:p-10 lg:flex-auto">
             <h3 className="text-2xl font-bold tracking-tight text-gray-900">{price.nickname}</h3>
             <p className="mt-6 text-base leading-7 text-gray-600">
-                {
-                    i === 0 ? 'Con el plan mensual aventurare y descubre un futuro para tu empresa. ' : 'Da un paso hacia el futuro y beneficiate de lo mejor de Check-Now.'
-                }
+              {
+                i === 0 ? 'Con el plan mensual aventurare y descubre un futuro para tu empresa. ' : 'Da un paso hacia el futuro y beneficiate de lo mejor de Check-Now.'
+              }
             </p>
             <div className="mt-10 flex items-center gap-x-4">
               <h4 className="flex-none text-sm font-semibold leading-6 text-emerald-600">Incluye</h4>
@@ -52,11 +53,11 @@ export default function PaymentOption({price, obtenerLink, formatAmount, i}) {
                   <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">MXN</span>
                 </p>
                 <button
-                    onClick={() => obtenerLink(price.id)}
+                  onClick={() => obtenerLink(price.id)}
                   className="mt-10 block w-full rounded-md bg-emerald-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                
+
                 >
-                    Obtener acceso
+                  Obtener acceso
                 </button>
                 <p className="mt-6 text-xs leading-5 text-gray-600">
                   Facturas y recibos disponibles en tu cuenta.
